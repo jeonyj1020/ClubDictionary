@@ -26,7 +26,7 @@
         tools:text="신비한\n동아리\n사전" />
 
     <EditText
-        android:id="@+id/id"
+        android:id="@+id/emailEditText_login"
         android:layout_width="256dp"
         android:layout_height="47dp"
         android:layout_marginTop="50dp"
@@ -37,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/passwordEditText_login"
         android:layout_width="256dp"
         android:layout_height="47dp"
         android:layout_marginTop="9dp"
@@ -45,10 +45,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/id" />
+        app:layout_constraintTop_toBottomOf="@+id/emailEditText_login" />
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/loginButton"
         android:layout_width="256dp"
         android:layout_height="39dp"
         android:layout_marginTop="12dp"
@@ -61,11 +61,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/passwordEditText_login"
         tools:text="로그인" />
 
     <TextView
-        android:id="@+id/makeid"
+        android:id="@+id/goToSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -79,11 +79,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login"
+        app:layout_constraintTop_toBottomOf="@+id/loginButton"
         tools:text="회원 가입" />
 
     <TextView
-        android:id="@+id/findid"
+        android:id="@+id/gotopasswordResetButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -97,7 +97,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/makeid"
+        app:layout_constraintTop_toBottomOf="@+id/goToSignUp"
         tools:text="아이디 / 비밀번호 찾기" />
 
 
