@@ -4,23 +4,101 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="#ffffff"
+    android:background="#f0f0f0"
+    android:backgroundTint="#f0f0f0"
     tools:context=".LoginActivity">
 
     <TextView
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
+        android:id="@+id/title"
+        android:layout_width="256dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginEnd="52dp"
         android:fontFamily="@font/gmarket_sans_medium"
         android:textColor="#3366ff"
-        android:textSize="13.3sp"
+        android:textSize="40sp"
         android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text=" 신비한\n
-동아리\n
-사전" />
+        app:layout_constraintVertical_bias="0.196"
+        tools:text="신비한\n동아리\n사전" />
+
+    <EditText
+        android:id="@+id/id"
+        android:layout_width="256dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="50dp"
+        android:hint="e-mail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="256dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="9dp"
+        android:hint="e-mail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/id" />
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="256dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="12dp"
+        android:background="#3366ff"
+        android:fontFamily="@font/gmarket_sans_medium"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText"
+        tools:text="로그인" />
+
+    <TextView
+        android:id="@+id/makeid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="#f0f0f0"
+        android:backgroundTint="#f0f0f0"
+        android:fontFamily="@font/gmarket_sans_medium"
+        android:gravity="center"
+        android:textColor="#3366ff"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login"
+        tools:text="회원 가입" />
+
+    <TextView
+        android:id="@+id/findid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="#f0f0f0"
+        android:backgroundTint="#f0f0f0"
+        android:fontFamily="@font/gmarket_sans_medium"
+        android:gravity="center"
+        android:textColor="#3366ff"
+        android:textSize="16sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/makeid"
+        tools:text="아이디 / 비밀번호 찾기" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
