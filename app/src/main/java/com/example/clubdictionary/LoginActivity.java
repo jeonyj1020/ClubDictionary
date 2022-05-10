@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
                     login();
                     break;
                 case R.id.gotopasswordResetButton:
-                    intent = new Intent(LoginActivity.this, FindActivity.class);
+                    intent = new Intent(LoginActivity.this, PasswordResetActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.goToSignUp:
