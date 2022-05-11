@@ -6,8 +6,9 @@
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_find.xml" value="0.21693840579710144" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_main.xml" value="0.24947916666666667" />
+        <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_memberinfo.xml" value="0.4" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_password_reset.xml" value="0.21693840579710144" />
-        <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_sign_up.xml" value="0.264" />
+        <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_sign_up.xml" value="0.4" />
       </map>
     </option>
   </component>
