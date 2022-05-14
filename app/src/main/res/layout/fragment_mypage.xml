@@ -1,6 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/mypage_user_profile"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/mypage_profile_pic"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginStart="40dp"
+            android:background="@drawable/round_background_border_black"
+            android:padding="1dp"
+            android:src="@drawable/mypage" />
+
+        <TextView
+            android:id="@+id/mypage_profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="사용자 이름"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/user_profile_division"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/mypage_user_profile"
+        android:background="@color/colorDivision"
+        android:orientation="horizontal" />
+
+    <TextView
+        android:id="@+id/mypage_profile_manage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/user_profile_division"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
+        android:text="계정 관리"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/mypage_password_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mypage_profile_manage"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:text="비밀번호 변경"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/mypage_email_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mypage_password_reset"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:text="이메일 변경"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/mypage_cerify_univ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mypage_email_reset"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:text="대학교 인증하기"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/mypage_apply_club"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mypage_cerify_univ"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
+        android:text="동아리 / 소모임 등록하기"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/mypage_my_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mypage_apply_club"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
+        android:text="내가 쓴 질문글"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/mypage_club_managing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mypage_my_question"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
+        android:text="동아리 관리하기"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/mypage_withdrawal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mypage_club_managing"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
+        android:text="회원 탈퇴"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/mypage_log_out"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mypage_withdrawal"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
+        android:text="로그 아웃"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+
+</RelativeLayout>
