@@ -23,6 +23,7 @@ public class MemberInitActivity extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 toast("신비한 동아리 사전에 오신 것을 환영합니다!!");
                 startActivity(intent);
+                finish();
             }
         });
     }
