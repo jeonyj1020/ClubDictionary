@@ -19,12 +19,22 @@ public class MyPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_page);
 
-        TextView applyTextView,logoutTextView,deleteTextView;
+        TextView passwordResetTextView, applyTextView,logoutTextView,deleteTextView;
 
         applyTextView = findViewById(R.id.applyTextView);
         logoutTextView = findViewById(R.id.logoutTextView);
         deleteTextView = findViewById(R.id.deleteTextView);
+        passwordResetTextView = findViewById(R.id.passwordResetTextView);
         mAuth = FirebaseAuth.getInstance();
+        passwordResetTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyPageActivity.this, PasswordResetActivity.class);
+                //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                //finish();
+            }
+        });
         applyTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

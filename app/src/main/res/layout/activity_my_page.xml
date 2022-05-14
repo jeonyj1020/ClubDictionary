@@ -6,7 +6,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MyPageActivity">
-
+    <TextView
+        android:id="@+id/passwordResetTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="비밀번호 재설정"
+        android:textSize="20dp"
+        android:textStyle="bold"/>
     <TextView
         android:id="@+id/applyTextView"
         android:layout_width="wrap_content"
