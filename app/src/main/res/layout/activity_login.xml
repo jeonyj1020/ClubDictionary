@@ -15,6 +15,7 @@
         android:layout_marginStart="52dp"
         android:layout_marginEnd="52dp"
         android:fontFamily="@font/gmarket_sans_medium"
+        android:text="신비한\n동아리\n사전"
         android:textColor="@color/maintheme"
         android:textSize="40sp"
         android:textStyle="normal"
@@ -22,8 +23,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.196"
-        tools:text="신비한\n동아리\n사전" />
+        app:layout_constraintVertical_bias="0.196" />
 
     <EditText
         android:id="@+id/emailEditText_login"
@@ -41,6 +41,7 @@
         android:layout_width="256dp"
         android:layout_height="47dp"
         android:layout_marginTop="9dp"
+        android:fontFamily="@font/gmarket_sans_light"
         android:hint="password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -55,14 +56,14 @@
         android:background="@color/maintheme"
         android:fontFamily="@font/gmarket_sans_medium"
         android:gravity="center"
+        android:text="로그인"
         android:textColor="#ffffff"
         android:textSize="20sp"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordEditText_login"
-        tools:text="로그인" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordEditText_login" />
 
     <TextView
         android:id="@+id/goToSignUp"
@@ -73,14 +74,14 @@
         android:backgroundTint="@color/backgroundcolor"
         android:fontFamily="@font/gmarket_sans_medium"
         android:gravity="center"
+        android:text="회원 가입"
         android:textColor="@color/maintheme"
         android:textSize="16sp"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton"
-        tools:text="회원 가입" />
+        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
 
     <TextView
         android:id="@+id/gotopasswordResetButton"
@@ -91,14 +92,14 @@
         android:backgroundTint="@color/backgroundcolor"
         android:fontFamily="@font/gmarket_sans_medium"
         android:gravity="center"
+        android:text="아이디 / 비밀번호 찾기"
         android:textColor="@color/maintheme"
         android:textSize="16sp"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/goToSignUp"
-        tools:text="아이디 / 비밀번호 찾기" />
+        app:layout_constraintTop_toBottomOf="@+id/goToSignUp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
