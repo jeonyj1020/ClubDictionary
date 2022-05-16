@@ -11,12 +11,6 @@
         android:theme="@style/Theme.ClubDictionary">
 
         <activity
-            android:name=".MyPageActivity"
-            android:exported="true">
-
-
-        </activity>
-        <activity
             android:name=".MemberInitActivity"
             android:exported="true" />
         <activity
