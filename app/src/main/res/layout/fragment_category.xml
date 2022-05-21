@@ -4,40 +4,35 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-  <TextView
-      android:id="@+id/society"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="사회"
-      android:textSize="40dp"
-      />
+    <TextView
+        android:id="@+id/society"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="사회"
+        android:textSize="20dp"/>
     <TextView
         android:id="@+id/study"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
         android:text="학술"
-        android:textSize="40dp"
-        />
+        android:textSize="20dp"/>
+    <TextView
+        android:id="@+id/arts"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="문예"
+        android:textSize="20dp"/>
     <TextView
         android:id="@+id/sports"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
         android:text="체육"
-        android:textSize="40dp"
-        />
-    <TextView
-        android:id="@+id/culture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="문예"
-        android:textSize="40dp"
-        />
+        android:textSize="20dp"/>
     <TextView
         android:id="@+id/religion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
         android:text="종교"
-        android:textSize="40dp"
-        />
+        android:textSize="20dp"/>
 
 </LinearLayout>

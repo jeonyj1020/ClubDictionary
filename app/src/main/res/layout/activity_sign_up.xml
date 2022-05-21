@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:text="이메일(아이디)"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.196"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,6 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,20 +31,17 @@
 
         <EditText
             android:id="@+id/emailEditText"
-            android:inputType="textEmailAddress"
             android:layout_width="140dp"
-            android:layout_height="33dp" />
+            android:layout_height="33dp"
+            android:inputType="textEmailAddress" />
 
         <TextView
             android:id="@+id/knuTextView"
             android:layout_width="119dp"
-            android:layout_height="23dp"
-            android:layout_marginLeft="15dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
             android:text="\ @knu.ac.kr"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/editText"
-            tools:layout_editor_absoluteY="24dp" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 
@@ -84,9 +81,9 @@
 
         <EditText
             android:id="@+id/authNumEditText"
-            android:inputType="number"
             android:layout_width="171dp"
-            android:layout_height="33dp" />
+            android:layout_height="33dp"
+            android:inputType="number" />
 
         <Button
             android:id="@+id/authNumButton"
@@ -110,13 +107,15 @@
         app:layout_constraintHorizontal_bias="0.178"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ll2" />
+
     <EditText
         android:id="@+id/passwordEditText"
-        android:inputType="textPassword"
-        android:hint="여섯자리이상"
         android:layout_width="270dp"
         android:layout_height="39dp"
         android:layout_marginTop="4dp"
+        android:hint="여섯자리이상"
+        android:inputType="textPassword"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
@@ -148,10 +147,10 @@
     <Button
         android:id="@+id/startButton"
         android:layout_width="269dp"
-        android:layout_height="41dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="시작하기"
         android:textSize="20sp"
-        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordcheckEditText" />

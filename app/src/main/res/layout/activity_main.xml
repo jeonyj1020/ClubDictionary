@@ -9,7 +9,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/main_logo_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="35dp">
+        android:layout_height="50dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -45,54 +45,17 @@
         android:id="@+id/navigation_bar_division"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_above="@id/navigaion_bar"
+        android:layout_above="@id/activity_main_navigation_bar"
         android:background="@color/colorDivision"
         android:orientation="horizontal" />
 
-    <LinearLayout
-        android:id="@+id/navigaion_bar"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/activity_main_navigation_bar"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true">
-
-        <ImageButton
-            android:id="@+id/movehome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#ffffff"
-            android:scaleType="centerInside"
-            android:src="@drawable/home" />
-
-        <ImageButton
-            android:id="@+id/movebookmark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#ffffff"
-            android:scaleType="centerInside"
-            android:src="@drawable/bookmark" />
-
-        <ImageButton
-            android:id="@+id/movecategory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#ffffff"
-            android:scaleType="centerInside"
-            android:src="@drawable/category" />
-
-        <ImageButton
-            android:id="@+id/movemypage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#ffffff"
-            android:scaleType="centerInside"
-            android:src="@drawable/mypage" />
-
-
-    </LinearLayout>
-
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        app:itemBackground="@color/white"
+        app:menu="@menu/activity_main_navigationbar_menu" />
 
 </RelativeLayout>

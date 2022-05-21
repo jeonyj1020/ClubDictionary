@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:enabled="true"
+        android:icon="@drawable/home_navi_item"
+        android:title="home" />
+    <item
+        android:id="@+id/bookmark"
+        android:enabled="true"
+        android:icon="@drawable/bookmark_navi_item"
+        android:title="bookmark" />
+    <item
+        android:id="@+id/category"
+        android:enabled="true"
+        android:icon="@drawable/category_navi_item"
+        android:title="category" />
+    <item
+        android:id="@+id/mypage"
+        android:enabled="true"
+        android:icon="@drawable/mypage_navi_item"
+        android:title="mypage" />
+
+</menu>

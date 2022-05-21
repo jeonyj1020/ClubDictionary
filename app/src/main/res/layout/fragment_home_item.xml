@@ -15,7 +15,7 @@
             android:layout_height="40dp"
             android:padding="1dp"
             android:layout_margin="5dp"
-            android:background="@drawable/round_background_border_black"
+            android:background="@drawable/round_background_border_main_theme"
             android:src="@drawable/mypage" />
 
         <LinearLayout
