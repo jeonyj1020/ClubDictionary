@@ -65,7 +65,7 @@ public class MyPageFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-                Objects.requireNonNull(getActivity()).finish();
+                requireActivity().finish();
             }
         });
 
@@ -76,7 +76,7 @@ public class MyPageFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-                Objects.requireNonNull(getActivity()).finish();
+                requireActivity().finish();
             }
         });
 
