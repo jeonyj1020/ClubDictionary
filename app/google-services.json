@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "26212022239",
-    "project_id": "clubdictionary",
-    "storage_bucket": "clubdictionary.appspot.com"
+    "project_number": "163149617716",
+    "project_id": "test-a8407",
+    "storage_bucket": "test-a8407.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:26212022239:android:e76f6accd5ebf26d66366a",
+        "mobilesdk_app_id": "1:163149617716:android:12b596bd22c3ed35be8861",
         "android_client_info": {
           "package_name": "com.example.clubdictionary"
         }
       },
       "oauth_client": [
         {
-          "client_id": "26212022239-vfu2eutkmvfgtfgn31kbp1enoi4llemp.apps.googleusercontent.com",
+          "client_id": "163149617716-7mn3ppbfb7a7ie4d5omi9cfrpcktas6e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.clubdictionary",
+            "certificate_hash": "8cfb883b354819a084923c4b40fa5bc9f04a0ec9"
+          }
+        },
+        {
+          "client_id": "163149617716-lh0042h504bvaelrk9uh074uq3e28dun.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA8vCq3Ie8u8cfzMpQQRZ08hpV3o-ngp68"
+          "current_key": "AIzaSyAdInF3yTr7A6U8qQ18nXDH5M9kMeoPM_c"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "26212022239-vfu2eutkmvfgtfgn31kbp1enoi4llemp.apps.googleusercontent.com",
+              "client_id": "163149617716-lh0042h504bvaelrk9uh074uq3e28dun.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
