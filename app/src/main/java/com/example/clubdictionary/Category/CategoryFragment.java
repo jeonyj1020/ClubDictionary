@@ -1,9 +1,7 @@
-package com.example.clubdictionary;
+package com.example.clubdictionary.Category;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -11,6 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.example.clubdictionary.MainActivity;
+import com.example.clubdictionary.R;
 
 public class CategoryFragment extends Fragment {
 
@@ -39,37 +40,33 @@ public class CategoryFragment extends Fragment {
         society.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity)getActivity()).replaceFragment(CategoryFragmentSociety.newInstance());
+                ((MainActivity)getActivity()).replaceFragment(SocietyFragment.newInstance());
             }
         });
         study.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity)getActivity()).replaceFragment(CategoryFragmentStudy.newInstance());
+                ((MainActivity)getActivity()).replaceFragment(StudyFragment.newInstance());
             }
         });
         sports.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity)getActivity()).replaceFragment(CategoryFragmentSports.newInstance());
+                ((MainActivity)getActivity()).replaceFragment(SportsFragment.newInstance());
             }
         });
         arts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity)getActivity()).replaceFragment(CategoryFragmentArts.newInstance());
+                ((MainActivity)getActivity()).replaceFragment(ArtsFragment.newInstance());
             }
         });
         religion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity)getActivity()).replaceFragment(CategoryFragmentReligion.newInstance());
+                ((MainActivity)getActivity()).replaceFragment(ReligionFragment.newInstance());
             }
         });
-
-
-
-
         return view;
     }
 

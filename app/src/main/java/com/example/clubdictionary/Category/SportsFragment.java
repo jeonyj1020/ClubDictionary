@@ -1,4 +1,4 @@
-package com.example.clubdictionary;
+package com.example.clubdictionary.Category;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,18 +9,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-public class CategoryFragmentStudy extends Fragment {
+import com.example.clubdictionary.R;
 
-    public CategoryFragmentStudy() {
+public class SportsFragment extends Fragment {
+
+    public SportsFragment() {
     }
 
-    public static CategoryFragmentStudy newInstance(){
-        return new CategoryFragmentStudy();
+    public static SportsFragment newInstance(){
+        return new SportsFragment();
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_category_study, container, false);
+        View view = inflater.inflate(R.layout.fragment_sports, container, false);
         return view;
     }
 }
-

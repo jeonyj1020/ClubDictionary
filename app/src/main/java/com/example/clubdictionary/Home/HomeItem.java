@@ -1,4 +1,4 @@
-package com.example.clubdictionary;
+package com.example.clubdictionary.Home;
 
 import android.widget.ImageView;
 import android.widget.TextView;

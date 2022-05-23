@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.clubdictionary.UserManagement.LoginActivity;
+import com.example.clubdictionary.UserManagement.PasswordResetActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;

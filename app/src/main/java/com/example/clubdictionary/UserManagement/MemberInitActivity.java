@@ -1,4 +1,4 @@
-package com.example.clubdictionary;
+package com.example.clubdictionary.UserManagement;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,13 +11,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.clubdictionary.MainActivity;
+import com.example.clubdictionary.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.Arrays;
 
 public class MemberInitActivity extends AppCompatActivity {
     private static final String TAG = "MemberInfoActivity";
