@@ -20,6 +20,7 @@ public class BookmarkFragment extends Fragment {
     RecyclerView recyclerView;
     BookmarkRecyclerViewAdapter bookmarkRecyclerViewAdapter;
 
+
     public BookmarkFragment() {
     }
 

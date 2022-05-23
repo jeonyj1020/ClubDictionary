@@ -12,4 +12,5 @@ public class HomeItem {
     private TextView clubName, clubHashTag, hashTag, contentDetails;
 
 
+
 }

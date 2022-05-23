@@ -60,6 +60,7 @@ public class MyPageFragment extends Fragment {
             }
         });
 
+
         logoutTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -22,6 +22,7 @@ public class CategoryFragment extends Fragment {
         return new CategoryFragment();
     }
 
+
     TextView society, study, sports, arts, religion;
 
     @Nullable

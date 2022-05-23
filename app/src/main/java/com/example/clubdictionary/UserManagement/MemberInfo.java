@@ -33,6 +33,7 @@ public class MemberInfo {
         this.department = department;
         this.phoneNum = phoneNum;
         this.BookMark = null;
+
     }
 
     public String getName() {

@@ -28,6 +28,7 @@ public class PasswordResetActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
     }
 
+
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {

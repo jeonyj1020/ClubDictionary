@@ -32,6 +32,7 @@ public class ClubListFragment extends Fragment {
         // Required empty public constructor
     }
 
+
     private Context context;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
