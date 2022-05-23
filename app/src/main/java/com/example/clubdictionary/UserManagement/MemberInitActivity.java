@@ -29,7 +29,6 @@ public class MemberInitActivity extends AppCompatActivity {
         Button startButton = findViewById(R.id.startButton);
 
 
-
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

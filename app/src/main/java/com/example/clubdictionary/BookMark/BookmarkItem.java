@@ -11,7 +11,6 @@ public class BookmarkItem {
     private ImageView bookMark;
     private TextView clubName, clubHashtag;
 
-
     public CircleImageView getClubProfile() {
         return clubProfile;
     }

@@ -20,7 +20,6 @@ public class ReligionFragment extends Fragment {
         return new ReligionFragment();
     }
 
-
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_religion, container, false);
         return view;

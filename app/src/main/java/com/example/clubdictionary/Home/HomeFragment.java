@@ -23,7 +23,6 @@ public class HomeFragment extends Fragment {
     public HomeFragment() {
     }
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

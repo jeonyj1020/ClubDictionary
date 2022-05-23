@@ -20,7 +20,6 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
         ClubNameSet = clubNameSet;
     }
 
-
     @NonNull
     @Override
     public BookmarkRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

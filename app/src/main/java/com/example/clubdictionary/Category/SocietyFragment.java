@@ -22,7 +22,6 @@ public class SocietyFragment extends Fragment {
         return new SocietyFragment();
     }
 
-
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_society, container, false);
         volunteer = view.findViewById(R.id.volunteer);

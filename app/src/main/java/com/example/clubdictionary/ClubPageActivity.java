@@ -35,7 +35,6 @@ public class ClubPageActivity extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user  = FirebaseAuth.getInstance().getCurrentUser();
 
-
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
         db.collection("clubs").whereEqualTo("name", name).get().

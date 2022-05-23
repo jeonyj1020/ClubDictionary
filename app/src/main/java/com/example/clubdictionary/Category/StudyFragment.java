@@ -20,7 +20,6 @@ public class StudyFragment extends Fragment {
         return new StudyFragment();
     }
 
-
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_study, container, false);
         return view;

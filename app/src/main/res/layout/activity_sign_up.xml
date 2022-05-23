@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".UserManagement.SignUpActivity">
 
-
     <TextView
         android:id="@+id/emailTextView"
         android:layout_width="wrap_content"
