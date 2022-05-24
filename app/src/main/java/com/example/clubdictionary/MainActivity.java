@@ -11,7 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.example.clubdictionary.BookMark.BookmarkFragment;
@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     MyPageFragment mypageFragment = new MyPageFragment();
 
     ArrayList<String> filtering = new ArrayList<>();
+    CheckBox onlyFavorite, onlyRecruit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,10 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.activity_main_navigation_bar);
 
         findViewById(R.id.filter).setOnClickListener(onClickListener);
+        onlyFavorite = findViewById(R.id.onlyFavorite);
+        onlyFavorite.setOnClickListener(onClickListener);
+        onlyRecruit = findViewById(R.id.onlyRecruit);
+        onlyRecruit.setOnClickListener(onClickListener);
 
 /*
         if (user == null) {
@@ -98,11 +103,21 @@ public class MainActivity extends AppCompatActivity {
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent;
+            // 필터 버튼, 찜한 동아리, 모집공고 3개 중 하나라도 눌리면 바로 쿼리 함수 변경해서 쿼리해야함
+            // 필터 버튼의 선택된 소분류들을 메인에서 받은 다음에 쿼리 - onActivityResult 에서 쿼리처리
+            // 체크박스는 둘 중 하나라도 상태 변경되면 바로 쿼리 - switch 문에서 바로 쿼리
+            boolean onlyFavoriteChecked, onlyRecruitChecked;
+
             switch (v.getId()){
                 case R.id.filter:
-                    intent = new Intent(MainActivity.this, FilterActivity.class);
+                    Intent intent = new Intent(MainActivity.this, FilterActivity.class);
                     startActivityForResult(intent, 1);
+                    break;
+
+                case R.id.onlyFavorite:
+                case R.id.onlyRecruit:
+                    onlyFavoriteChecked = onlyFavorite.isChecked();
+                    onlyRecruitChecked = onlyRecruit.isChecked();
                     break;
             }
         }
@@ -114,13 +129,14 @@ public class MainActivity extends AppCompatActivity {
         if(resultCode ==  RESULT_OK){
             switch(requestCode){
                 case 1 :
-                    ArrayList<String> result = data.getStringArrayListExtra("filtering");
+                    filtering = data.getStringArrayListExtra("filtering");
                     String show = "";
-                    for(String now : result){
+                    for(String now : filtering){
                         show += now + " ";
                     }
 
-                    Toast.makeText(this, "" + show, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "" + show, Toast.LENGTH_LONG).show();
+                    // 이 밑에서 쿼리
                     break;
             }
         }

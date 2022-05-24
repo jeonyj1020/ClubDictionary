@@ -12,24 +12,15 @@
         android:layout_width="match_parent"
         android:layout_height="35dp">
 
-        <RelativeLayout
+        <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            android:src="@drawable/main_logo" />
 
-            <Button
-                android:id="@+id/filter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="필터"/>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="center"
-                android:src="@drawable/main_logo" />
-
-        </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
+
+
 
     <LinearLayout
         android:id="@+id/toolbar_division"
@@ -39,12 +30,42 @@
         android:background="@color/colorDivision"
         android:orientation="horizontal" />
 
+    <LinearLayout
+        android:id="@+id/checkLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar_division"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/filter"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="필터" />
+
+        <CheckBox
+            android:id="@+id/onlyFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="찜한 동아리만"/>
+
+        <CheckBox
+            android:id="@+id/onlyRecruit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="모집공고만"/>
+
+    </LinearLayout>
+
     <FrameLayout
         android:id="@+id/mainframe"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/navigation_bar_division"
-        android:layout_below="@+id/main_logo_toolbar">
+        android:layout_below="@+id/checkLayout">
 
     </FrameLayout>
 
@@ -59,9 +80,9 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/activity_main_navigation_bar"
         android:layout_width="match_parent"
-        android:background="@color/white"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
+        android:background="@color/white"
         app:menu="@menu/activity_main_navigationbar_menu" />
 
 
