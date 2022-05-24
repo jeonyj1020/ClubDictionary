@@ -1,13 +1,17 @@
 package com.example.clubdictionary;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.clubdictionary.BookMark.BookmarkFragment;
@@ -17,6 +21,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseUser user;
@@ -28,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     CategoryFragment categoryFragment = new CategoryFragment();
     MyPageFragment mypageFragment = new MyPageFragment();
 
+    ArrayList<String> filtering = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         bottomNavigationView = findViewById(R.id.activity_main_navigation_bar);
+
+        findViewById(R.id.filter).setOnClickListener(onClickListener);
 
 /*
         if (user == null) {
@@ -83,6 +93,37 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+    }
+
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent;
+            switch (v.getId()){
+                case R.id.filter:
+                    intent = new Intent(MainActivity.this, FilterActivity.class);
+                    startActivityForResult(intent, 1);
+                    break;
+            }
+        }
+    };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode ==  RESULT_OK){
+            switch(requestCode){
+                case 1 :
+                    ArrayList<String> result = data.getStringArrayListExtra("filtering");
+                    String show = "";
+                    for(String now : result){
+                        show += now + " ";
+                    }
+
+                    Toast.makeText(this, "" + show, Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
     }
 
     public void replaceFragment(Fragment fragment) {
