@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.clubdictionary.BookMark.BookmarkFragment;
 import com.example.clubdictionary.Category.CategoryFragment;
 import com.example.clubdictionary.Home.HomeFragment;
+import com.example.clubdictionary.UserManagement.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -51,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         onlyRecruit = findViewById(R.id.onlyRecruit);
         onlyRecruit.setOnClickListener(onClickListener);
 
-/*
         if (user == null) {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
         } else {
             //매인피드시작
         }
-*/
 
         //이부분이 메인 피드 시작 부분
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
