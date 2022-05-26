@@ -22,15 +22,21 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.model.DocumentCollections;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseUser user;
@@ -48,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     String filteringBinary = null;
     ArrayList<Boolean> checked = new ArrayList<>();
     CheckBox onlyFavorite, onlyRecruit;
+    CollectionReference clubsRef = db.collection("clubs");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,6 +171,19 @@ public class MainActivity extends AppCompatActivity {
         boolean onlyFavoriteChecked = onlyFavorite.isChecked();
         Toast.makeText(this, ""+filtering, Toast.LENGTH_LONG).show();
         Toast.makeText(this, ""+onlyRecruitChecked + ", " + onlyFavoriteChecked, Toast.LENGTH_SHORT).show();
+
+        ArrayList<Task> tasks = null;
+        for(int i = 0; i <= filtering.size()/10; i++) {
+            List<String> now = null;
+            if(filtering.size() >= 10 * i) {
+                now = filtering.subList(10 * i, 10 * i + 9);
+            }
+            else{
+                now = filtering.subList(10 * i, filtering.size() - 1);
+            }
+            Query query = clubsRef.whereIn("minor", now);
+            tasks.set(i, query.get());
+        }
     }
 
     private void getFiltering(){
