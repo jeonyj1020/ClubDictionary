@@ -1,6 +1,7 @@
 package com.example.clubdictionary.ClubPage;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager2.widget.ViewPager2;
@@ -36,6 +37,13 @@ public class ClubPageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_club_page);
 
         Toolbar toolbar = findViewById(R.id.club_activity_toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+
         CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.club_activity_collapsebar);
         collapsingToolbarLayout.setTitle("동아리 페이지");
 
@@ -58,6 +66,7 @@ public class ClubPageActivity extends AppCompatActivity {
                 tab.setCustomView(textView);
             }
         }).attach();
+
 
 
         TextView Uid, icon, nameTextView, day, activityTime, money, registerUrl;

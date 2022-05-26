@@ -36,7 +36,7 @@ public class IntroFragment extends Fragment {
 
         View view = LayoutInflater.from(inflater.getContext()).inflate(R.layout.fragment_clubpage_intro, container, false);
 
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return view;
     }
 }
 

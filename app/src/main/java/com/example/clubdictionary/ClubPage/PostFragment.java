@@ -13,6 +13,8 @@ import com.example.clubdictionary.R;
 
 public class PostFragment extends Fragment {
 
+
+
     public static PostFragment newInstance(int number) {
         PostFragment postFragment = new PostFragment();
         Bundle bundle = new Bundle();
@@ -36,7 +38,7 @@ public class PostFragment extends Fragment {
 
         View view = LayoutInflater.from(inflater.getContext()).inflate(R.layout.fragment_clubpage_post, container, false);
 
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return view;
     }
 }
 

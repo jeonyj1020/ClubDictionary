@@ -41,7 +41,9 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
+
         private TextView textView;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textView = itemView.findViewById(R.id.home_item_profile_name);

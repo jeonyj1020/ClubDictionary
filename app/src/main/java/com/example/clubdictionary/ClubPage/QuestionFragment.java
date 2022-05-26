@@ -36,6 +36,6 @@ public class QuestionFragment extends Fragment {
 
         View view = LayoutInflater.from(inflater.getContext()).inflate(R.layout.fragment_clubpage_question, container, false);
 
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return view;
     }
 }
