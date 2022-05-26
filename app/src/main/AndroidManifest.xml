@@ -19,8 +19,14 @@
             android:name=".UserManagement.PasswordResetActivity"
             android:exported="true"></activity>
         <activity
-            android:name=".ClubPageActivity"
-            android:exported="true" />
+            android:name=".ClubPage.ClubPageActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".UserManagement.SignUpActivity"
             android:exported="true" />
@@ -30,11 +36,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".FilterActivity"

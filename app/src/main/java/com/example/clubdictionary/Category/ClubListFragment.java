@@ -13,8 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.clubdictionary.ClubPageActivity;
-import com.example.clubdictionary.MainActivity;
+import com.example.clubdictionary.ClubPage.ClubPageActivity;
 import com.example.clubdictionary.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
