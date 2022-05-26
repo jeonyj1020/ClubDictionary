@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
@@ -22,21 +23,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.model.DocumentCollections;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseUser user;
@@ -49,12 +44,12 @@ public class MainActivity extends AppCompatActivity {
     MyPageFragment mypageFragment = new MyPageFragment();
 
     // 필터링 관련 변수들
-    DocumentReference docRef;
+    DocumentReference docRef = null;
     ArrayList<String> filtering = new ArrayList<>();
     String filteringBinary = null;
     ArrayList<Boolean> checked = new ArrayList<>();
     CheckBox onlyFavorite, onlyRecruit;
-    CollectionReference clubsRef = db.collection("clubs");
+    ArrayList<String> bookMark = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,8 +72,20 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             //매인피드시작
-            docRef = db.collection("users").document(user.getUid());
-            getFiltering();
+            docRef = db.collection("clubs").document(user.getUid());
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if(task.isSuccessful()){
+                        DocumentSnapshot document = task.getResult();
+                        if(!document.exists()){
+                            docRef = db.collection("users").document(user.getUid());
+                            getFiltering();
+                        }
+                        else getFiltering();
+                    }
+                }
+            });
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.mainframe, homeFragment);
@@ -166,26 +173,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void query() {
-        boolean onlyRecruitChecked = onlyRecruit.isChecked();
-        boolean onlyFavoriteChecked = onlyFavorite.isChecked();
-        Toast.makeText(this, ""+filtering, Toast.LENGTH_LONG).show();
-        Toast.makeText(this, ""+onlyRecruitChecked + ", " + onlyFavoriteChecked, Toast.LENGTH_SHORT).show();
-
-        ArrayList<Task> tasks = null;
-        for(int i = 0; i <= filtering.size()/10; i++) {
-            List<String> now = null;
-            if(filtering.size() >= 10 * i) {
-                now = filtering.subList(10 * i, 10 * i + 9);
-            }
-            else{
-                now = filtering.subList(10 * i, filtering.size() - 1);
-            }
-            Query query = clubsRef.whereIn("minor", now);
-            tasks.set(i, query.get());
-        }
-    }
-
     private void getFiltering(){
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
@@ -195,6 +182,7 @@ public class MainActivity extends AppCompatActivity {
                             filtering = (ArrayList<String>) document.get("filtering");
                             filteringBinary = (String) document.get("filteringBinary");
                             checked = (ArrayList<Boolean>) document.get("checked");
+                            bookMark = (ArrayList<String>) document.get("bookMark");
 
                             if (checked.get(0)) onlyRecruit.setChecked(true);
                             else onlyRecruit.setChecked(false);
@@ -205,6 +193,26 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    private void query() {
+        boolean onlyRecruitChecked = onlyRecruit.isChecked();
+        boolean onlyFavoriteChecked = onlyFavorite.isChecked();
+        Toast.makeText(this, ""+filtering, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, ""+onlyRecruitChecked + ", " + onlyFavoriteChecked, Toast.LENGTH_SHORT).show();
+
+        /*ArrayList<Task> tasks = null;
+        for(int i = 0; i <= filtering.size()/10; i++) {
+            List<String> now = null;
+            if(filtering.size() >= 10 * i) {
+                now = filtering.subList(10 * i, 10 * i + 9);
+            }
+            else{
+                now = filtering.subList(10 * i, filtering.size() - 1);
+            }
+            Query query = clubsRef.whereIn("minor", now);
+            tasks.set(i, query.get());
+        }*/
     }
 
     public void replaceFragment(Fragment fragment) {
