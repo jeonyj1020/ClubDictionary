@@ -15,6 +15,7 @@
             android:id="@+id/club_activity_collapsebar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/white"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="exitUntilCollapsed|scroll">
 
@@ -29,9 +30,11 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/icon"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
                     android:layout_gravity="start"
+                    android:background="@drawable/round_background_border_main_theme"
+                    android:padding="1dp"
                     android:src="@drawable/mypage" />
 
                 <View
@@ -41,9 +44,10 @@
 
                 <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="80dp"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:padding="5dp">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -54,6 +58,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="활동 요일"
+                            android:textColor="@color/maintheme"
                             android:textSize="15sp" />
 
                         <TextView
@@ -61,6 +66,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:text="활동 시간"
+                            android:textColor="@color/maintheme"
                             android:textSize="15sp" />
 
                         <TextView
@@ -68,6 +74,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:text="회비"
+                            android:textColor="@color/maintheme"
                             android:textSize="15sp" />
 
                     </LinearLayout>
@@ -82,6 +89,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text=" : "
+                            android:textColor="@color/maintheme"
                             android:textSize="15sp" />
 
                         <TextView
@@ -89,6 +97,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:text=" : "
+                            android:textColor="@color/maintheme"
                             android:textSize="15sp" />
 
                         <TextView
@@ -96,6 +105,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:text=" : "
+                            android:textColor="@color/maintheme"
                             android:textSize="15sp" />
 
                     </LinearLayout>
@@ -111,6 +121,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="월, 금"
+                            android:textColor="@color/black"
                             android:textSize="15sp" />
 
                         <TextView
@@ -119,6 +130,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:text="19시 ~ 21시"
+                            android:textColor="@color/black"
                             android:textSize="15sp" />
 
                         <TextView
@@ -127,6 +139,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:text="2만원 / 학기"
+                            android:textColor="@color/black"
                             android:textSize="15sp" />
 
                     </LinearLayout>
@@ -141,53 +154,53 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/white"
+                app:contentInsetStart="0dp"
                 app:layout_collapseMode="pin">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginEnd="16dp"
                     android:orientation="horizontal">
 
                     <ImageButton
                         android:id="@+id/back_btn"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:layout_gravity="left|center_vertical"
+                        android:layout_marginStart="24dp"
                         android:background="@color/white"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/back_btn" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="동아리 이름"
-                        android:textColor="@color/black"
-                        android:textSize="16dp" />
-
-                    <View
-                        android:layout_width="8dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="0.5" />
+                        android:src="@drawable/back_btn"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <Button
-                        android:id="@+id/apply_btn"
+                        android:id="@+id/registerUrl"
                         android:layout_width="wrap_content"
                         android:layout_height="32dp"
-                        android:layout_gravity="right|center_vertical"
+                        android:layout_marginEnd="24dp"
                         android:background="@drawable/rectangular_background_button"
                         android:text="신청하기"
                         android:textColor="@color/maintheme"
-                        android:textSize="16dp" />
+                        android:textSize="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/Uid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="동아리 이름"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
-                </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             </androidx.appcompat.widget.Toolbar>
@@ -198,7 +211,12 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:tabIndicatorColor="@color/maintheme"
+            app:tabTextColor="@color/unselectedColor"
+            app:tabSelectedTextColor="@color/maintheme"
+
+            android:background="@color/white" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
