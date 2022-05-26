@@ -74,10 +74,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/mypage_email_reset"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="20dp"
-        android:text="대학교 인증하기"
-        android:textSize="18sp" />
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="30dp"
+        android:text="내가 좋아요한 게시글 보기"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/mypage_apply_club"
