@@ -18,15 +18,22 @@ import com.example.clubdictionary.BookMark.BookmarkFragment;
 import com.example.clubdictionary.Category.CategoryFragment;
 import com.example.clubdictionary.Home.HomeFragment;
 import com.example.clubdictionary.UserManagement.LoginActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseUser user;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     BottomNavigationView bottomNavigationView;
 
@@ -36,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     MyPageFragment mypageFragment = new MyPageFragment();
 
     ArrayList<String> filtering = new ArrayList<>();
+    String filteringBinary = null;
+    ArrayList<Boolean> checked = new ArrayList<>();
     CheckBox onlyFavorite, onlyRecruit;
 
     @Override
@@ -56,67 +65,64 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
-        } else {
-            //매인피드시작
         }
+        else {
+            //매인피드시작
+            getFiltering();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.mainframe, homeFragment);
+            transaction.commit();
 
-        //이부분이 메인 피드 시작 부분
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.mainframe, homeFragment);
-        transaction.commit();
+            bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    FragmentManager fm = getSupportFragmentManager();
+                    for (int i = 0; i < fm.getBackStackEntryCount(); ++i) {
+                        fm.popBackStack();
+                    }
+                    switch (item.getItemId()) {
+                        case R.id.home:
 
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                FragmentManager fm = getSupportFragmentManager();
-                for(int i = 0; i < fm.getBackStackEntryCount(); ++i) {
-                    fm.popBackStack();
+                            transaction.replace(R.id.mainframe, homeFragment);
+                            transaction.commit();
+                            return true;
+                        case R.id.bookmark:
+                            transaction.replace(R.id.mainframe, bookmarkFragment);
+                            transaction.commit();
+                            return true;
+                        case R.id.category:
+                            transaction.replace(R.id.mainframe, categoryFragment);
+                            transaction.commit();
+                            return true;
+                        case R.id.mypage:
+                            transaction.replace(R.id.mainframe, mypageFragment);
+                            transaction.commit();
+                            return true;
+                    }
+                    return false;
                 }
-                switch(item.getItemId()){
-                    case R.id.home:
 
-                        transaction.replace(R.id.mainframe, homeFragment);
-                        transaction.commit();
-                        return true;
-                    case R.id.bookmark:
-                        transaction.replace(R.id.mainframe, bookmarkFragment);
-                        transaction.commit();
-                        return true;
-                    case R.id.category:
-                        transaction.replace(R.id.mainframe, categoryFragment);
-                        transaction.commit();
-                        return true;
-                    case R.id.mypage:
-                        transaction.replace(R.id.mainframe, mypageFragment);
-                        transaction.commit();
-                        return true;
-                }
-                return false;
-            }
-
-        });
-
+            });
+        }
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            // 필터 버튼, 찜한 동아리, 모집공고 3개 중 하나라도 눌리면 바로 쿼리 함수 변경해서 쿼리해야함
-            // 필터 버튼의 선택된 소분류들을 메인에서 받은 다음에 쿼리 - onActivityResult 에서 쿼리처리
-            // 체크박스는 둘 중 하나라도 상태 변경되면 바로 쿼리 - switch 문에서 바로 쿼리
-            boolean onlyFavoriteChecked, onlyRecruitChecked;
-
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.filter:
                     Intent intent = new Intent(MainActivity.this, FilterActivity.class);
+                    intent.putExtra("filteringBinary", filteringBinary);
                     startActivityForResult(intent, 1);
                     break;
 
                 case R.id.onlyFavorite:
                 case R.id.onlyRecruit:
-                    onlyFavoriteChecked = onlyFavorite.isChecked();
-                    onlyRecruitChecked = onlyRecruit.isChecked();
+                    if (filteringBinary == null || filteringBinary.isEmpty())
+                        query(true, onlyFavorite.isChecked(), onlyRecruit.isChecked());
+                    else
+                        query(false, onlyFavorite.isChecked(), onlyRecruit.isChecked());
                     break;
             }
         }
@@ -125,22 +131,44 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode ==  RESULT_OK){
-            switch(requestCode){
-                case 1 :
-                    filtering = data.getStringArrayListExtra("filtering");
-                    String show = "";
-                    for(String now : filtering){
-                        show += now + " ";
-                    }
-
-                    Toast.makeText(this, "" + show, Toast.LENGTH_LONG).show();
-                    // 이 밑에서 쿼리
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case 1:
+                    filtering = data.getStringArrayListExtra("newFiltering");
+                    filteringBinary = data.getStringExtra("newFilteringBinary");
+                    if (filtering == null || filtering.isEmpty())
+                        query(true, onlyFavorite.isChecked(), onlyRecruit.isChecked());
+                    else
+                        query(false, onlyFavorite.isChecked(), onlyRecruit.isChecked());
                     break;
             }
         }
     }
 
+    private void query(boolean isFilteringEmpty, boolean onlyFavoriteChecked, boolean onlyRecruitChecked) {
+        Toast.makeText(this, ""+filtering, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "" + onlyFavoriteChecked + onlyRecruitChecked, Toast.LENGTH_SHORT).show();
+    }
+
+    private void getFiltering(){
+        db.collection("users").document(user.getUid()).get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            filteringBinary = (String) document.get("filtering");
+                            checked = (ArrayList<Boolean>) document.get("checked");
+
+                            if (checked.get(0)) onlyRecruit.setChecked(true);
+                            else onlyRecruit.setChecked(false);
+                            if (checked.get(1)) onlyFavorite.setChecked(true);
+                            else onlyFavorite.setChecked(false);
+                            Toast.makeText(MainActivity.this, "" + filteringBinary, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
     public void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

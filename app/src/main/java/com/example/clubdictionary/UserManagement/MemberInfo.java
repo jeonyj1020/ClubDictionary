@@ -1,30 +1,28 @@
 package com.example.clubdictionary.UserManagement;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MemberInfo {
     private String name;
     private String schoolNum;
     private String department;
     private String phoneNum;
-    private ArrayList<String>BookMark;
-
-    public ArrayList<String> getBookMark() {
-        return BookMark;
-    }
-
-    public void setBookMark(ArrayList<String> bookMark) {
-        BookMark = bookMark;
-    }
+    private ArrayList<String> bookMark;
+    private String filtering;
+    private ArrayList<Boolean> checked;
 
     public MemberInfo(){}
 
-    public MemberInfo(String name, String schoolNum, String department, String phoneNum, ArrayList<String> bookMark) {
+    public MemberInfo(String name, String schoolNum, String department, String phoneNum, ArrayList<String> bookMark
+            , String filtering, ArrayList<Boolean> checked) {
         this.name = name;
         this.schoolNum = schoolNum;
         this.department = department;
         this.phoneNum = phoneNum;
-        this.BookMark = bookMark;
+        this.bookMark = bookMark;
+        this.filtering = filtering;
+        this.checked = checked;
     }
 
     public MemberInfo(String name, String schoolNum, String department, String phoneNum) {
@@ -32,7 +30,9 @@ public class MemberInfo {
         this.schoolNum = schoolNum;
         this.department = department;
         this.phoneNum = phoneNum;
-        this.BookMark = null;
+        this.bookMark = null;
+        this.filtering = null;
+        this.checked = new ArrayList<Boolean>(Arrays.asList(false, false));
     }
 
     public String getName() {
@@ -66,4 +66,17 @@ public class MemberInfo {
     public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
     }
+
+    public ArrayList<String> getBookMark() {return bookMark;}
+    public void setBookMark(ArrayList<String> bookMark) {
+        this.bookMark = bookMark;
+    }
+
+    public String getFiltering() {
+        return filtering;
+    }
+    public void setFiltering(String filtering) { this.filtering = filtering;}
+
+    public ArrayList<Boolean> getChecked(){return checked;}
+    public void setChecked(ArrayList<Boolean> checked) {this.checked = checked;}
 }

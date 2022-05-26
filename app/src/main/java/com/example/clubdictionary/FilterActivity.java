@@ -3,18 +3,19 @@ package com.example.clubdictionary;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.GridLayout;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.clubdictionary.Home.HomeFragment;
-import com.example.clubdictionary.Home.HomeRecyclerViewAdapter;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -22,13 +23,17 @@ import java.util.List;
 
 public class FilterActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    ArrayList<String> filtering;
+    String filteringBinary;
+    String newFilteringBinary = "";
 
     List<CheckBox> societyList = new ArrayList<>();
     List<CheckBox> studyList = new ArrayList<>();
     List<CheckBox> artsList = new ArrayList<>();
     List<CheckBox> sportsList = new ArrayList<>();
     List<CheckBox> religionList = new ArrayList<>();
+    List<CheckBox> allList = new ArrayList<>();
+    List<CheckBox> allChecked = new ArrayList<>();
+    ArrayList<Integer> childCnt = new ArrayList<>();
 
     GridLayout society, study, arts, sports, religion;
     CheckBox societyChecked, studyChecked, artsChecked, sportsChecked, religionChecked;
@@ -37,169 +42,202 @@ public class FilterActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter);
+        filteringBinary = getIntent().getStringExtra("filteringBinary");
 
         findViewById(R.id.apply).setOnClickListener(onClickListener);
         findViewById(R.id.allUnCheck).setOnClickListener(onClickListener);
         societyChecked = (CheckBox) findViewById(R.id.societyChecked);
+        allChecked.add((CheckBox) societyChecked);
         studyChecked = (CheckBox) findViewById(R.id.studyChecked);
+        allChecked.add((CheckBox) studyChecked);
         artsChecked = (CheckBox) findViewById(R.id.artsChecked);
+        allChecked.add((CheckBox) artsChecked);
         sportsChecked = (CheckBox) findViewById(R.id.sportsChecked);
+        allChecked.add((CheckBox) sportsChecked);
         religionChecked = (CheckBox) findViewById(R.id.religionChecked);
+        allChecked.add((CheckBox) religionChecked);
 
         societyChecked.setOnClickListener(onClickListener);
         society = findViewById(R.id.society);
-        for(int i = 0; i < society.getChildCount(); i++){
+        for (int i = 0; i < society.getChildCount(); i++) {
             societyList.add((CheckBox) society.getChildAt(i));
+            allList.add((CheckBox) society.getChildAt(i));
         }
+        childCnt.add(societyList.size());
 
         studyChecked.setOnClickListener(onClickListener);
         study = findViewById(R.id.study);
-        for(int i = 0; i < study.getChildCount(); i++){
+        for (int i = 0; i < study.getChildCount(); i++) {
             studyList.add((CheckBox) study.getChildAt(i));
+            allList.add((CheckBox) study.getChildAt(i));
         }
+        childCnt.add(studyList.size());
 
         artsChecked.setOnClickListener(onClickListener);
         arts = findViewById(R.id.arts);
-        for(int i = 0; i < arts.getChildCount(); i++){
+        for (int i = 0; i < arts.getChildCount(); i++) {
             artsList.add((CheckBox) arts.getChildAt(i));
+            allList.add((CheckBox) arts.getChildAt(i));
         }
+        childCnt.add(artsList.size());
 
         sportsChecked.setOnClickListener(onClickListener);
-        sports = findViewById(R.id.sports);
-        for(int i = 0; i < sports.getChildCount(); i++){
+        sports = findViewById(R.id.arts);
+        for (int i = 0; i < arts.getChildCount(); i++) {
             sportsList.add((CheckBox) sports.getChildAt(i));
+            allList.add((CheckBox) sports.getChildAt(i));
         }
+        childCnt.add(sportsList.size());
 
         religionChecked.setOnClickListener(onClickListener);
         religion = findViewById(R.id.religion);
-        for(int i = 0; i < religion.getChildCount(); i++){
+        for (int i = 0; i < religion.getChildCount(); i++) {
             religionList.add((CheckBox) religion.getChildAt(i));
+            allList.add((CheckBox) religion.getChildAt(i));
         }
+        childCnt.add(religionList.size());
 
+        Toast.makeText(this, ""+filteringBinary, Toast.LENGTH_LONG).show();
+        if (filteringBinary == null) {
+            for (CheckBox now : allList) {
+                now.setChecked(true);
+            }
+            for (CheckBox now : allChecked) {
+                now.setChecked(true);
+            }
+        }
+        else {
+            if (!filteringBinary.isEmpty()) {
+                int index = -1;
+                for(int i = 0; i<5; i++){
+                    int n = childCnt.get(i);
+                    int checkedCnt = 0;
+                    for(int j = 1; j<=n; j++){
+                        index++;
+                        if(filteringBinary.charAt(index) == '1') {
+                            allList.get(j).setChecked(true);
+                            checkedCnt++;
+                        }
+                    }
+                    if(checkedCnt == n) allChecked.get(i).setChecked(true);
+                }
+            }
+        }
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             boolean allCheck;
-            switch(view.getId()){
+            switch (view.getId()) {
 
                 case R.id.societyChecked:
-                    allCheck = ((CheckBox)view).isChecked();
-                    if(allCheck) {
-                        for (CheckBox now : societyList){
+                    allCheck = ((CheckBox) view).isChecked();
+                    if (allCheck) {
+                        for (CheckBox now : societyList) {
                             now.setChecked(true);
                         }
-                    }
-                    else{
-                        for (CheckBox now : societyList){
+                    } else {
+                        for (CheckBox now : societyList) {
                             now.setChecked(false);
                         }
                     }
                     break;
 
-                case R.id.studyChecked :
-                    allCheck = ((CheckBox)view).isChecked();
-                    if(allCheck) {
-                        for (CheckBox now : studyList){
+                case R.id.studyChecked:
+                    allCheck = ((CheckBox) view).isChecked();
+                    if (allCheck) {
+                        for (CheckBox now : studyList) {
                             now.setChecked(true);
                         }
-                    }
-                    else{
-                        for (CheckBox now : studyList){
+                    } else {
+                        for (CheckBox now : studyList) {
                             now.setChecked(false);
                         }
                     }
                     break;
 
-                case R.id.artsChecked :
-                    allCheck = ((CheckBox)view).isChecked();
-                    if(allCheck) {
-                        for (CheckBox now : artsList){
+                case R.id.artsChecked:
+                    allCheck = ((CheckBox) view).isChecked();
+                    if (allCheck) {
+                        for (CheckBox now : artsList) {
                             now.setChecked(true);
                         }
-                    }
-                    else{
-                        for (CheckBox now : artsList){
+                    } else {
+                        for (CheckBox now : artsList) {
                             now.setChecked(false);
                         }
                     }
                     break;
 
-                case R.id.sportsChecked :
-                    allCheck = ((CheckBox)view).isChecked();
-                    if(allCheck) {
-                        for (CheckBox now : sportsList){
+                case R.id.sportsChecked:
+                    allCheck = ((CheckBox) view).isChecked();
+                    if (allCheck) {
+                        for (CheckBox now : sportsList) {
                             now.setChecked(true);
                         }
-                    }
-                    else{
-                        for (CheckBox now : sportsList){
+                    } else {
+                        for (CheckBox now : sportsList) {
                             now.setChecked(false);
                         }
                     }
                     break;
 
-                case R.id.religionChecked :
-                    allCheck = ((CheckBox)view).isChecked();
-                    if(allCheck) {
-                        for (CheckBox now : religionList){
+                case R.id.religionChecked:
+                    allCheck = ((CheckBox) view).isChecked();
+                    if (allCheck) {
+                        for (CheckBox now : religionList) {
                             now.setChecked(true);
                         }
-                    }
-                    else{
-                        for (CheckBox now : religionList){
+                    } else {
+                        for (CheckBox now : religionList) {
                             now.setChecked(false);
                         }
                     }
                     break;
 
                 case R.id.allUnCheck:
-                    societyChecked.setChecked(false);
-                    studyChecked.setChecked(false);
-                    artsChecked.setChecked(false);
-                    sportsChecked.setChecked(false);
-                    religionChecked.setChecked(false);
-
-                    for(CheckBox now : societyList){
+                    for (CheckBox now : allChecked) {
                         now.setChecked(false);
                     }
-                    for(CheckBox now : studyList){
-                        now.setChecked(false);
-                    }
-                    for(CheckBox now : artsList){
-                        now.setChecked(false);
-                    }
-                    for(CheckBox now : sportsList){
-                        now.setChecked(false);
-                    }
-                    for(CheckBox now : religionList){
+                    for (CheckBox now : allList) {
                         now.setChecked(false);
                     }
                     break;
 
-                case R.id.apply :
-                    ArrayList<String> checked = new ArrayList<>();
-                    for(CheckBox now : societyList){
-                        if(now.isChecked()) checked.add(now.getText().toString());
-                    }
-                    for(CheckBox now : studyList){
-                        if(now.isChecked()) checked.add(now.getText().toString());
-                    }
-                    for(CheckBox now : artsList){
-                        if(now.isChecked()) checked.add(now.getText().toString());
-                    }
-                    for(CheckBox now : sportsList){
-                        if(now.isChecked()) checked.add(now.getText().toString());
-                    }
-                    for(CheckBox now : religionList) {
-                        if (now.isChecked()) checked.add(now.getText().toString());
+                case R.id.apply:
+
+                    ArrayList<String> newFiltering = new ArrayList<>();
+
+                    for(CheckBox now : allList){
+                        if(now.isChecked()) {
+                            newFilteringBinary += "1";
+                            newFiltering.add(now.getText().toString());
+                        }
+                        else newFilteringBinary += "0";
                     }
 
-                    Intent intent = new Intent();
-                    intent.putStringArrayListExtra("filtering", checked);
-                    setResult(RESULT_OK, intent);
-                    finish();
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                    DocumentReference docRef = db.collection("users").document(user.getUid());
+                    docRef.update("filtering", newFilteringBinary)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+                                    Toast.makeText(FilterActivity.this, "펄터링을 수정했습니다",
+                                            Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent();
+                                    intent.putStringArrayListExtra("newFiltering", newFiltering);
+                                    intent.putExtra("newFilteringBinary", newFilteringBinary);
+                                    setResult(RESULT_OK, intent);
+                                    finish();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(FilterActivity.this, "펄터링 수정에 실패했습니다!",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            });
                     break;
             }
         }
