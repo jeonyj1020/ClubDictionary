@@ -33,7 +33,7 @@ public class ClubPageActivity extends AppCompatActivity {
         registerUrl = findViewById(R.id.registerUrl);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        FirebaseUser user  = FirebaseAuth.getInstance().getCurrentUser();
+       // FirebaseUser user  = FirebaseAuth.getInstance().getCurrentUser();
 
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");

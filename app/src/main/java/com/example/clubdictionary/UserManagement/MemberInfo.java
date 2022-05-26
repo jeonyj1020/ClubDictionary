@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MemberInfo {
+    private String Uid;
     private String name;
     private String schoolNum;
     private String department;
@@ -11,11 +12,12 @@ public class MemberInfo {
     private ArrayList<String> bookMark;
     private String filtering;
     private ArrayList<Boolean> checked;
+    private ArrayList<String> scrap;
+    private ArrayList<String> questionList;
+    private ArrayList<String> alarmList;
 
-    public MemberInfo(){}
-
-    public MemberInfo(String name, String schoolNum, String department, String phoneNum, ArrayList<String> bookMark
-            , String filtering, ArrayList<Boolean> checked) {
+    public MemberInfo(String uid, String name, String schoolNum, String department, String phoneNum, ArrayList<String> bookMark, String filtering, ArrayList<Boolean> checked, ArrayList<String> scrap, ArrayList<String> questionList, ArrayList<String> alarmList) {
+        this.Uid = uid;
         this.name = name;
         this.schoolNum = schoolNum;
         this.department = department;
@@ -23,9 +25,46 @@ public class MemberInfo {
         this.bookMark = bookMark;
         this.filtering = filtering;
         this.checked = checked;
+        this.scrap = scrap;
+        this.questionList = questionList;
+        this.alarmList = alarmList;
+    }
+
+
+    public MemberInfo(String uid, String name, String schoolNum, String department, String phoneNum) {
+        this.Uid = uid;
+        this.name = name;
+        this.schoolNum = schoolNum;
+        this.department = department;
+        this.phoneNum = phoneNum;
+
+        this.bookMark = null;
+        this.filtering = null;
+        this.checked = new ArrayList<Boolean>(Arrays.asList(false, false));
+        this.scrap = null;
+        this.questionList = null;
+        this.alarmList = null;
+    }
+
+    public MemberInfo(){}
+
+    public MemberInfo(String name, String schoolNum, String department, String phoneNum, ArrayList<String> bookMark
+            , String filtering, ArrayList<Boolean> checked) {
+       this.Uid = "";
+        this.name = name;
+        this.schoolNum = schoolNum;
+        this.department = department;
+        this.phoneNum = phoneNum;
+        this.bookMark = bookMark;
+        this.filtering = filtering;
+        this.checked = checked;
+        this.scrap = null;
+        this.questionList = null;
+        this.alarmList = null;
     }
 
     public MemberInfo(String name, String schoolNum, String department, String phoneNum) {
+        this.Uid = "";
         this.name = name;
         this.schoolNum = schoolNum;
         this.department = department;
@@ -33,6 +72,9 @@ public class MemberInfo {
         this.bookMark = null;
         this.filtering = null;
         this.checked = new ArrayList<Boolean>(Arrays.asList(false, false));
+        this.scrap = null;
+        this.questionList = null;
+        this.alarmList = null;
     }
 
     public String getName() {
@@ -79,4 +121,36 @@ public class MemberInfo {
 
     public ArrayList<Boolean> getChecked(){return checked;}
     public void setChecked(ArrayList<Boolean> checked) {this.checked = checked;}
+
+    public String getUid() {
+        return Uid;
+    }
+
+    public void setUid(String uid) {
+        Uid = uid;
+    }
+
+    public ArrayList<String> getScrap() {
+        return scrap;
+    }
+
+    public void setScrap(ArrayList<String> scrap) {
+        this.scrap = scrap;
+    }
+
+    public ArrayList<String> getQuestionList() {
+        return questionList;
+    }
+
+    public void setQuestionList(ArrayList<String> questionList) {
+        this.questionList = questionList;
+    }
+
+    public ArrayList<String> getAlarmList() {
+        return alarmList;
+    }
+
+    public void setAlarmList(ArrayList<String> alarmList) {
+        this.alarmList = alarmList;
+    }
 }

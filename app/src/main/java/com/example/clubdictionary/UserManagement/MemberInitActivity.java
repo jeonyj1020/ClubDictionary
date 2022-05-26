@@ -56,10 +56,8 @@ public class MemberInitActivity extends AppCompatActivity {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-
-            MemberInfo memberInfo = new MemberInfo(name, schoolNum, department, phoneNum);
-
             if(user != null){
+                MemberInfo memberInfo = new MemberInfo(user.getUid(), name, schoolNum, department, phoneNum);
                 db.collection("users").document(user.getUid()).set(memberInfo)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
@@ -81,7 +79,7 @@ public class MemberInitActivity extends AppCompatActivity {
 
         }
         else{
-
+            toast("회원 정보 등록에 실패했습니다.");
         }
     }
     private void toast(String text) {
