@@ -19,6 +19,7 @@ import com.example.clubdictionary.Category.CategoryFragment;
 import com.example.clubdictionary.Home.HomeFragment;
 import com.example.clubdictionary.UserManagement.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -36,12 +37,13 @@ public class MainActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     BottomNavigationView bottomNavigationView;
-
     HomeFragment homeFragment = new HomeFragment();
     BookmarkFragment bookmarkFragment = new BookmarkFragment();
     CategoryFragment categoryFragment = new CategoryFragment();
     MyPageFragment mypageFragment = new MyPageFragment();
 
+    // 필터링 관련 변수들
+    DocumentReference docRef;
     ArrayList<String> filtering = new ArrayList<>();
     String filteringBinary = null;
     ArrayList<Boolean> checked = new ArrayList<>();
@@ -68,7 +70,9 @@ public class MainActivity extends AppCompatActivity {
         }
         else {
             //매인피드시작
+            docRef = db.collection("users").document(user.getUid());
             getFiltering();
+
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.mainframe, homeFragment);
             transaction.commit();
@@ -119,10 +123,23 @@ public class MainActivity extends AppCompatActivity {
 
                 case R.id.onlyFavorite:
                 case R.id.onlyRecruit:
-                    if (filteringBinary == null || filteringBinary.isEmpty())
-                        query(true, onlyFavorite.isChecked(), onlyRecruit.isChecked());
-                    else
-                        query(false, onlyFavorite.isChecked(), onlyRecruit.isChecked());
+                    checked.set(0, onlyRecruit.isChecked());
+                    checked.set(1, onlyFavorite.isChecked());
+
+                    docRef.update("checked", checked)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+
+                                }
+                            });
+
+                    query();
                     break;
             }
         }
@@ -136,39 +153,40 @@ public class MainActivity extends AppCompatActivity {
                 case 1:
                     filtering = data.getStringArrayListExtra("newFiltering");
                     filteringBinary = data.getStringExtra("newFilteringBinary");
-                    if (filtering == null || filtering.isEmpty())
-                        query(true, onlyFavorite.isChecked(), onlyRecruit.isChecked());
-                    else
-                        query(false, onlyFavorite.isChecked(), onlyRecruit.isChecked());
+                    query();
                     break;
             }
         }
     }
 
-    private void query(boolean isFilteringEmpty, boolean onlyFavoriteChecked, boolean onlyRecruitChecked) {
-        Toast.makeText(this, ""+filtering, Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, "" + onlyFavoriteChecked + onlyRecruitChecked, Toast.LENGTH_SHORT).show();
+    private void query() {
+        boolean onlyRecruitChecked = onlyRecruit.isChecked();
+        boolean onlyFavoriteChecked = onlyFavorite.isChecked();
+        Toast.makeText(this, ""+filtering, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, ""+onlyRecruitChecked + ", " + onlyFavoriteChecked, Toast.LENGTH_SHORT).show();
     }
 
     private void getFiltering(){
-        db.collection("users").document(user.getUid()).get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
                             DocumentSnapshot document = task.getResult();
-                            filteringBinary = (String) document.get("filtering");
+                            filtering = (ArrayList<String>) document.get("filtering");
+                            filteringBinary = (String) document.get("filteringBinary");
                             checked = (ArrayList<Boolean>) document.get("checked");
 
                             if (checked.get(0)) onlyRecruit.setChecked(true);
                             else onlyRecruit.setChecked(false);
                             if (checked.get(1)) onlyFavorite.setChecked(true);
                             else onlyFavorite.setChecked(false);
-                            Toast.makeText(MainActivity.this, "" + filteringBinary, Toast.LENGTH_SHORT).show();
+
+                            query();
                         }
                     }
                 });
     }
+
     public void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

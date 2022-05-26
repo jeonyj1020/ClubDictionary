@@ -1,7 +1,5 @@
 package com.example.clubdictionary;
 
-import com.google.common.collect.ArrayTable;
-
 
 import java.util.ArrayList;
 
@@ -15,8 +13,9 @@ public class ClubInfo {
     private String minor;
     private String money;
     private String registerUrl;
-    private String filtering;
+    private String filteringBinary;
     private String introduce;
+    private ArrayList<String> filtering;
     private ArrayList<String> introducePicture;
     private ArrayList<Boolean> checked;
     private ArrayList<String> scrap;
@@ -27,7 +26,10 @@ public class ClubInfo {
 
     public  ClubInfo(){}
 
-    public ClubInfo(String uid, String icon, String name, String day, String activityTime, String major, String minor, String money, String registerUrl, String filtering, String introduce, ArrayList<String> introducePicture, ArrayList<Boolean> checked, ArrayList<String> scrap, ArrayList<String> questionList, ArrayList<String> alarmList, ArrayList<String> subscribers) {
+    public ClubInfo(String uid, String icon, String name, String day, String activityTime, String major, String minor,
+                    String money, String registerUrl, String filteringBinary, String introduce, ArrayList<String> introducePicture,
+                    ArrayList<Boolean> checked, ArrayList<String> scrap, ArrayList<String> questionList, ArrayList<String> alarmList,
+                    ArrayList<String> subscribers, ArrayList<String> filtering) {
         Uid = uid;
         this.icon = icon;
         this.name = name;
@@ -37,7 +39,7 @@ public class ClubInfo {
         this.minor = minor;
         this.money = money;
         this.registerUrl = registerUrl;
-        this.filtering = filtering;
+        this.filteringBinary = filteringBinary;
         this.introduce = introduce;
         this.introducePicture = introducePicture;
         this.checked = checked;
@@ -45,6 +47,7 @@ public class ClubInfo {
         this.questionList = questionList;
         this.alarmList = alarmList;
         this.subscribers = subscribers;
+        this.filtering = filtering;
     }
 
     public String getUid() {
@@ -119,12 +122,11 @@ public class ClubInfo {
         this.registerUrl = registerUrl;
     }
 
-    public String getFiltering() {
-        return filtering;
+    public String getFilteringBinary() {
+        return filteringBinary;
     }
-
-    public void setFiltering(String filtering) {
-        this.filtering = filtering;
+    public void setFilteringBinary(String filteringBinary) {
+        this.filteringBinary = filteringBinary;
     }
 
     public String getIntroduce() {
@@ -146,15 +148,20 @@ public class ClubInfo {
     public ArrayList<Boolean> getChecked() {
         return checked;
     }
-
     public void setChecked(ArrayList<Boolean> checked) {
         this.checked = checked;
+    }
+
+    public ArrayList<String> getFiltering() {
+        return filtering;
+    }
+    public void setCFiltering(ArrayList<String> filtering) {
+        this.filtering = filtering;
     }
 
     public ArrayList<String> getScrap() {
         return scrap;
     }
-
     public void setScrap(ArrayList<String> scrap) {
         this.scrap = scrap;
     }
@@ -162,15 +169,11 @@ public class ClubInfo {
     public ArrayList<String> getQuestionList() {
         return questionList;
     }
-
-    public void setQuestionList(ArrayList<String> questionList) {
-        this.questionList = questionList;
-    }
+    public void setQuestionList(ArrayList<String> questionList) {this.questionList = questionList;}
 
     public ArrayList<String> getAlarmList() {
         return alarmList;
     }
-
     public void setAlarmList(ArrayList<String> alarmList) {
         this.alarmList = alarmList;
     }
@@ -178,10 +181,10 @@ public class ClubInfo {
     public ArrayList<String> getSubscribers() {
         return subscribers;
     }
-
     public void setSubscribers(ArrayList<String> subscribers) {
         this.subscribers = subscribers;
     }
+
 /*private String icon;
     private String name;
     private String day;

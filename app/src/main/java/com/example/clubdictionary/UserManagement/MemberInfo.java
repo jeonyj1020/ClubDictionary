@@ -10,26 +10,32 @@ public class MemberInfo {
     private String department;
     private String phoneNum;
     private ArrayList<String> bookMark;
-    private String filtering;
+    private String filteringBinary;
     private ArrayList<Boolean> checked;
     private ArrayList<String> scrap;
     private ArrayList<String> questionList;
     private ArrayList<String> alarmList;
+    private ArrayList<String> filtering;
 
-    public MemberInfo(String uid, String name, String schoolNum, String department, String phoneNum, ArrayList<String> bookMark, String filtering, ArrayList<Boolean> checked, ArrayList<String> scrap, ArrayList<String> questionList, ArrayList<String> alarmList) {
+    public MemberInfo(){}
+
+    public MemberInfo(String uid, String name, String schoolNum, String department, String phoneNum,
+                      ArrayList<String> bookMark, String filteringBinary, ArrayList<Boolean> checked,
+                      ArrayList<String> scrap, ArrayList<String> questionList, ArrayList<String> alarmList,
+                      ArrayList<String> filtering) {
         this.Uid = uid;
         this.name = name;
         this.schoolNum = schoolNum;
         this.department = department;
         this.phoneNum = phoneNum;
         this.bookMark = bookMark;
-        this.filtering = filtering;
+        this.filteringBinary = filteringBinary;
         this.checked = checked;
         this.scrap = scrap;
         this.questionList = questionList;
         this.alarmList = alarmList;
+        this.filtering = filtering;
     }
-
 
     public MemberInfo(String uid, String name, String schoolNum, String department, String phoneNum) {
         this.Uid = uid;
@@ -39,42 +45,12 @@ public class MemberInfo {
         this.phoneNum = phoneNum;
 
         this.bookMark = null;
-        this.filtering = null;
+        this.filteringBinary = null;
         this.checked = new ArrayList<Boolean>(Arrays.asList(false, false));
         this.scrap = null;
         this.questionList = null;
         this.alarmList = null;
-    }
-
-    public MemberInfo(){}
-
-    public MemberInfo(String name, String schoolNum, String department, String phoneNum, ArrayList<String> bookMark
-            , String filtering, ArrayList<Boolean> checked) {
-       this.Uid = "";
-        this.name = name;
-        this.schoolNum = schoolNum;
-        this.department = department;
-        this.phoneNum = phoneNum;
-        this.bookMark = bookMark;
-        this.filtering = filtering;
-        this.checked = checked;
-        this.scrap = null;
-        this.questionList = null;
-        this.alarmList = null;
-    }
-
-    public MemberInfo(String name, String schoolNum, String department, String phoneNum) {
-        this.Uid = "";
-        this.name = name;
-        this.schoolNum = schoolNum;
-        this.department = department;
-        this.phoneNum = phoneNum;
-        this.bookMark = null;
         this.filtering = null;
-        this.checked = new ArrayList<Boolean>(Arrays.asList(false, false));
-        this.scrap = null;
-        this.questionList = null;
-        this.alarmList = null;
     }
 
     public String getName() {
@@ -114,10 +90,10 @@ public class MemberInfo {
         this.bookMark = bookMark;
     }
 
-    public String getFiltering() {
-        return filtering;
+    public String getFilteringBinary() {
+        return filteringBinary;
     }
-    public void setFiltering(String filtering) { this.filtering = filtering;}
+    public void setFilteringBinary(String filteringBinary) { this.filteringBinary = filteringBinary;}
 
     public ArrayList<Boolean> getChecked(){return checked;}
     public void setChecked(ArrayList<Boolean> checked) {this.checked = checked;}
@@ -153,4 +129,9 @@ public class MemberInfo {
     public void setAlarmList(ArrayList<String> alarmList) {
         this.alarmList = alarmList;
     }
+
+    public ArrayList<String> getFiltering() {
+        return filtering;
+    }
+    public void setFiltering(ArrayList<String> filtering) { this.filtering = filtering;}
 }

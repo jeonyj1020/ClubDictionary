@@ -82,8 +82,8 @@ public class FilterActivity extends AppCompatActivity {
         childCnt.add(artsList.size());
 
         sportsChecked.setOnClickListener(onClickListener);
-        sports = findViewById(R.id.arts);
-        for (int i = 0; i < arts.getChildCount(); i++) {
+        sports = findViewById(R.id.sports);
+        for (int i = 0; i < sports.getChildCount(); i++) {
             sportsList.add((CheckBox) sports.getChildAt(i));
             allList.add((CheckBox) sports.getChildAt(i));
         }
@@ -115,7 +115,7 @@ public class FilterActivity extends AppCompatActivity {
                     for(int j = 1; j<=n; j++){
                         index++;
                         if(filteringBinary.charAt(index) == '1') {
-                            allList.get(j).setChecked(true);
+                            allList.get(index).setChecked(true);
                             checkedCnt++;
                         }
                     }
@@ -219,7 +219,7 @@ public class FilterActivity extends AppCompatActivity {
 
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     DocumentReference docRef = db.collection("users").document(user.getUid());
-                    docRef.update("filtering", newFilteringBinary)
+                    docRef.update("filtering", newFiltering, "filteringBinary", newFilteringBinary)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
