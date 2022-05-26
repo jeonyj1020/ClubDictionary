@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.clubdictionary.BookMark.BookmarkFragment;
 import com.example.clubdictionary.Category.CategoryFragment;
+import com.example.clubdictionary.Group.GroupFragment;
 import com.example.clubdictionary.Home.HomeFragment;
 import com.example.clubdictionary.UserManagement.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,6 +36,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseUser user;
+
+
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     BottomNavigationView bottomNavigationView;
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     BookmarkFragment bookmarkFragment = new BookmarkFragment();
     CategoryFragment categoryFragment = new CategoryFragment();
     MyPageFragment mypageFragment = new MyPageFragment();
-
+    GroupFragment groupFragment = new GroupFragment();
     // 필터링 관련 변수들
     DocumentReference docRef = null;
     ArrayList<String> filtering = new ArrayList<>();
@@ -111,6 +114,10 @@ public class MainActivity extends AppCompatActivity {
                             return true;
                         case R.id.category:
                             transaction.replace(R.id.mainframe, categoryFragment);
+                            transaction.commit();
+                            return true;
+                        case R.id.group:
+                            transaction.replace(R.id.mainframe, groupFragment);
                             transaction.commit();
                             return true;
                         case R.id.mypage:

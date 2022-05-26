@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,12 +25,12 @@ public class ClubPageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_club_page);
-        TextView Uid, icon, nameTextView, day, hour, money, registerUrl;
+        TextView Uid, icon, nameTextView, day, activityTime, money, registerUrl;
         Uid = findViewById(R.id.Uid);
         icon = findViewById(R.id.icon);
         nameTextView = findViewById(R.id.nameTextView);
         day = findViewById(R.id.day);
-        hour = findViewById(R.id.hour);
+        activityTime = findViewById(R.id.activityTime);
         money = findViewById(R.id.money);
         registerUrl = findViewById(R.id.registerUrl);
 
@@ -44,14 +46,27 @@ public class ClubPageActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Log.d(TAG, document.getId() + " => " + document.getData());
-                                Uid.setText(document.get("Uid").toString());
+                                /*Uid.setText(document.get("Uid").toString());
                                 icon.setText(document.get("icon").toString());
                                 nameTextView.setText(document.get("name").toString());
                                 day.setText(document.get("day").toString());
                                 hour.setText(document.get("hour").toString());
                                 money.setText(document.get("money").toString());
-                                registerUrl.setText(document.get("registerUrl").toString());
-
+                                registerUrl.setText(document.get("registerUrl").toString());*/
+                                ClubInfo clubInfo = document.toObject(ClubInfo.class);
+                                icon.setText(clubInfo.getIcon());
+                                nameTextView.setText(clubInfo.getName());
+                                day.setText(clubInfo.getDay());
+                                activityTime.setText(clubInfo.getActivityTime());
+                                money.setText(clubInfo.getMoney());
+                                registerUrl.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                                        intent.setData(Uri.parse(clubInfo.getRegisterUrl()));
+                                        startActivity(intent);
+                                    }
+                                });
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());

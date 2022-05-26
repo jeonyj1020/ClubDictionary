@@ -1,5 +1,7 @@
 package com.example.clubdictionary.UserManagement;
 
+import com.google.firebase.firestore.CollectionReference;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -16,6 +18,7 @@ public class MemberInfo {
     private ArrayList<String> questionList;
     private ArrayList<String> alarmList;
     private ArrayList<String> filtering;
+
 
     public MemberInfo(){}
 
@@ -134,4 +137,6 @@ public class MemberInfo {
         return filtering;
     }
     public void setFiltering(ArrayList<String> filtering) { this.filtering = filtering;}
+
+
 }

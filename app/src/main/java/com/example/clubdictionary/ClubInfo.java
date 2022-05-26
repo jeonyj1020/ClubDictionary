@@ -1,6 +1,8 @@
 package com.example.clubdictionary;
 
 
+import com.google.firebase.firestore.CollectionReference;
+
 import java.util.ArrayList;
 
 public class ClubInfo {
@@ -22,6 +24,8 @@ public class ClubInfo {
     private ArrayList<String> questionList;
     private ArrayList<String> alarmList;
     private ArrayList<String> subscribers;
+    private CollectionReference QnA;
+    private CollectionReference posts;
 
 
     public  ClubInfo(){}
@@ -184,15 +188,20 @@ public class ClubInfo {
     public void setSubscribers(ArrayList<String> subscribers) {
         this.subscribers = subscribers;
     }
+    public CollectionReference getQnA() {
+        return QnA;
+    }
 
-/*private String icon;
-    private String name;
-    private String day;
-    private String money;
-    private String activityTime;
-    private String registerUrl;
-    private String introduce;
-    private ArrayList<String> introducePicture;
-    private ArrayList<ArrayList<String>> QnA;*/
+    public void setQnA(CollectionReference qnA) {
+        QnA = qnA;
+    }
+
+    public CollectionReference getPosts() {
+        return posts;
+    }
+
+    public void setPosts(CollectionReference posts) {
+        this.posts = posts;
+    }
 
 }
