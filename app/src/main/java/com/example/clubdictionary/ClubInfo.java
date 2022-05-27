@@ -4,6 +4,8 @@ package com.example.clubdictionary;
 import com.google.firebase.firestore.CollectionReference;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class ClubInfo {
     private String Uid;
@@ -26,14 +28,14 @@ public class ClubInfo {
     private ArrayList<String> subscribers;
     private CollectionReference QnA;
     private CollectionReference posts;
-
+    private Map<String, List<String>> bookMark;
 
     public  ClubInfo(){}
 
     public ClubInfo(String uid, String icon, String name, String day, String activityTime, String major, String minor,
                     String money, String registerUrl, String filteringBinary, String introduce, ArrayList<String> introducePicture,
                     ArrayList<Boolean> checked, ArrayList<String> scrap, ArrayList<String> questionList, ArrayList<String> alarmList,
-                    ArrayList<String> subscribers, ArrayList<String> filtering) {
+                    ArrayList<String> subscribers, ArrayList<String> filtering, Map<String, List<String>> bookMark) {
         Uid = uid;
         this.icon = icon;
         this.name = name;
@@ -52,6 +54,7 @@ public class ClubInfo {
         this.alarmList = alarmList;
         this.subscribers = subscribers;
         this.filtering = filtering;
+        this.bookMark = bookMark;
     }
 
     public String getUid() {
@@ -204,4 +207,8 @@ public class ClubInfo {
         this.posts = posts;
     }
 
+    public Map<String, List<String>> getBookMark(){return bookMark;}
+    public void setBookMark(Map<String, List<String>> bookMark) {
+        this.bookMark = bookMark;
+    }
 }

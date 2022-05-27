@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Pair;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
@@ -30,9 +31,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.IdentityHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseUser user;
@@ -52,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     String filteringBinary = null;
     ArrayList<Boolean> checked = new ArrayList<>();
     CheckBox onlyFavorite, onlyRecruit;
-    ArrayList<String> bookMark = new ArrayList<>();
+    Map<String, List<String>> bookMark = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
                         DocumentSnapshot document = task.getResult();
                         if(!document.exists()){
                             docRef = db.collection("users").document(user.getUid());
+                            Log.d("type", "유저입니다");
                             getFiltering();
                         }
                         else getFiltering();
@@ -189,8 +196,18 @@ public class MainActivity extends AppCompatActivity {
                             filtering = (ArrayList<String>) document.get("filtering");
                             filteringBinary = (String) document.get("filteringBinary");
                             checked = (ArrayList<Boolean>) document.get("checked");
-                            bookMark = (ArrayList<String>) document.get("bookMark");
+                            bookMark = (Map<String, List<String>>) document.get("bookMark");
+                            /*Map<String, List<String>> bookMark = new HashMap<>();
+                            bookMark = (Map<String, List<String>>) document.get("bookMark");
+                            List<String> newBookMark = new ArrayList<>();
 
+                            if(bookMark.containsKey("ball")){
+                                newBookMark = bookMark.get("ball");
+                            }
+                            newBookMark.add("스트라이크");
+                            bookMark.put("ball", newBookMark);
+
+                            docRef.update("bookMark", bookMark);*/
                             if (checked.get(0)) onlyRecruit.setChecked(true);
                             else onlyRecruit.setChecked(false);
                             if (checked.get(1)) onlyFavorite.setChecked(true);
@@ -205,9 +222,18 @@ public class MainActivity extends AppCompatActivity {
     private void query() {
         boolean onlyRecruitChecked = onlyRecruit.isChecked();
         boolean onlyFavoriteChecked = onlyFavorite.isChecked();
-        Toast.makeText(this, ""+filtering, Toast.LENGTH_LONG).show();
-        Toast.makeText(this, ""+onlyRecruitChecked + ", " + onlyFavoriteChecked, Toast.LENGTH_SHORT).show();
+        Log.d("filter", " \n" + filtering + "\n" + filteringBinary + "\n" + onlyRecruitChecked +
+                ", " + onlyFavoriteChecked + "\n" + bookMark);
 
+        ArrayList<String> intersection = null;
+        /*if(onlyFavoriteChecked){
+            for(){
+
+            }
+        }
+        else{
+            intersection = filtering;
+        }*/
         /*ArrayList<Task> tasks = null;
         for(int i = 0; i <= filtering.size()/10; i++) {
             List<String> now = null;

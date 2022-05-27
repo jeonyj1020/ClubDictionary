@@ -4,6 +4,9 @@ import com.google.firebase.firestore.CollectionReference;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MemberInfo {
     private String Uid;
@@ -11,7 +14,7 @@ public class MemberInfo {
     private String schoolNum;
     private String department;
     private String phoneNum;
-    private ArrayList<String> bookMark;
+    private Map<String, List<String>> bookMark;
     private String filteringBinary;
     private ArrayList<Boolean> checked;
     private ArrayList<String> scrap;
@@ -19,11 +22,10 @@ public class MemberInfo {
     private ArrayList<String> alarmList;
     private ArrayList<String> filtering;
 
-
     public MemberInfo(){}
 
     public MemberInfo(String uid, String name, String schoolNum, String department, String phoneNum,
-                      ArrayList<String> bookMark, String filteringBinary, ArrayList<Boolean> checked,
+                      Map<String, List<String>> bookMark, String filteringBinary, ArrayList<Boolean> checked,
                       ArrayList<String> scrap, ArrayList<String> questionList, ArrayList<String> alarmList,
                       ArrayList<String> filtering) {
         this.Uid = uid;
@@ -88,8 +90,8 @@ public class MemberInfo {
         this.phoneNum = phoneNum;
     }
 
-    public ArrayList<String> getBookMark() {return bookMark;}
-    public void setBookMark(ArrayList<String> bookMark) {
+    public Map<String, List<String>> getBookMark() {return bookMark;}
+    public void setBookMark(Map<String, List<String>> bookMark) {
         this.bookMark = bookMark;
     }
 
@@ -137,6 +139,4 @@ public class MemberInfo {
         return filtering;
     }
     public void setFiltering(ArrayList<String> filtering) { this.filtering = filtering;}
-
-
 }

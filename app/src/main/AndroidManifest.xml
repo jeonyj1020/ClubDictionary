@@ -42,6 +42,7 @@
         <activity
             android:name=".FilterActivity"
             android:exported="true" />
+
     </application>
 
 </manifest>

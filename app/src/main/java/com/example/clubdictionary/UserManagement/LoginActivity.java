@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.clubdictionary.MainActivity;
 import com.example.clubdictionary.R;
 import com.example.clubdictionary.YoonJinTestActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -69,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 Toast.makeText(LoginActivity.this,"로그인에 성공하였습니다.",Toast.LENGTH_SHORT).show();
 
-                                Intent intent = new Intent(LoginActivity.this, YoonJinTestActivity.class);
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
 
