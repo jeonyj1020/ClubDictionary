@@ -12,13 +12,22 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clubdictionary.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class BookmarkFragment extends Fragment {
 
     RecyclerView recyclerView;
     BookmarkRecyclerViewAdapter bookmarkRecyclerViewAdapter;
+    private FirebaseUser user;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    Map<String, List<String>> bookMark = new HashMap<>();
 
     public BookmarkFragment() {}
 
@@ -28,6 +37,8 @@ public class BookmarkFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_bookmark, container, false);
 
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        //db.collection(get)
         ArrayList<String> testDataSet = new ArrayList<>();
 
         for(int i = 0; i < 20; i++){

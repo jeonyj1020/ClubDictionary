@@ -111,7 +111,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                     switch (item.getItemId()) {
                         case R.id.home:
-
                             transaction.replace(R.id.mainframe, homeFragment);
                             transaction.commit();
                             return true;

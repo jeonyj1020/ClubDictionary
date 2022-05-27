@@ -44,7 +44,7 @@ public class ClubPageActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference userDocRef = null;            // 지금 동아리 페이지 보고 있는 유저의 문서 주소 - bookMark 등 업데이트 용
     DocumentReference clubDocRef = null;            // 해당 동아리 문서의 주소 - 이걸로 동아리 정보 수정하면 될 듯
-    DocumentSnapshot userDoc = null;
+    DocumentSnapshot userDoc = null;                //
     String minor = null;
     String clubName = null;
     Map<String, List<String>> bookMark = new HashMap<>();
@@ -197,7 +197,7 @@ public class ClubPageActivity extends AppCompatActivity {
             bookMarked = false;
             // 이미지 설정?
         }
-        Log.d("bookMark", bookMark.get("ball").get(0) + ", " + bookMark.get("ball").get(1));
+        //Log.d("bookMark", bookMark.get("ball").get(0) + ", " + bookMark.get("ball").get(1));
         //Toast.makeText(this, ""+bookMarked, Toast.LENGTH_SHORT).show();
     }
     private void addBookMark(){
