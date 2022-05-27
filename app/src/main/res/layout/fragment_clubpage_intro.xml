@@ -4,9 +4,12 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="50dp"
-        android:text="동아리 소개"/>
+        android:textSize="20dp"
+        android:text=""/>
 
 </androidx.core.widget.NestedScrollView>
