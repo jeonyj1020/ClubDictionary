@@ -49,13 +49,13 @@ public class MemberInfo {
         this.department = department;
         this.phoneNum = phoneNum;
 
-        this.bookMark = null;
-        this.filteringBinary = null;
+        this.bookMark = new HashMap<>();
+        this.filteringBinary = new String();
         this.checked = new ArrayList<Boolean>(Arrays.asList(false, false));
-        this.scrap = null;
-        this.questionList = null;
-        this.alarmList = null;
-        this.filtering = null;
+        this.scrap = new ArrayList<>();
+        this.questionList = new ArrayList<>();
+        this.alarmList = new ArrayList<>();
+        this.filtering = new ArrayList<>();
     }
 
     public String getName() {
