@@ -14,10 +14,10 @@ import java.util.ArrayList;
 
 public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRecyclerViewAdapter.ViewHolder> {
 
-    private ArrayList<String> ClubNameSet;
+    private ArrayList<BookmarkItem> bookmarkItemList;
 
-    public BookmarkRecyclerViewAdapter(ArrayList<String> clubNameSet) {
-        ClubNameSet = clubNameSet;
+    public BookmarkRecyclerViewAdapter(ArrayList<BookmarkItem> bookmarkItemList) {
+        bookmarkItemList = bookmarkItemList;
     }
 
     @NonNull
@@ -30,13 +30,13 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
 
     @Override
     public void onBindViewHolder(@NonNull BookmarkRecyclerViewAdapter.ViewHolder holder, int position) {
-        String text = ClubNameSet.get(position);
-        holder.textView.setText(text);
+        //String text = bookmarkItemList.get(position);
+        //holder.textView.setText(text);
     }
 
     @Override
     public int getItemCount() {
-        return ClubNameSet.size();
+        return bookmarkItemList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
