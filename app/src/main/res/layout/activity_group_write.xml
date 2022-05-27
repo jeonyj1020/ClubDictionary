@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Group.GroupWriteActivity">
+
+
+    <EditText
+        android:padding="10dp"
+        android:id="@+id/title"
+        android:hint="제목"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="20dp"
+        android:fontFamily="@font/gmarket_sans_medium"
+         />
+
+    <EditText
+        android:id="@id/content"
+        android:padding="10dp"
+        android:hint="내용"
+        android:textSize="20dp"
+        android:gravity="top"
+        android:lines="20"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/gmarket_sans_medium"
+        />
+    <EditText
+        android:id="@+id/kakaoLink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:hint="오픈카카오톡링크"
+        android:textSize="20dp"
+        android:fontFamily="@font/gmarket_sans_medium"/>
+    <Button
+        android:id="@+id/applyButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="확인"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/maintheme"
+        android:fontFamily="@font/gmarket_sans_medium"/>
+
+</LinearLayout>

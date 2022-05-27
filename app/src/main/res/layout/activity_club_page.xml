@@ -188,7 +188,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/Uid"
+                        android:id="@+id/nameTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="동아리 이름"
