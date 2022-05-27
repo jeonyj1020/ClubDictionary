@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_marginStart="12dp"
     android:layout_marginEnd="12dp"
@@ -8,377 +9,391 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tool_bar"
         android:layout_width="match_parent"
-        android:layout_height="60dp" />
+        android:layout_height="60dp"
+        app:contentInsetStart="0dp">
 
-    <TextView
-        android:id="@+id/title_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tool_bar"
-        android:gravity="center_vertical"
-        android:text="원하시는 동아리를 선택해주세요"
-        android:textColor="@color/black"
-        android:textSize="24dp" />
+    </androidx.appcompat.widget.Toolbar>
 
     <ScrollView
-        android:layout_below="@+id/title_bar"
+        android:id="@+id/scrollView"
+        android:layout_above="@+id/bottom_linear"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tool_bar">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/title_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="25dp"
+                android:gravity="center_vertical"
+                android:text="원하시는 동아리를 선택해주세요"
+                android:textColor="@color/black"
+                android:textSize="24dp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="사회" />
-
-                    <CheckBox
-                        android:id="@+id/societyChecked"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:text="전체 선택" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginTop="10dp">
-
-                    <GridLayout
-                        android:id="@+id/society"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:columnCount="3"
-                        android:orientation="horizontal"
-                        android:useDefaultMargins="true">
+                        android:orientation="horizontal">
 
-                        <CheckBox
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="봉사" />
+                            android:text="사회" />
 
-                    </GridLayout>
+                        <CheckBox
+                            android:id="@+id/societyChecked"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="30dp"
+                            android:text="전체 선택" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="10dp">
+
+                        <GridLayout
+                            android:id="@+id/society"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:columnCount="3"
+                            android:orientation="horizontal"
+                            android:useDefaultMargins="true">
+
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="봉사" />
+
+                        </GridLayout>
+
+                    </LinearLayout>
 
                 </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="학술" />
-
-                    <CheckBox
-                        android:id="@+id/studyChecked"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:text="전체 선택" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginTop="10dp">
-
-                    <GridLayout
-                        android:id="@+id/study"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:columnCount="2"
-                        android:orientation="horizontal"
-                        android:useDefaultMargins="true">
+                        android:orientation="horizontal">
 
-                        <CheckBox
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="인문" />
+                            android:text="학술" />
 
                         <CheckBox
+                            android:id="@+id/studyChecked"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="진로/창업/발명" />
+                            android:layout_marginLeft="30dp"
+                            android:text="전체 선택" />
 
-                        <CheckBox
-                            android:layout_width="wrap_content"
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="10dp">
+
+                        <GridLayout
+                            android:id="@+id/study"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="IT" />
+                            android:columnCount="2"
+                            android:orientation="horizontal"
+                            android:useDefaultMargins="true">
 
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="자연" />
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="인문" />
 
-                    </GridLayout>
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="진로/창업/발명" />
+
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="IT" />
+
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="자연" />
+
+                        </GridLayout>
+
+                    </LinearLayout>
 
                 </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="문예" />
-
-                    <CheckBox
-                        android:id="@+id/artsChecked"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:text="전체 선택" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginTop="10dp">
-
-                    <GridLayout
-                        android:id="@+id/arts"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:columnCount="2"
-                        android:orientation="horizontal"
-                        android:useDefaultMargins="true">
+                        android:orientation="horizontal">
 
-                        <CheckBox
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="밴드" />
+                            android:text="문예" />
 
                         <CheckBox
+                            android:id="@+id/artsChecked"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="악기" />
+                            android:layout_marginLeft="30dp"
+                            android:text="전체 선택" />
 
-                        <CheckBox
-                            android:layout_width="wrap_content"
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="10dp">
+
+                        <GridLayout
+                            android:id="@+id/arts"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="노래" />
+                            android:columnCount="2"
+                            android:orientation="horizontal"
+                            android:useDefaultMargins="true">
 
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="미술" />
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="밴드" />
 
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="사진/영상" />
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="악기" />
 
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="연극" />
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="노래" />
 
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="댄스" />
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="미술" />
 
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="수공예" />
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="사진/영상" />
 
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="요리" />
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="연극" />
 
-                    </GridLayout>
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="댄스" />
+
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="수공예" />
+
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="요리" />
+
+                        </GridLayout>
+
+                    </LinearLayout>
 
                 </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="체육" />
-
-                    <CheckBox
-                        android:id="@+id/sportsChecked"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:text="전체 선택" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginTop="10dp">
-
-                    <GridLayout
-                        android:id="@+id/sports"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:columnCount="2"
-                        android:orientation="horizontal"
-                        android:useDefaultMargins="true">
+                        android:orientation="horizontal">
 
-                        <CheckBox
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="구기" />
+                            android:text="체육" />
 
                         <CheckBox
+                            android:id="@+id/sportsChecked"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="라켓 스포츠" />
+                            android:layout_marginLeft="30dp"
+                            android:text="전체 선택" />
 
-                        <CheckBox
-                            android:layout_width="wrap_content"
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="10dp">
+
+                        <GridLayout
+                            android:id="@+id/sports"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="무술" />
+                            android:columnCount="2"
+                            android:orientation="horizontal"
+                            android:useDefaultMargins="true">
 
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="익스트림 스포츠" />
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="구기" />
 
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="양궁" />
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="라켓 스포츠" />
 
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="게임" />
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="무술" />
 
-                    </GridLayout>
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="익스트림 스포츠" />
+
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="양궁" />
+
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="게임" />
+
+                        </GridLayout>
+
+                    </LinearLayout>
 
                 </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="종교" />
-
-                    <CheckBox
-                        android:id="@+id/religionChecked"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="30dp"
-                        android:text="전체 선택" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginTop="10dp">
-
-                    <GridLayout
-                        android:id="@+id/religion"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:columnCount="2"
-                        android:orientation="horizontal"
-                        android:useDefaultMargins="true">
+                        android:orientation="horizontal">
 
-                        <CheckBox
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="기독교" />
+                            android:text="종교" />
 
                         <CheckBox
+                            android:id="@+id/religionChecked"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="불교" />
+                            android:layout_marginLeft="30dp"
+                            android:text="전체 선택" />
 
-                        <CheckBox
-                            android:layout_width="wrap_content"
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="10dp">
+
+                        <GridLayout
+                            android:id="@+id/religion"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="가톨릭" />
+                            android:columnCount="2"
+                            android:orientation="horizontal"
+                            android:useDefaultMargins="true">
 
-                        <CheckBox
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="증산도" />
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="기독교" />
 
-                    </GridLayout>
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="불교" />
+
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="가톨릭" />
+
+                            <CheckBox
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="증산도" />
+
+                        </GridLayout>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
             </LinearLayout>
+
 
         </LinearLayout>
 
@@ -386,11 +401,12 @@
     </ScrollView>
 
     <LinearLayout
-        android:background="@color/white"
+        android:id="@+id/bottom_linear"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="20dp"
+        android:background="@color/white"
         android:orientation="horizontal">
 
         <Button

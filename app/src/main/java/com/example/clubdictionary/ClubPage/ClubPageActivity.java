@@ -12,8 +12,11 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -86,22 +89,26 @@ public class ClubPageActivity extends AppCompatActivity {
             }
         }).attach();
 
+        ImageButton apply_btn = findViewById(R.id.bookMark);
         TextView nameTextView, day, activityTime, money, registerUrl;
         ImageButton back_btn = findViewById(R.id.back_btn);
-        findViewById(R.id.bookMark).setOnClickListener(new View.OnClickListener() {
+
+        apply_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(bookMarked){
+                if (bookMarked) {
                     bookMarked = false;
                     deleteBookMark();
+                    apply_btn.setImageResource(R.drawable.png_bookmark);
+
                     //이미지설정?
-                }
-                else{
+                } else {
                     bookMarked = true;
                     addBookMark();
+                    apply_btn.setImageResource(R.drawable.png_bookmark_selected);
                     // 이미지 설정?
                 }
-                Toast.makeText(ClubPageActivity.this, ""+bookMarked, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ClubPageActivity.this, "" + bookMarked, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -160,49 +167,47 @@ public class ClubPageActivity extends AppCompatActivity {
         userDocRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     userDoc = task.getResult();
-                    if(!userDoc.exists()){
+                    if (!userDoc.exists()) {
                         userDocRef = db.collection("clubs").document(user.getUid());
                         userDocRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     Log.d("user", "동아리입니다");
                                     userDoc = task.getResult();
                                     getBookMark();
                                 }
                             }
                         });
-                    }
-                    else {
+                    } else {
                         Log.d("user", "유저입니다");
                         getBookMark();
                     }
-                }
-                else Log.d("task", "실패");
+                } else Log.d("task", "실패");
             }
         });
 
 
     }
 
-    private void getBookMark(){
+    private void getBookMark() {
         bookMark = (Map<String, List<String>>) userDoc.get("bookMark");
-        if(subscribers.contains(user.getUid())){
+        if (subscribers.contains(user.getUid())) {
             bookMarked = true;
             // 이미지 설정?
-        }
-        else {
+        } else {
             bookMarked = false;
             // 이미지 설정?
         }
         //Log.d("bookMark", bookMark.get("ball").get(0) + ", " + bookMark.get("ball").get(1));
         //Toast.makeText(this, ""+bookMarked, Toast.LENGTH_SHORT).show();
     }
-    private void addBookMark(){
+
+    private void addBookMark() {
         List<String> newBookMark = new ArrayList<>();
-        if(bookMark.containsKey(minor)){
+        if (bookMark.containsKey(minor)) {
             newBookMark = bookMark.get(minor);
         }
         newBookMark.add(clubName);
@@ -213,14 +218,13 @@ public class ClubPageActivity extends AppCompatActivity {
         clubDocRef.update("subscribers", FieldValue.arrayUnion(user.getUid()));
     }
 
-    private void deleteBookMark(){
+    private void deleteBookMark() {
         List<String> newBookMark = new ArrayList<>();
         newBookMark = bookMark.get(minor);
         newBookMark.remove(clubName);
-        if(newBookMark.isEmpty()){
+        if (newBookMark.isEmpty()) {
             bookMark.remove(minor);
-        }
-        else bookMark.put(minor, newBookMark);
+        } else bookMark.put(minor, newBookMark);
 
         userDocRef.update("bookMark", bookMark);
 

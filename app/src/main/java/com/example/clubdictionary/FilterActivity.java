@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -35,6 +36,9 @@ public class FilterActivity extends AppCompatActivity {
     List<CheckBox> allChecked = new ArrayList<>();
     ArrayList<Integer> childCnt = new ArrayList<>();
 
+    Toolbar toolbar;
+
+
     GridLayout society, study, arts, sports, religion;
     CheckBox societyChecked, studyChecked, artsChecked, sportsChecked, religionChecked;
 
@@ -43,6 +47,12 @@ public class FilterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filter);
         filteringBinary = getIntent().getStringExtra("filteringBinary");
+
+        toolbar = findViewById(R.id.tool_bar);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         findViewById(R.id.apply).setOnClickListener(onClickListener);
         findViewById(R.id.allUnCheck).setOnClickListener(onClickListener);
