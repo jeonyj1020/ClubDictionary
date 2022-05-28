@@ -41,9 +41,10 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="49" />
+            android:layout_weight="103" />
 
         <EditText
+            android:inputType="text"
             android:layout_margin="5dp"
             android:includeFontPadding="false"
             android:id="@+id/emailEditText_login"
@@ -52,7 +53,8 @@
             android:layout_weight="126"
             android:background="@drawable/edittext_background"
             android:elevation="2dp"
-            android:textSize="15dp"
+            android:gravity="center_vertical"
+            android:textSize="13dp"
             android:padding="20dp"
             android:fontFamily="@font/notosanskr_medium"
             android:hint="이메일을 입력해주세요"
@@ -61,9 +63,10 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="24" />
+            android:layout_weight="12" />
 
         <EditText
+            android:inputType="textPassword"
             android:background="@drawable/edittext_background"
             android:elevation="2dp"
             android:padding="20dp"
@@ -73,7 +76,8 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="126"
-            android:textSize="15dp"
+            android:gravity="center_vertical"
+            android:textSize="13dp"
             android:fontFamily="@font/notosanskr_medium"
             android:hint="비밀번호를 입력해주세요"
             android:textColor="@color/black_191919" />
@@ -81,7 +85,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="54" />
+            android:layout_weight="12" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -119,7 +123,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="42"
+            android:layout_weight="62"
             android:weightSum="690"
             android:orientation="horizontal">
 
@@ -131,6 +135,7 @@
             <TextView
                 android:includeFontPadding="false"
                 android:layout_width="0dp"
+                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_weight="242"
                 android:textColor="@color/black_191919"
@@ -145,8 +150,9 @@
                 android:id="@+id/gotopasswordResetButton"
                 android:includeFontPadding="false"
                 android:layout_width="0dp"
+                android:gravity="center"
                 android:layout_height="match_parent"
-                android:layout_weight="187"
+                android:layout_weight="140"
                 android:textColor="@color/maintheme"
                 android:fontFamily="@font/notosanskr_medium"
                 android:autoSizeMaxTextSize="100dp"
@@ -154,19 +160,23 @@
                 android:autoSizeTextType="uniform"
                 android:text="비밀번호 찾기"/>
 
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="160" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="344" />
+            android:layout_weight="314" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:weightSum="690"
             android:orientation="horizontal"
-            android:layout_weight="42">
+            android:layout_weight="62">
 
             <View
                 android:layout_width="0dp"
@@ -174,10 +184,12 @@
                 android:layout_weight="150" />
             
             <TextView
+                android:gravity="center"
                 android:layout_width="0dp"
                 android:includeFontPadding="false"
                 android:layout_height="match_parent"
                 android:layout_weight="263"
+                android:layout_gravity="center"
                 android:fontFamily="@font/notosanskr_medium"
                 android:autoSizeMaxTextSize="100dp"
                 android:autoSizeMinTextSize="10dp"
@@ -186,9 +198,11 @@
                 android:text="아직 회원이 아니신가요?"/>
 
             <TextView
+                android:gravity="center"
                 android:id="@+id/goToSignUp"
                 android:includeFontPadding="false"
                 android:layout_width="0dp"
+                android:layout_gravity="center"
                 android:layout_height="match_parent"
                 android:layout_weight="100"
                 android:text="회원 가입"
@@ -204,7 +218,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="31"
                 android:src="@drawable/next_btn"
-                android:padding="3dp"/>
+                android:padding="4dp"/>
 
             <View
                 android:layout_width="0dp"

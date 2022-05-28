@@ -157,6 +157,7 @@
                 app:contentInsetStart="0dp"
                 app:layout_collapseMode="pin">
 
+
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -180,13 +181,14 @@
                         android:layout_height="32dp"
                         android:background="@color/white"
                         android:scaleType="centerInside"
-                        android:src="@drawable/bookmark"
+                        android:src="@drawable/png_bookmark"
+                        android:padding="5dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toEndOf="@+id/registerUrl"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.541" />
+                        app:layout_constraintVertical_bias="0.5" />
 
                     <Button
                         android:id="@+id/registerUrl"
@@ -200,7 +202,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.541" />
+                        app:layout_constraintVertical_bias="0.5" />
 
                     <TextView
                         android:id="@+id/nameTextView"
