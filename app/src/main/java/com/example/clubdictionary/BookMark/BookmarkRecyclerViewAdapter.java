@@ -8,13 +8,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.clubdictionary.MainActivity;
 import com.example.clubdictionary.R;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRecyclerViewAdapter.ViewHolder> {
+    FirebaseStorage storage = FirebaseStorage.getInstance();
 
     private ArrayList<BookmarkItem> bookMarkItemList;
 
@@ -35,7 +42,7 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
 
         BookmarkItem bookmarkItem = bookMarkItemList.get(position);
 
-        //holder.icon.setText(bookmarkItem.get());
+        //holder.icon.se
         holder.name.setText(bookmarkItem.getClubName());
         holder.major.setText("#"+bookmarkItem.getMajor()+" ");
         holder.minor.setText("#"+bookmarkItem.getMinor()+" ");
@@ -51,7 +58,7 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        //private text icon;
+        private CircleImageView icon;
         private TextView name;
         private TextView major;
         private TextView minor;
@@ -59,7 +66,10 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            //icon = itemView.findViewById(R.id.bookmark_item_icon);
+            icon = itemView.findViewById(R.id.bookmark_item_icon);
+            Glide.with(itemView).
+                    load("gs://clubdictionary.appspot.com/clubs/5cLadUS3cng18VygrQzHd8Qrorg1/24283C3858F778CA2E.jpg")
+                    .into(icon);
             name = itemView.findViewById(R.id.bookmark_item_name);
             major = itemView.findViewById(R.id.bookmark_item_major);
             minor = itemView.findViewById(R.id.bookmark_item_minor);
