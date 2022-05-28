@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "26212022239",
+    "project_id": "clubdictionary",
+    "storage_bucket": "clubdictionary.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:26212022239:android:e76f6accd5ebf26d66366a",
+        "android_client_info": {
+          "package_name": "com.example.clubdictionary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "26212022239-vfu2eutkmvfgtfgn31kbp1enoi4llemp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8vCq3Ie8u8cfzMpQQRZ08hpV3o-ngp68"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "26212022239-vfu2eutkmvfgtfgn31kbp1enoi4llemp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

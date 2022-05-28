@@ -22,6 +22,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class GroupWriteActivity extends AppCompatActivity {
     private static final String TAG = "GroupWriteActivity";
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -49,8 +52,12 @@ public class GroupWriteActivity extends AppCompatActivity {
         String titleStr = title.getText().toString();
         String contentStr = content.getText().toString();
         String kakaoLinkStr =kakaoLink.getText().toString();
+        long now = System.currentTimeMillis();
+        Date date = new Date(now);
+        SimpleDateFormat sdf = new SimpleDateFormat("MM / dd HH : mm");
+        String getTime = sdf.format(date);
         if(title.length()>0 && content.length()>0 && kakaoLinkStr.length() > 0){
-            GroupPostInfo groupPostInfo = new GroupPostInfo(titleStr, contentStr, kakaoLinkStr, user.getUid());
+            GroupPostInfo groupPostInfo = new GroupPostInfo(titleStr, contentStr, kakaoLinkStr, user.getUid(), getTime, "");
             uploader(groupPostInfo);
         }
         else{
@@ -67,6 +74,8 @@ public class GroupWriteActivity extends AppCompatActivity {
         db.collection("group").add(groupPostInfo).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override
             public void onSuccess(DocumentReference documentReference) {
+                documentReference.update("postUid", documentReference.getId());
+                Log.d(TAG, documentReference.getId());
                 toast("게시글을 등록하였습니다.");
             }
         }).addOnFailureListener(new OnFailureListener() {
