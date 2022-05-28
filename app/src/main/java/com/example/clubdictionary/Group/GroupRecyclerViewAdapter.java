@@ -1,16 +1,20 @@
 package com.example.clubdictionary.Group;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clubdictionary.GroupPostInfo;
 import com.example.clubdictionary.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -60,5 +64,7 @@ public class GroupRecyclerViewAdapter extends RecyclerView.Adapter<GroupRecycler
             date = itemView.findViewById(R.id.date);
             //클릭했을때 기능같은거 여기에 넣기
         }
+
     }
+
 }
