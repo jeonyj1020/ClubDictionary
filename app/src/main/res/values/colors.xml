@@ -11,6 +11,9 @@
     <color name="backgroundcolor">#FFf0f0f0</color>
     <color name="colorDivision">#FFEDEDED</color>
     <color name="unselectedColor">#FF767676</color>
+    <color name="gray_dbdbdb">#FFDBDBDB</color>
+    <color name="black_191919">#FF191919</color>
+    <color name="gray_767676">#FF767676</color>
 
 
 </resources>

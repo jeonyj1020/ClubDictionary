@@ -4,102 +4,219 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundcolor"
-    android:backgroundTint="@color/backgroundcolor"
+    android:background="@drawable/background_image"
     tools:context=".UserManagement.LoginActivity">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="256dp"
-        android:layout_height="140dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginEnd="52dp"
-        android:fontFamily="@font/gmarket_sans_medium"
-        android:text="신비한\n동아리\n사전"
-        android:textColor="@color/maintheme"
-        android:textSize="40sp"
-        android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.196" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="vertical"
+        android:weightSum="1670">
 
-    <EditText
-        android:id="@+id/emailEditText_login"
-        android:layout_width="256dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:hint="e-mail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="250" />
 
-    <EditText
-        android:id="@+id/passwordEditText_login"
-        android:layout_width="256dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
-        android:fontFamily="@font/gmarket_sans_light"
-        android:hint="password"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailEditText_login" />
 
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="256dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="12dp"
-        android:background="@color/maintheme"
-        android:fontFamily="@font/gmarket_sans_medium"
-        android:gravity="center"
-        android:text="로그인"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        android:textStyle="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordEditText_login" />
+        <TextView
+            android:id="@+id/title"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="356"
+            android:autoSizeMaxTextSize="90sp"
+            android:autoSizeMinTextSize="30sp"
+            android:autoSizeStepGranularity="1sp"
+            android:autoSizeTextType="uniform"
+            android:fontFamily="@font/dx_poet_guana"
+            android:lineSpacingExtra="10dp"
+            android:text="신비한\n동아리\n사전"
+            android:textColor="@color/maintheme"
+            android:textStyle="normal" />
 
-    <TextView
-        android:id="@+id/goToSignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@color/backgroundcolor"
-        android:backgroundTint="@color/backgroundcolor"
-        android:fontFamily="@font/gmarket_sans_medium"
-        android:gravity="center"
-        android:text="회원 가입"
-        android:textColor="@color/maintheme"
-        android:textSize="16sp"
-        android:textStyle="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="49" />
 
-    <TextView
-        android:id="@+id/gotopasswordResetButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@color/backgroundcolor"
-        android:backgroundTint="@color/backgroundcolor"
-        android:fontFamily="@font/gmarket_sans_medium"
-        android:gravity="center"
-        android:text="아이디 / 비밀번호 찾기"
-        android:textColor="@color/maintheme"
-        android:textSize="16sp"
-        android:textStyle="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/goToSignUp" />
+        <EditText
+            android:layout_margin="5dp"
+            android:includeFontPadding="false"
+            android:id="@+id/emailEditText_login"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="126"
+            android:background="@drawable/edittext_background"
+            android:elevation="2dp"
+            android:textSize="15dp"
+            android:padding="20dp"
+            android:fontFamily="@font/notosanskr_medium"
+            android:hint="이메일을 입력해주세요"
+            android:textColor="@color/black_191919"  />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="24" />
+
+        <EditText
+            android:background="@drawable/edittext_background"
+            android:elevation="2dp"
+            android:padding="20dp"
+            android:layout_margin="5dp"
+            android:includeFontPadding="false"
+            android:id="@+id/passwordEditText_login"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="126"
+            android:textSize="15dp"
+            android:fontFamily="@font/notosanskr_medium"
+            android:hint="비밀번호를 입력해주세요"
+            android:textColor="@color/black_191919" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="54" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="169">
+
+            <Button
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:id="@+id/loginButton"
+                android:layout_width="match_parent"
+                android:layout_height="63dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="-2dp"
+                android:layout_marginBottom="5dp"
+                android:autoSizeMaxTextSize="100dp"
+                android:autoSizeMinTextSize="10dp"
+                android:autoSizeTextType="uniform"
+                android:background="@drawable/button_background"
+                android:fontFamily="@font/notosanskr_bold"
+                android:gravity="center"
+                android:text="로그인"
+                android:textColor="#ffffff" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="8dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/button_shadow" />
+        </RelativeLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="42"
+            android:weightSum="690"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="141" />
+
+            <TextView
+                android:includeFontPadding="false"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="242"
+                android:textColor="@color/black_191919"
+                android:fontFamily="@font/notosanskr_medium"
+                android:autoSizeMaxTextSize="100dp"
+                android:autoSizeMinTextSize="10dp"
+                android:autoSizeTextType="uniform"
+                android:text="비밀번호를 잊으셨나요?"/>
+
+
+            <TextView
+                android:id="@+id/gotopasswordResetButton"
+                android:includeFontPadding="false"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="187"
+                android:textColor="@color/maintheme"
+                android:fontFamily="@font/notosanskr_medium"
+                android:autoSizeMaxTextSize="100dp"
+                android:autoSizeMinTextSize="10dp"
+                android:autoSizeTextType="uniform"
+                android:text="비밀번호 찾기"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="344" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:weightSum="690"
+            android:orientation="horizontal"
+            android:layout_weight="42">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="150" />
+            
+            <TextView
+                android:layout_width="0dp"
+                android:includeFontPadding="false"
+                android:layout_height="match_parent"
+                android:layout_weight="263"
+                android:fontFamily="@font/notosanskr_medium"
+                android:autoSizeMaxTextSize="100dp"
+                android:autoSizeMinTextSize="10dp"
+                android:autoSizeTextType="uniform"
+                android:textColor="@color/gray_767676"
+                android:text="아직 회원이 아니신가요?"/>
+
+            <TextView
+                android:id="@+id/goToSignUp"
+                android:includeFontPadding="false"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="100"
+                android:text="회원 가입"
+                android:textStyle="bold"
+                android:fontFamily="@font/notosanskr_medium"
+                android:autoSizeMaxTextSize="100dp"
+                android:autoSizeMinTextSize="10dp"
+                android:autoSizeTextType="uniform"
+                android:textColor="@color/black_191919"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="31"
+                android:src="@drawable/next_btn"
+                android:padding="3dp"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="148" />
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
