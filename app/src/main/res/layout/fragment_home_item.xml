@@ -7,69 +7,166 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="center_vertical">
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="center_vertical"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:weightSum="786">
+
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/home_item_profile_image"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:padding="1dp"
-            android:layout_margin="5dp"
+            android:id="@+id/icon"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="80"
             android:background="@drawable/round_background_border_main_theme"
+            android:padding="1dp"
             android:src="@drawable/mypage" />
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="16" />
+
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="384"
+            android:orientation="vertical"
+            android:weightSum="81">
 
             <TextView
-                android:id="@+id/home_item_profile_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="동아리 명"
-                android:textSize="20dp" />
+                android:id="@+id/clubName"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="46"
+                android:fontFamily="@font/notosanskr_medium"
+                android:includeFontPadding="false"
+                android:text="동아리 이름"
+                android:textColor="@color/black_191919"
+                android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/home_item_profile_category"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="#카테고리"
-                android:textSize="12dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="35"
+                android:orientation="horizontal"
+                android:weightSum="184">
+
+                <TextView
+                    android:id="@+id/major"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/notosanskr_medium"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="대분류"
+                    android:textColor="@color/gray_999999"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/minor"
+                    android:layout_marginStart="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/notosanskr_medium"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="소분류"
+                    android:textColor="@color/gray_999999"
+                    android:textSize="12sp" />
+
+
+
+
+                <ImageView
+                    android:layout_width="3dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:src="@drawable/icon_dot" />
+
+
+                <TextView
+                    android:id="@+id/upTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/notosanskr_medium"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="시간"
+                    android:textColor="@color/gray_999999"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
         <View
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_height="match_parent"
+            android:layout_weight="306" />
 
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="right|center"
-            android:layout_margin="5dp"
-            android:src="@drawable/bookmark" />
 
     </LinearLayout>
 
-    <ImageView
-        android:background="@color/colorDivision"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:id="@+id/home_item_content_viewpager"/>
+        android:layout_height="400dp">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewpager2"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/gray_dbdbdb" />
+
+        <LinearLayout
+            android:id="@+id/layout_indicator"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="8dp" />
+
+    </RelativeLayout>
+
+    <ImageButton
+        android:id="@+id/scrap"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"
+        android:background="@color/white"
+        android:scaleType="centerInside"
+        android:src="@drawable/png_like" />
 
     <TextView
-        android:id="@+id/home_item_hashtag"
+        android:id="@+id/hashTag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/notosanskr_medium"
+        android:includeFontPadding="false"
+        android:text="#여기에 #해시태그 #띄우고"
         android:textColor="@color/maintheme"
-        android:text="#여기에 #해시태그 #띄우고"/>
+        android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/home_item_content_details"
+        android:id="@+id/contents"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="여기에 내용 띠워 넣고\n몇줄까지 보이게 할지 정하고\n더보기..."/>
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:fontFamily="@font/notosanskr_medium"
+        android:includeFontPadding="false"
+        android:text="여기에 내용 띠워 넣고 몇줄까지 보이게 할지 정하고\n더보기..."
+        android:textColor="@color/black_191919"
+        android:textSize="16sp" />
 
 
 </LinearLayout>
