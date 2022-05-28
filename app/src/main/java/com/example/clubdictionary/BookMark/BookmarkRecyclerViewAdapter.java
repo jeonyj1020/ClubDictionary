@@ -12,12 +12,14 @@ import com.example.clubdictionary.R;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRecyclerViewAdapter.ViewHolder> {
 
-    private ArrayList<BookmarkItem> bookmarkItemList;
+    private ArrayList<BookmarkItem> bookMarkItemList;
 
-    public BookmarkRecyclerViewAdapter(ArrayList<BookmarkItem> bookmarkItemList) {
-        bookmarkItemList = bookmarkItemList;
+    public BookmarkRecyclerViewAdapter(ArrayList<BookmarkItem> bookMarkItemList) {
+        this.bookMarkItemList = bookMarkItemList;
     }
 
     @NonNull
@@ -30,23 +32,37 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
 
     @Override
     public void onBindViewHolder(@NonNull BookmarkRecyclerViewAdapter.ViewHolder holder, int position) {
+
+        BookmarkItem bookmarkItem = bookMarkItemList.get(position);
+
+        //holder.icon.setText(bookmarkItem.get());
+        holder.name.setText(bookmarkItem.getClubName());
+        holder.major.setText("#"+bookmarkItem.getMajor()+" ");
+        holder.minor.setText("#"+bookmarkItem.getMinor()+" ");
+
         //String text = bookmarkItemList.get(position);
         //holder.textView.setText(text);
     }
 
     @Override
     public int getItemCount() {
-        return bookmarkItemList.size();
+        return bookMarkItemList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView textView;
+        //private text icon;
+        private TextView name;
+        private TextView major;
+        private TextView minor;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            textView = itemView.findViewById(R.id.bookmark_item_profile_name);
+            //icon = itemView.findViewById(R.id.bookmark_item_icon);
+            name = itemView.findViewById(R.id.bookmark_item_name);
+            major = itemView.findViewById(R.id.bookmark_item_major);
+            minor = itemView.findViewById(R.id.bookmark_item_minor);
 
             /*itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -58,9 +74,7 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
                 }
             });*/
         }
-        public TextView getTextView(){
-            return textView;
-        }
+
     }
 }
 
