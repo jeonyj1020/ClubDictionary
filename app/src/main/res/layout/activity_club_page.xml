@@ -30,11 +30,11 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/icon"
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
+                    android:layout_width="95dp"
+                    android:layout_height="95dp"
                     android:layout_gravity="start"
                     android:background="@drawable/round_background_border_main_theme"
-                    android:padding="1dp"
+                    android:padding="2dp"
                     android:src="@drawable/mypage" />
 
                 <View
@@ -55,6 +55,8 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:fontFamily="@font/notosanskr_medium"
+                            android:includeFontPadding="false"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="활동 요일"
@@ -62,6 +64,8 @@
                             android:textSize="15sp" />
 
                         <TextView
+                            android:fontFamily="@font/notosanskr_medium"
+                            android:includeFontPadding="false"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
@@ -70,6 +74,8 @@
                             android:textSize="15sp" />
 
                         <TextView
+                            android:fontFamily="@font/notosanskr_medium"
+                            android:includeFontPadding="false"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
@@ -86,6 +92,8 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:fontFamily="@font/notosanskr_medium"
+                            android:includeFontPadding="false"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text=" : "
@@ -93,6 +101,8 @@
                             android:textSize="15sp" />
 
                         <TextView
+                            android:fontFamily="@font/notosanskr_medium"
+                            android:includeFontPadding="false"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
@@ -101,6 +111,8 @@
                             android:textSize="15sp" />
 
                         <TextView
+                            android:fontFamily="@font/notosanskr_medium"
+                            android:includeFontPadding="false"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
@@ -117,6 +129,8 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:fontFamily="@font/notosanskr_medium"
+                            android:includeFontPadding="false"
                             android:id="@+id/day"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -125,6 +139,8 @@
                             android:textSize="15sp" />
 
                         <TextView
+                            android:fontFamily="@font/notosanskr_medium"
+                            android:includeFontPadding="false"
                             android:id="@+id/activityTime"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -134,6 +150,8 @@
                             android:textSize="15sp" />
 
                         <TextView
+                            android:fontFamily="@font/notosanskr_medium"
+                            android:includeFontPadding="false"
                             android:id="@+id/money"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -156,7 +174,6 @@
                 android:background="@color/white"
                 app:contentInsetStart="0dp"
                 app:layout_collapseMode="pin">
-
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -191,6 +208,8 @@
                         app:layout_constraintVertical_bias="0.5" />
 
                     <Button
+                        android:fontFamily="@font/notosanskr_medium"
+                        android:includeFontPadding="false"
                         android:id="@+id/registerUrl"
                         android:layout_width="wrap_content"
                         android:layout_height="32dp"
@@ -205,6 +224,8 @@
                         app:layout_constraintVertical_bias="0.5" />
 
                     <TextView
+                        android:includeFontPadding="false"
+                        android:fontFamily="@font/notosanskr_medium"
                         android:id="@+id/nameTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -232,7 +253,6 @@
             app:tabIndicatorColor="@color/maintheme"
             app:tabTextColor="@color/unselectedColor"
             app:tabSelectedTextColor="@color/maintheme"
-
             android:background="@color/white" />
 
     </com.google.android.material.appbar.AppBarLayout>
