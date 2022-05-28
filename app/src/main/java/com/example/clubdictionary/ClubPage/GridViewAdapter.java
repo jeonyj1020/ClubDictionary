@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -44,10 +43,10 @@ public class GridViewAdapter extends BaseAdapter {
 
         if(view == null){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.club_page_gridview_item, viewGroup, false);
+            view = inflater.inflate(R.layout.square_image, viewGroup, false);
 
 
-            ImageView img = view.findViewById(R.id.iv_icon);
+            ImageView img = view.findViewById(R.id.square_image_icon);
 
 
 

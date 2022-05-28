@@ -71,13 +71,11 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             icon = itemView.findViewById(R.id.icon);
             scrap = itemView.findViewById(R.id.scrap);
 
-
-
             viewPager2 = itemView.findViewById(R.id.viewpager2);
             layoutIndicator = itemView.findViewById(R.id.layout_indicator);
 
             viewPager2.setOffscreenPageLimit(1);
-            viewPager2.setAdapter(new ItemViewPagerAdapter(context, images));
+            viewPager2.setAdapter(new ImageViewPagerAdapter(images, context));
 
             viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
                 @Override
