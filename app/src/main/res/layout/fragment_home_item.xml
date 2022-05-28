@@ -142,7 +142,7 @@
         android:layout_marginTop="2dp"
         android:background="@color/white"
         android:scaleType="centerInside"
-        android:src="@drawable/png_like" />
+        android:src="@drawable/icon_scrap" />
 
     <TextView
         android:id="@+id/hashTag"
