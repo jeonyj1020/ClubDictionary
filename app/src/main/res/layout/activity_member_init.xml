@@ -23,7 +23,7 @@
             android:includeFontPadding="false"
             android:text="회원 가입"
             android:textColor="@color/black_191919"
-            android:textSize="18dp" />
+            android:textSize="18sp" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -46,19 +46,20 @@
             android:id="@+id/emailTextView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="40"
+            android:layout_weight="50"
             android:fontFamily="@font/notosanskr_medium"
             android:includeFontPadding="false"
             android:text="이름"
-            android:autoSizeMaxTextSize="100dp"
-            android:autoSizeMinTextSize="10dp"
+            android:autoSizeMaxTextSize="100sp"
+            android:autoSizeMinTextSize="10sp"
+            android:autoSizeStepGranularity="1dp"
             android:autoSizeTextType="uniform"
             android:textColor="@color/black_191919" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="85"
+            android:layout_weight="95"
             android:gravity="center"
             android:orientation="horizontal"
             android:weightSum="691">
@@ -68,13 +69,15 @@
                 android:id="@+id/nameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="85"
                 android:fontFamily="@font/notosanskr_medium"
-                android:hint="홍길동"
+                android:hint="호반우"
                 android:includeFontPadding="false"
                 android:inputType="text"
                 android:textColor="@color/black_191919"
-                android:textSize="15sp"/>
+                android:autoSizeMaxTextSize="100sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeStepGranularity="1dp"
+                android:autoSizeTextType="uniform"/>
 
         </LinearLayout>
 
@@ -85,14 +88,15 @@
 
         <TextView
             android:id="@+id/authnumTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="40"
+            android:layout_weight="50"
             android:fontFamily="@font/notosanskr_medium"
             android:includeFontPadding="false"
             android:text="학번"
             android:autoSizeMaxTextSize="100sp"
             android:autoSizeMinTextSize="10sp"
+            android:autoSizeStepGranularity="1dp"
             android:autoSizeTextType="uniform"
             android:textColor="@color/black_191919" />
 
@@ -106,13 +110,16 @@
             android:id="@+id/schoolNumEditText"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="85"
+            android:layout_weight="95"
             android:fontFamily="@font/notosanskr_medium"
             android:hint="0000000000"
             android:includeFontPadding="false"
             android:inputType="number"
             android:textColor="@color/black_191919"
-            android:textSize="15sp" />
+            android:autoSizeMaxTextSize="100sp"
+            android:autoSizeMinTextSize="10sp"
+            android:autoSizeStepGranularity="1dp"
+            android:autoSizeTextType="uniform"/>
 
         <View
             android:layout_width="match_parent"
@@ -123,12 +130,13 @@
             android:id="@+id/passwordTextView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="40"
+            android:layout_weight="50"
             android:fontFamily="@font/notosanskr_medium"
             android:includeFontPadding="false"
             android:text="학과"
             android:autoSizeMaxTextSize="100sp"
             android:autoSizeMinTextSize="10sp"
+            android:autoSizeStepGranularity="1dp"
             android:autoSizeTextType="uniform"
             android:textColor="@color/black_191919" />
 
@@ -137,13 +145,16 @@
             android:id="@+id/departmentEditText"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="85"
+            android:layout_weight="95"
             android:fontFamily="@font/notosanskr_medium"
             android:hint="모바일 공학과"
             android:inputType="text"
             android:includeFontPadding="false"
             android:textColor="@color/black_191919"
-            android:textSize="15sp" />
+            android:autoSizeMaxTextSize="100sp"
+            android:autoSizeMinTextSize="10sp"
+            android:autoSizeStepGranularity="1dp"
+            android:autoSizeTextType="uniform" />
 
         <View
             android:layout_width="match_parent"
@@ -154,12 +165,13 @@
             android:id="@+id/tv4"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="40"
+            android:layout_weight="50"
             android:fontFamily="@font/notosanskr_medium"
             android:includeFontPadding="false"
             android:text="전화번호"
             android:autoSizeMaxTextSize="100sp"
             android:autoSizeMinTextSize="10sp"
+            android:autoSizeStepGranularity="1dp"
             android:autoSizeTextType="uniform"
             android:textColor="@color/black_191919" />
 
@@ -168,19 +180,22 @@
             android:id="@+id/phoneNumEditText"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="85"
+            android:layout_weight="95"
             android:fontFamily="@font/notosanskr_medium"
-            android:hint="010 - 0000 - 0000"
+            android:hint="01000000000"
             android:includeFontPadding="false"
             android:inputType="number"
             android:textColor="@color/black_191919"
-            android:textSize="15sp" />
+            android:autoSizeMaxTextSize="100sp"
+            android:autoSizeMinTextSize="10sp"
+            android:autoSizeStepGranularity="1dp"
+            android:autoSizeTextType="uniform" />
 
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="573" />
+            android:layout_weight="493" />
 
         <Button
             android:id="@+id/startButton"

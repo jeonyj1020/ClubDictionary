@@ -4,9 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.clubdictionary.R;
@@ -17,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class PasswordResetActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,16 @@ public class PasswordResetActivity extends AppCompatActivity {
         findViewById(R.id.sendButton).setOnClickListener(onClickListener);
 
         mAuth = FirebaseAuth.getInstance();
+        textView = findViewById(R.id.websitemoveTextView);
+
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("https://mail.knu.ac.kr/"));
+                startActivity(intent);
+            }
+        });
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
