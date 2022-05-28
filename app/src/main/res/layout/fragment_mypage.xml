@@ -20,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="100"
-            android:weightSum="215"
+            android:weightSum="217"
             android:orientation="vertical">
 
             <View
@@ -30,9 +30,10 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/mypage_profile_pic"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="100"
+                android:adjustViewBounds="true"
                 android:background="@drawable/round_background_border_main_theme"
                 android:padding="1dp"
                 android:src="@drawable/mypage" />
