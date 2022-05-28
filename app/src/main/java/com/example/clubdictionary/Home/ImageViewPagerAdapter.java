@@ -51,7 +51,7 @@ public class ImageViewPagerAdapter extends RecyclerView.Adapter<ImageViewPagerAd
         }
 
         public void bindSliderImage(String imageURL) {
-            // 여기서 Url 통해서 가져온 아이템 imageView 에 load 하면 됨
+
 
         }
     }
