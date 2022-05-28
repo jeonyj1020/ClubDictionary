@@ -4,24 +4,24 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class BookmarkItem {
 
-    private String clubUid, clubName, major, minor;
+    private String iconUrl, clubName, major, minor;
     //private CircleImageView icon;
     //private ImageView bookMark;
 
     public BookmarkItem(){}
 
-    public BookmarkItem(String clubUid, String clubName, String major, String minor){
-        this.clubUid = clubUid;
+    public BookmarkItem(String iconUrl, String clubName, String major, String minor){
+        this.iconUrl = iconUrl;
         this.clubName = clubName;
         this.major = major;
         this.minor = minor;
     }
 
-    public String getClubUid() {
-        return clubUid;
+    public String getIconUrl() {
+        return iconUrl;
     }
-    public void setClubUid(String clubUid) {
-        this.clubUid = clubUid;
+    public void setIconUrl(String iconUrl) {
+        this.iconUrl = iconUrl;
     }
 
     //public ImageView getBookMark() {return bookMark;}

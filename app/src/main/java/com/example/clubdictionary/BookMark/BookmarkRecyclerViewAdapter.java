@@ -1,8 +1,12 @@
 package com.example.clubdictionary.BookMark;
 
+import android.content.Context;
+import android.graphics.Color;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,9 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.clubdictionary.MainActivity;
 import com.example.clubdictionary.R;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
@@ -24,9 +30,11 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
     FirebaseStorage storage = FirebaseStorage.getInstance();
 
     private ArrayList<BookmarkItem> bookMarkItemList;
+    Context mContext;
 
-    public BookmarkRecyclerViewAdapter(ArrayList<BookmarkItem> bookMarkItemList) {
+    public BookmarkRecyclerViewAdapter(ArrayList<BookmarkItem> bookMarkItemList, Context mContext) {
         this.bookMarkItemList = bookMarkItemList;
+        this.mContext = mContext;
     }
 
     @NonNull
@@ -43,10 +51,11 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
         BookmarkItem bookmarkItem = bookMarkItemList.get(position);
 
         //holder.icon.se
+
         holder.name.setText(bookmarkItem.getClubName());
         holder.major.setText("#"+bookmarkItem.getMajor()+" ");
         holder.minor.setText("#"+bookmarkItem.getMinor()+" ");
-
+        holder.bindProfileImage(bookmarkItem.getIconUrl());
         //String text = bookmarkItemList.get(position);
         //holder.textView.setText(text);
     }
@@ -62,14 +71,13 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
         private TextView name;
         private TextView major;
         private TextView minor;
+        private String iconUrl;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             icon = itemView.findViewById(R.id.bookmark_item_icon);
-            Glide.with(itemView).
-                    load("gs://clubdictionary.appspot.com/clubs/5cLadUS3cng18VygrQzHd8Qrorg1/24283C3858F778CA2E.jpg")
-                    .into(icon);
+
             name = itemView.findViewById(R.id.bookmark_item_name);
             major = itemView.findViewById(R.id.bookmark_item_major);
             minor = itemView.findViewById(R.id.bookmark_item_minor);
@@ -83,6 +91,11 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
                     }
                 }
             });*/
+        }
+
+        public void bindProfileImage(String iconUrl){
+            Glide.with(mContext).load(iconUrl).into(icon);
+            icon.setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
 
     }
