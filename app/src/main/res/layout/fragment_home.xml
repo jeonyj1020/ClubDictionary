@@ -9,11 +9,10 @@
         android:id="@+id/checkLayout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:weight="80"
         android:orientation="horizontal">
 
         <CheckBox
-            android:id="@+id/onlyFwavorite"
+            android:id="@+id/onlyFavorite"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"

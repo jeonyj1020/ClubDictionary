@@ -2,6 +2,7 @@ package com.example.clubdictionary;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.GridLayout;
@@ -41,6 +42,17 @@ public class FilterActivity extends AppCompatActivity {
 
     GridLayout society, study, arts, sports, religion;
     CheckBox societyChecked, studyChecked, artsChecked, sportsChecked, religionChecked;
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{ //toolbar의 back키 눌렀을 때 동작
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

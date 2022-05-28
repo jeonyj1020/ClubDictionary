@@ -2,10 +2,12 @@ package com.example.clubdictionary.UserManagement;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,6 +22,18 @@ public class PasswordResetActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private TextView textView;
+    Toolbar toolbar;
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{ //toolbar의 back키 눌렀을 때 동작
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +41,11 @@ public class PasswordResetActivity extends AppCompatActivity {
         setContentView(R.layout.activity_password_reset);
 
         findViewById(R.id.sendButton).setOnClickListener(onClickListener);
+
+        toolbar = findViewById(R.id.tool_bar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mAuth = FirebaseAuth.getInstance();
         textView = findViewById(R.id.websitemoveTextView);
