@@ -96,7 +96,6 @@ public class GroupRecyclerViewAdapter extends RecyclerView.Adapter<GroupRecycler
             title = itemView.findViewById(R.id.title);
             content = itemView.findViewById(R.id.content);
             date = itemView.findViewById(R.id.date);
-            //클릭했을때 기능같은거 여기에 넣기
 
         }
 
