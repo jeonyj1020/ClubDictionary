@@ -20,7 +20,7 @@
          />
 
     <EditText
-        android:id="@id/content"
+        android:id="@+id/content"
         android:padding="10dp"
         android:hint="내용"
         android:textSize="20dp"

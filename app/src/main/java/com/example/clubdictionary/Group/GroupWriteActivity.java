@@ -28,39 +28,40 @@ import java.util.Date;
 public class GroupWriteActivity extends AppCompatActivity {
     private static final String TAG = "GroupWriteActivity";
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_write);
         EditText title = findViewById(R.id.title);
         EditText content = findViewById(R.id.content);
-        Button applyButton= findViewById(R.id.applyButton);
+        Button applyButton = findViewById(R.id.applyButton);
 
         applyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 profileUpdate();
-                finish();
+
             }
         });
     }
 
-    private void profileUpdate(){
+    private void profileUpdate() {
         EditText title = findViewById(R.id.title);
         EditText content = findViewById(R.id.content);
         EditText kakaoLink = findViewById(R.id.kakaoLink);
         String titleStr = title.getText().toString();
         String contentStr = content.getText().toString();
-        String kakaoLinkStr =kakaoLink.getText().toString();
+        String kakaoLinkStr = kakaoLink.getText().toString();
         long now = System.currentTimeMillis();
         Date date = new Date(now);
         SimpleDateFormat sdf = new SimpleDateFormat("MM / dd HH : mm");
         String getTime = sdf.format(date);
-        if(title.length()>0 && content.length()>0 && kakaoLinkStr.length() > 0){
-            GroupPostInfo groupPostInfo = new GroupPostInfo(titleStr, contentStr, kakaoLinkStr, user.getUid(), getTime, "");
+        if (title.length() > 0 && content.length() > 0 && kakaoLinkStr.length() > 0) {
+            GroupPostInfo groupPostInfo = new GroupPostInfo(titleStr, contentStr, kakaoLinkStr, user.getUid(), getTime, String.valueOf(now));
             uploader(groupPostInfo);
-        }
-        else{
+            finish();
+        } else {
             toast("제목과 내용을 모두 입력해주세요.\n카카오톡링크는 필수입니다.");
         }
     }
@@ -69,13 +70,12 @@ public class GroupWriteActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
     }
 
-    private void uploader(GroupPostInfo groupPostInfo){
+    private void uploader(GroupPostInfo groupPostInfo) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("group").add(groupPostInfo).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        String now = String.valueOf(System.currentTimeMillis());
+        db.collection("group").document(now).set(groupPostInfo).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
-            public void onSuccess(DocumentReference documentReference) {
-                documentReference.update("postUid", documentReference.getId());
-                Log.d(TAG, documentReference.getId());
+            public void onSuccess(Void unused) {
                 toast("게시글을 등록하였습니다.");
             }
         }).addOnFailureListener(new OnFailureListener() {
