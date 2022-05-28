@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +29,8 @@ import java.util.Date;
 public class GroupWriteActivity extends AppCompatActivity {
     private static final String TAG = "GroupWriteActivity";
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    long lnow = System.currentTimeMillis();
+    String now = String.valueOf(lnow);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,13 +56,14 @@ public class GroupWriteActivity extends AppCompatActivity {
         String titleStr = title.getText().toString();
         String contentStr = content.getText().toString();
         String kakaoLinkStr = kakaoLink.getText().toString();
-        long now = System.currentTimeMillis();
-        Date date = new Date(now);
+
+        Date date = new Date(lnow);
         SimpleDateFormat sdf = new SimpleDateFormat("MM / dd HH : mm");
         String getTime = sdf.format(date);
         if (title.length() > 0 && content.length() > 0 && kakaoLinkStr.length() > 0) {
-            GroupPostInfo groupPostInfo = new GroupPostInfo(titleStr, contentStr, kakaoLinkStr, user.getUid(), getTime, String.valueOf(now));
+            GroupPostInfo groupPostInfo = new GroupPostInfo(titleStr, contentStr, kakaoLinkStr, user.getUid(), getTime, now);
             uploader(groupPostInfo);
+            Log.e("!!!", "작성됨");
             finish();
         } else {
             toast("제목과 내용을 모두 입력해주세요.\n카카오톡링크는 필수입니다.");
@@ -72,7 +76,6 @@ public class GroupWriteActivity extends AppCompatActivity {
 
     private void uploader(GroupPostInfo groupPostInfo) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        String now = String.valueOf(System.currentTimeMillis());
         db.collection("group").document(now).set(groupPostInfo).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
@@ -85,4 +88,5 @@ public class GroupWriteActivity extends AppCompatActivity {
             }
         });
     }
+
 }
