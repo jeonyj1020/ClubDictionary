@@ -21,10 +21,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerViewAdapter.ViewHolder>{
 
-    private ArrayList<HomeItem> ClubNameSet;
+    //private ArrayList<HomeItem> ClubNameSet;
+    private ArrayList<String> ClubNameSet;
     Context context;
 
-    public HomeRecyclerViewAdapter(ArrayList<HomeItem> clubNameSet, Context context) {
+    public HomeRecyclerViewAdapter(ArrayList<String> clubNameSet, Context context) {
         ClubNameSet = clubNameSet;
         this.context = context;
     }
@@ -42,8 +43,11 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
     @Override
     public void onBindViewHolder(@NonNull HomeRecyclerViewAdapter.ViewHolder holder, int position) {
 
-        HomeItem homeItem = ClubNameSet.get(position);
-        holder.clubName.setText(homeItem.getClubName());
+        //HomeItem homeItem = ClubNameSet.get(position);
+        //holder.clubName.setText(homeItem.getClubName());
+
+        //태스트용
+        holder.clubName.setText(ClubNameSet.get(position));
 
     }
 
@@ -74,7 +78,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             viewPager2 = itemView.findViewById(R.id.viewpager2);
             layoutIndicator = itemView.findViewById(R.id.layout_indicator);
 
-            viewPager2.setOffscreenPageLimit(1);
+            /*viewPager2.setOffscreenPageLimit(1);
             viewPager2.setAdapter(new ImageViewPagerAdapter(images, context));
 
             viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
@@ -85,7 +89,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
                 }
             });
 
-            setupIndicators(images.size());
+            setupIndicators(images.size());*/
         }
 
         private void setupIndicators(int count) {

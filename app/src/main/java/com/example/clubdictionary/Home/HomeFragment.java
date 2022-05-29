@@ -91,7 +91,14 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        ArrayList<HomeItem> testDataSet = new ArrayList<>();
+        //ArrayList<HomeItem> testDataSet = new ArrayList<>();
+
+        //테스트 용
+        ArrayList<String> testDataSet = new ArrayList<>();
+
+        for(int i = 0; i < 10; i++){
+            testDataSet.add(i + "번째 아이템");
+        }
 
         recyclerView = view.findViewById(R.id.fragmrnt_home_recyclerview);
         homeRecyclerViewAdapter = new HomeRecyclerViewAdapter(testDataSet, mContext);
