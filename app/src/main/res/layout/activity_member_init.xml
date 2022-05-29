@@ -74,10 +74,7 @@
                 android:includeFontPadding="false"
                 android:inputType="text"
                 android:textColor="@color/black_191919"
-                android:autoSizeMaxTextSize="100sp"
-                android:autoSizeMinTextSize="10sp"
-                android:autoSizeStepGranularity="1dp"
-                android:autoSizeTextType="uniform"/>
+                android:textSize="14sp"/>
 
         </LinearLayout>
 
@@ -116,10 +113,7 @@
             android:includeFontPadding="false"
             android:inputType="number"
             android:textColor="@color/black_191919"
-            android:autoSizeMaxTextSize="100sp"
-            android:autoSizeMinTextSize="10sp"
-            android:autoSizeStepGranularity="1dp"
-            android:autoSizeTextType="uniform"/>
+            android:textSize="14sp"/>
 
         <View
             android:layout_width="match_parent"
@@ -151,10 +145,7 @@
             android:inputType="text"
             android:includeFontPadding="false"
             android:textColor="@color/black_191919"
-            android:autoSizeMaxTextSize="100sp"
-            android:autoSizeMinTextSize="10sp"
-            android:autoSizeStepGranularity="1dp"
-            android:autoSizeTextType="uniform" />
+            android:textSize="14sp" />
 
         <View
             android:layout_width="match_parent"
@@ -186,10 +177,7 @@
             android:includeFontPadding="false"
             android:inputType="number"
             android:textColor="@color/black_191919"
-            android:autoSizeMaxTextSize="100sp"
-            android:autoSizeMinTextSize="10sp"
-            android:autoSizeStepGranularity="1dp"
-            android:autoSizeTextType="uniform" />
+            android:textSize="14sp" />
 
 
         <View
