@@ -6,6 +6,14 @@
     tools:context=".Category.ClubListFragment">
 
     <TextView
+        android:id="@+id/whitchminor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="뭔 minor 임?"
+        android:textSize="30dp"
+        android:gravity="center"/>
+
+    <TextView
         android:id="@+id/testTextView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

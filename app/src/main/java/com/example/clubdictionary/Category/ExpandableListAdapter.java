@@ -1,6 +1,7 @@
 package com.example.clubdictionary.Category;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.clubdictionary.MainActivity;
 import com.example.clubdictionary.R;
 
 import java.util.ArrayList;
@@ -101,10 +103,14 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 childItemController.minor_item_layout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(context, item.text + " 선택", Toast.LENGTH_SHORT).show();
+                        Bundle result = new Bundle();
+                        result.putString("minor", item.minor_category);
+                        ClubListFragment clubListFragment = new ClubListFragment();
+                        clubListFragment.setArguments(result);
+                        MainActivity activity = (MainActivity) context;
+                        activity.getSupportFragmentManager().beginTransaction().replace(R.id.mainframe, clubListFragment).addToBackStack(null).commit();
                     }
                 });
-
                 break;
         }
     }
@@ -150,7 +156,14 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public static class Item {
         public int type;
         public String text;
+        public String minor_category;
         public List<Item> invisibleChildren;
+
+        public Item(int type, String text, String minor_category) {
+            this.type = type;
+            this.text = text;
+            this.minor_category = minor_category;
+        }
 
         public Item() {
         }
