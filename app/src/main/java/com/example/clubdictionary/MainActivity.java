@@ -43,7 +43,6 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     private FirebaseUser user;
 
-
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     BottomNavigationView bottomNavigationView;

@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class ClubInfo {
     private String Uid;
-    private String icon;
+    private String iconUrl;
     private String name;
     private String day;
     private String activityTime;
@@ -32,12 +32,12 @@ public class ClubInfo {
 
     public  ClubInfo(){}
 
-    public ClubInfo(String uid, String icon, String name, String day, String activityTime, String major, String minor,
+    public ClubInfo(String uid, String iconUrl, String name, String day, String activityTime, String major, String minor,
                     String money, String registerUrl, String filteringBinary, String introduce, ArrayList<String> introducePicture,
                     ArrayList<Boolean> checked, ArrayList<String> scrap, ArrayList<String> questionList, ArrayList<String> alarmList,
                     ArrayList<String> subscribers, ArrayList<String> filtering, Map<String, List<String>> bookMark) {
         Uid = uid;
-        this.icon = icon;
+        this.iconUrl = iconUrl;
         this.name = name;
         this.day = day;
         this.activityTime = activityTime;
@@ -65,12 +65,12 @@ public class ClubInfo {
         Uid = uid;
     }
 
-    public String getIcon() {
-        return icon;
+    public String getIconUrl() {
+        return iconUrl;
     }
 
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setIconUrl(String iconUrl) {
+        this.iconUrl = iconUrl;
     }
 
     public String getName() {

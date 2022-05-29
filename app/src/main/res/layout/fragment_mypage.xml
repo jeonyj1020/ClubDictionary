@@ -33,7 +33,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="100"
-                android:adjustViewBounds="true"
                 android:background="@drawable/round_background_border_main_theme"
                 android:padding="1dp"
                 android:src="@drawable/mypage" />
