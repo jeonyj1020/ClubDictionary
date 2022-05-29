@@ -49,7 +49,7 @@
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_bookmark.xml" value="0.21693840579710144" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_bookmark_item.xml" value="0.22175925925925927" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_category.xml" value="0.21693840579710144" />
-        <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_category2.xml" value="0.1" />
+        <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_category2.xml" value="0.16" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_club_list.xml" value="0.22175925925925927" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_clubpage_intro.xml" value="0.22083333333333333" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_clubpage_post.xml" value="0.22083333333333333" />
@@ -65,8 +65,9 @@
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/home_item.xml" value="0.176" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/home_item_viewpage.xml" value="0.1" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/layout_clubpage_toolbar.xml" value="0.264" />
-        <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/major_category_item.xml" value="0.152" />
-        <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/minor_category_item.xml" value="0.2" />
+        <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/list_header.xml" value="0.264" />
+        <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/major_category_item.xml" value="0.264" />
+        <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/minor_category_item.xml" value="0.264" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/question_item.xml" value="0.264" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/round_background_border_black.xml" value="0.21693840579710144" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/square_image.xml" value="0.1" />

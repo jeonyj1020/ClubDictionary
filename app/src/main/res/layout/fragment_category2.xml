@@ -1,20 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:paddingTop="12dp"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+    android:id="@+id/category_recyclerView"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ExpandableListView
-            android:id="@+id/expandable_list_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="true"
-            android:groupIndicator="@null"/>
-
-
-    </LinearLayout>
-
-</ScrollView>
+</androidx.recyclerview.widget.RecyclerView>

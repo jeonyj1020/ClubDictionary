@@ -17,6 +17,7 @@ import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.example.clubdictionary.BookMark.BookmarkFragment;
+import com.example.clubdictionary.Category.Category2Fragment;
 import com.example.clubdictionary.Category.CategoryFragment;
 import com.example.clubdictionary.Group.GroupFragment;
 import com.example.clubdictionary.Home.HomeFragment;
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     HomeFragment homeFragment = new HomeFragment();
     BookmarkFragment bookmarkFragment = new BookmarkFragment();
-    CategoryFragment categoryFragment = new CategoryFragment();
+    Category2Fragment categoryFragment = new Category2Fragment();
     MyPageFragment mypageFragment = new MyPageFragment();
     GroupFragment groupFragment = new GroupFragment();
 
