@@ -1,14 +1,17 @@
 package com.example.clubdictionary.Home;
 
 import android.app.Activity;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,11 +20,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clubdictionary.FilterActivity;
+import com.example.clubdictionary.MainActivity;
 import com.example.clubdictionary.R;
+import com.example.clubdictionary.WritePost.WriteContentsActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -45,6 +51,7 @@ public class HomeFragment extends Fragment {
     ArrayList<Boolean> checked = new ArrayList<>();
     CheckBox onlyFavorite, onlyRecruit;
     Map<String, List<String>> bookMark = null;
+    FloatingActionButton writePostButton;
 
     private FirebaseUser user;
 
@@ -71,6 +78,9 @@ public class HomeFragment extends Fragment {
         onlyRecruit = view.findViewById(R.id.onlyRecruit);
         onlyRecruit.setOnClickListener(onClickListener);
 
+        writePostButton = view.findViewById(R.id.writePostButton);
+        writePostButton.setOnClickListener(onClickListener);
+
         user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -79,14 +89,19 @@ public class HomeFragment extends Fragment {
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     DocumentSnapshot documentSnapshot = task.getResult();
-                    if(!documentSnapshot.exists()){
-                        docRef = db.collection("users").document(user.getUid());
+                    if (!documentSnapshot.exists()) {
+                        Log.e("###", "클럽입니다");
+                        docRef = db.collection("clubs").document(user.getUid());
+                        writePostButton.setVisibility(View.VISIBLE);
                         getFiltering();
                     }
-                    else getFiltering();
-
+                    else {
+                        Log.e("###", "클럽입니다");
+                        writePostButton.setVisibility(View.VISIBLE);
+                        getFiltering();
+                    }
                 }
             }
         });
@@ -96,7 +111,7 @@ public class HomeFragment extends Fragment {
         //테스트 용
         ArrayList<String> testDataSet = new ArrayList<>();
 
-        for(int i = 0; i < 10; i++){
+        for (int i = 0; i < 10; i++) {
             testDataSet.add(i + "번째 아이템");
         }
 
@@ -108,20 +123,6 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == getActivity().RESULT_OK) {
-            switch (requestCode) {
-                case 1:
-                    filtering = data.getStringArrayListExtra("newFiltering");
-                    filteringBinary = data.getStringExtra("newFilteringBinary");
-                    query();
-                    break;
-            }
-        }
-    }
-
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -131,6 +132,7 @@ public class HomeFragment extends Fragment {
                     intent.putExtra("filteringBinary", filteringBinary);
                     startActivityForResult(intent, 1);
                     break;
+
                 case R.id.onlyFavorite:
                 case R.id.onlyRecruit:
                     checked.set(0, onlyRecruit.isChecked());
@@ -153,9 +155,61 @@ public class HomeFragment extends Fragment {
 
                     query();
                     break;
+
+                case R.id.writePostButton :
+                    intent = new Intent(Intent.ACTION_PICK);
+                    intent.setType("image/*");
+                    intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                    intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
+                    startActivityForResult(intent, 2);
             }
         }
     };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == getActivity().RESULT_OK) {
+            switch (requestCode) {
+                case 1:
+                    filtering = data.getStringArrayListExtra("newFiltering");
+                    filteringBinary = data.getStringExtra("newFilteringBinary");
+                    query();
+                    break;
+                case 2:
+                    if (resultCode == Activity.RESULT_OK) {
+                        ArrayList<Uri> imageList = new ArrayList<>();
+
+                        if (data.getClipData() == null) {
+                            imageList.add(Uri.parse(data.getData().getPath()));
+                        }
+                        else {
+                            ClipData clipData = data.getClipData();
+                            if (clipData.getItemCount() > 10){
+                                Toast.makeText(getActivity(), "사진은 10개까지 선택가능 합니다.", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                            else if (clipData.getItemCount() == 1) {
+                                imageList.add(clipData.getItemAt(0).getUri());
+                            }
+                            else if (clipData.getItemCount() > 1 && clipData.getItemCount() < 10) {
+                                for (int i = 0; i < clipData.getItemCount(); i++) {
+                                    imageList.add((clipData.getItemAt(i).getUri()));
+                                }
+                            }
+                        }
+
+                        Intent intent = new Intent(getActivity(), WriteContentsActivity.class);
+                        intent.putExtra("imageList", imageList);
+                        startActivity(intent);
+                    }
+                    else {
+                        Toast.makeText(getActivity(), "사진 선택을 취소하였습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+            }
+        }
+    }
 
     private void getFiltering(){
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
