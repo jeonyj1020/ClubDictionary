@@ -1,7 +1,6 @@
 package com.example.clubdictionary.Home;
 
 import android.app.Activity;
-import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,12 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clubdictionary.FilterActivity;
 import com.example.clubdictionary.R;
-import com.example.clubdictionary.WritePost.WriteContentsActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -37,10 +33,10 @@ import java.util.List;
 import java.util.Map;
 
 public class HomeFragment extends Fragment {
+
     RecyclerView recyclerView;
     HomeRecyclerViewAdapter homeRecyclerViewAdapter;
     Context mContext;
-    FloatingActionButton writePostButton;
 
     // 필터링 관련 변수들
     DocumentReference docRef = null;
@@ -59,15 +55,13 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        writePostButton = view.findViewById(R.id.writePostButton);
+        mContext = container.getContext();
 
         view.findViewById(R.id.filter).setOnClickListener(onClickListener);
 
@@ -77,17 +71,9 @@ public class HomeFragment extends Fragment {
         onlyRecruit = view.findViewById(R.id.onlyRecruit);
         onlyRecruit.setOnClickListener(onClickListener);
 
-        mContext = container.getContext();
-
-        ArrayList<HomeItem> testDataSet = new ArrayList<>();
-
-        recyclerView = view.findViewById(R.id.fragmrnt_home_recyclerview);
-        //homeRecyclerViewAdapter = new HomeRecyclerViewAdapter(testDataSet, mContext);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(homeRecyclerViewAdapter);
-
         user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
         docRef = db.collection("clubs").document(user.getUid());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -95,16 +81,12 @@ public class HomeFragment extends Fragment {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if(task.isSuccessful()){
                     DocumentSnapshot documentSnapshot = task.getResult();
-
                     if(!documentSnapshot.exists()){
                         docRef = db.collection("users").document(user.getUid());
-                        writePostButton.setVisibility(View.VISIBLE);
-                        writePostButton.setOnClickListener(onClickListener);
                         getFiltering();
                     }
-                    else {
-                        getFiltering();
-                    }
+                    else getFiltering();
+
                 }
             }
         });
@@ -112,18 +94,32 @@ public class HomeFragment extends Fragment {
         //ArrayList<HomeItem> testDataSet = new ArrayList<>();
 
         //테스트 용
-        //ArrayList<String> testDataSet = new ArrayList<>();
+        ArrayList<String> testDataSet = new ArrayList<>();
 
-        /*for(int i = 0; i < 10; i++){
+        for(int i = 0; i < 10; i++){
             testDataSet.add(i + "번째 아이템");
-        }*/
+        }
 
         recyclerView = view.findViewById(R.id.fragmrnt_home_recyclerview);
-        //homeRecyclerViewAdapter = new HomeRecyclerViewAdapter(testDataSet, mContext);
+        homeRecyclerViewAdapter = new HomeRecyclerViewAdapter(testDataSet, mContext);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(homeRecyclerViewAdapter);
 
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == getActivity().RESULT_OK) {
+            switch (requestCode) {
+                case 1:
+                    filtering = data.getStringArrayListExtra("newFiltering");
+                    filteringBinary = data.getStringExtra("newFilteringBinary");
+                    query();
+                    break;
+            }
+        }
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -157,62 +153,9 @@ public class HomeFragment extends Fragment {
 
                     query();
                     break;
-                case R.id.writePostButton:
-                    //PermissionChecker permissionChecker = new PermissionChecker.PermissionResult();
-                    intent = new Intent(Intent.ACTION_PICK);
-                    intent.setType("image/*");
-                    intent.putExtra(intent.EXTRA_ALLOW_MULTIPLE, true);
-                    intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
-                    startActivityForResult(intent, 2);
-                    break;
             }
         }
     };
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == getActivity().RESULT_OK) {
-            switch (requestCode) {
-                case 1:     // 필터링
-                    filtering = data.getStringArrayListExtra("newFiltering");
-                    filteringBinary = data.getStringExtra("newFilteringBinary");
-                    query();
-                    break;
-                case 2 :    // 글 쓰기 버튼 - 갤러리에서 이미지 선택해서 돌아옴
-                    if(resultCode == Activity.RESULT_OK){
-                        ArrayList<String> imageList = new ArrayList<>();
-                        if (data.getClipData() == null) {
-                            imageList.add(String.valueOf(data.getData()));
-                        }
-                        else {
-                            ClipData clipData = data.getClipData();
-                           /* if (clipData.getItemCount() > 10){
-                                Toast.makeText(MainActivity.this, "사진은 10개까지 선택가능 합니다.", Toast.LENGTH_SHORT).show();
-                                return;
-                            }*/
-                           if (clipData.getItemCount() == 1) {
-                                String dataStr = String.valueOf(clipData.getItemAt(0).getUri());
-                                imageList.add(dataStr);
-                            }
-                           else if (clipData.getItemCount() > 1 && clipData.getItemCount() < 10) {
-                                for (int i = 0; i < clipData.getItemCount(); i++) {
-                                    imageList.add(String.valueOf(clipData.getItemAt(i).getUri()));
-                                }
-                            }
-                        }
-
-                        Intent intent = new Intent(getActivity(), WriteContentsActivity.class);
-                        intent.putStringArrayListExtra("imageList", imageList);
-                        startActivity(intent);
-                    }
-                    else{
-                        Toast.makeText(getActivity(), "게시물 작성을 취소했습니다", Toast.LENGTH_SHORT).show();
-                    }
-                    break;
-            }
-        }
-    }
 
     private void getFiltering(){
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
