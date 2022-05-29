@@ -64,8 +64,10 @@ public class HomeFragment extends Fragment {
         mContext = container.getContext();
 
         view.findViewById(R.id.filter).setOnClickListener(onClickListener);
+
         onlyFavorite = view.findViewById(R.id.onlyFavorite);
         onlyFavorite.setOnClickListener(onClickListener);
+
         onlyRecruit = view.findViewById(R.id.onlyRecruit);
         onlyRecruit.setOnClickListener(onClickListener);
 
@@ -126,6 +128,8 @@ public class HomeFragment extends Fragment {
                 case R.id.onlyRecruit:
                     checked.set(0, onlyRecruit.isChecked());
                     checked.set(1, onlyFavorite.isChecked());
+
+                    if(onlyFavorite.isChecked())
 
                     docRef.update("checked", checked)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {

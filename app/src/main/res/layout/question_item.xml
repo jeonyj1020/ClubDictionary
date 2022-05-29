@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rectangular_background_border"
+    android:orientation="vertical"
+    android:paddingLeft="12dp"
+    android:paddingTop="14dp"
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
+    android:layout_marginBottom="4dp"
+    android:layout_marginTop="8dp"
+    android:paddingRight="12dp"
+    android:paddingBottom="14dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="684">
+
+        <TextView
+            android:id="@+id/questionText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="643"
+            android:fontFamily="@font/notosanskr_bold"
+            android:includeFontPadding="false"
+            android:text="Q. 술을 잘 못먹는데 괜찮을까요?"
+            android:textColor="@color/maintheme"
+            android:textSize="16sp" />
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="41"
+            android:background="@android:color/transparent"
+            android:padding="4dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/icon_threedot" />
+
+    </LinearLayout>
+
+    <kr.co.prnd.readmore.ReadMoreTextView
+        android:id="@+id/answerText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/notosanskr_regular"
+        android:includeFontPadding="false"
+        android:text="A. 꼭 모든 요일에 참여해 주시지 않아도 괜찮습니다 ! 동아리 인원들 중에도 모두 참석하지 않는 인원도 많습니다 꾸준히 참여만 잘 해주신다면 아마 충분하실거에요 ㅎ"
+        android:textColor="@color/gray_767676"
+        app:readMoreColor="@color/black"
+        app:readMoreMaxLine="2"
+        app:readMoreText="...더보기" />
+
+</LinearLayout>

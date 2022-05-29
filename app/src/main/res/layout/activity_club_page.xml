@@ -21,21 +21,42 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="220dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginEnd="24dp"
                 android:orientation="horizontal"
                 android:paddingTop="80dp"
                 app:layout_collapseMode="parallax">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/icon"
+                <LinearLayout
                     android:layout_width="95dp"
-                    android:layout_height="95dp"
-                    android:layout_gravity="start"
-                    android:background="@drawable/round_background_border_main_theme"
-                    android:padding="2dp"
-                    android:src="@drawable/mypage" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/icon"
+                        android:layout_width="95dp"
+                        android:layout_height="95dp"
+                        android:layout_gravity="start"
+                        android:background="@drawable/round_background_border_main_theme"
+                        android:padding="1dp"
+                        android:src="@drawable/mypage" />
+
+                    <Button
+                        android:fontFamily="@font/notosanskr_medium"
+                        android:includeFontPadding="false"
+                        android:id="@+id/registerUrl"
+                        android:layout_width="match_parent"
+                        android:layout_height="32dp"
+                        android:layout_marginTop="13dp"
+                        android:background="@drawable/rectangular_background_button"
+                        android:text="신청하기"
+                        android:textColor="@color/maintheme"
+                        android:textSize="16dp"/>
+
+                </LinearLayout>
+
+
 
                 <View
                     android:layout_width="0dp"
@@ -197,31 +218,16 @@
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:background="@color/white"
+                        android:padding="5dp"
                         android:scaleType="centerInside"
                         android:src="@drawable/png_bookmark"
-                        android:padding="5dp"
+                        android:layout_marginEnd="24dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toEndOf="@+id/registerUrl"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.5" />
 
-                    <Button
-                        android:fontFamily="@font/notosanskr_medium"
-                        android:includeFontPadding="false"
-                        android:id="@+id/registerUrl"
-                        android:layout_width="wrap_content"
-                        android:layout_height="32dp"
-                        android:layout_marginEnd="52dp"
-                        android:background="@drawable/rectangular_background_button"
-                        android:text="신청하기"
-                        android:textColor="@color/maintheme"
-                        android:textSize="16dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.5" />
+
 
                     <TextView
                         android:includeFontPadding="false"
