@@ -1,29 +1,27 @@
 package com.example.clubdictionary.BookMark;
 
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class BookmarkItem {
 
-    private String clubProfile, clubName, major, minor;
+    private String iconUrl, clubName, major, minor;
+    //private CircleImageView icon;
     //private ImageView bookMark;
 
     public BookmarkItem(){}
 
-    public BookmarkItem(String clubProfile, String clubName, String major, String minor){
-        this.clubProfile = clubProfile;
+    public BookmarkItem(String iconUrl, String clubName, String major, String minor){
+        this.iconUrl = iconUrl;
         this.clubName = clubName;
         this.major = major;
         this.minor = minor;
     }
 
-    public String getClubProfile() {
-        return clubProfile;
+    public String getIconUrl() {
+        return iconUrl;
     }
-    public void setClubProfile(String clubProfile) {
-        this.clubProfile = clubProfile;
+    public void setIconUrl(String iconUrl) {
+        this.iconUrl = iconUrl;
     }
 
     //public ImageView getBookMark() {return bookMark;}
@@ -52,4 +50,12 @@ public class BookmarkItem {
     public void setMinor(String minor) {
         this.minor = minor;
     }
+
+    /*public CircleImageView getIcon() {
+        return icon;
+    }
+
+    public void setIcon(CircleImageView icon) {
+        this.icon = icon;
+    }*/
 }

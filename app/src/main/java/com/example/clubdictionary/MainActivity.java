@@ -43,7 +43,6 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     private FirebaseUser user;
 
-
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     BottomNavigationView bottomNavigationView;
@@ -52,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     CategoryFragment categoryFragment = new CategoryFragment();
     MyPageFragment mypageFragment = new MyPageFragment();
     GroupFragment groupFragment = new GroupFragment();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

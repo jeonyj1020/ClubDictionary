@@ -1,5 +1,6 @@
 package com.example.clubdictionary.BookMark;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,6 +40,7 @@ import java.util.Map;
 public class BookmarkFragment extends Fragment {
 
     RecyclerView recyclerView;
+    Context mContext;
     BookmarkRecyclerViewAdapter bookmarkRecyclerViewAdapter;
     private FirebaseUser user;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -53,6 +55,9 @@ public class BookmarkFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bookmark, container, false);
+
+        mContext = container.getContext();
+
         bookMark.clear();
         //bookmarkItemList.clear();
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -132,7 +137,7 @@ public class BookmarkFragment extends Fragment {
                                                     if (task.isSuccessful()) {
                                                         for (QueryDocumentSnapshot document : task.getResult()) {
                                                             bookmarkItemList.add(new BookmarkItem(
-                                                                    (String) document.get("icon"), (String) document.get("name"),
+                                                                    (String) document.get("iconUrl"), (String) document.get("name"),
                                                                     (String) document.get("major"), (String) document.get("minor")));
                                                         }
                                                     }
@@ -141,7 +146,7 @@ public class BookmarkFragment extends Fragment {
                                                 @Override
                                                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                                     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                                                    bookmarkRecyclerViewAdapter = new BookmarkRecyclerViewAdapter(bookmarkItemList);
+                                                    bookmarkRecyclerViewAdapter = new BookmarkRecyclerViewAdapter(bookmarkItemList, mContext);
                                                     recyclerView.setAdapter(bookmarkRecyclerViewAdapter);
                                                 }
                                             });
@@ -159,7 +164,7 @@ public class BookmarkFragment extends Fragment {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     bookmarkItemList.add(new BookmarkItem(
-                                            (String) document.get("icon"), (String) document.get("name"),
+                                            (String) document.get("iconUrl"), (String) document.get("name"),
                                             (String) document.get("major"), (String) document.get("minor")));
                                 }
                             }
@@ -168,7 +173,7 @@ public class BookmarkFragment extends Fragment {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                            bookmarkRecyclerViewAdapter = new BookmarkRecyclerViewAdapter(bookmarkItemList);
+                            bookmarkRecyclerViewAdapter = new BookmarkRecyclerViewAdapter(bookmarkItemList, mContext);
                             recyclerView.setAdapter(bookmarkRecyclerViewAdapter);
                         }
                     });

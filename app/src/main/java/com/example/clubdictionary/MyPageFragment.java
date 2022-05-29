@@ -27,9 +27,12 @@ import com.google.firebase.firestore.Source;
 
 import java.util.Objects;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class MyPageFragment extends Fragment {
 
     TextView passwordResetTextView, applyTextView,logoutTextView,deleteTextView, mypage_profile_name;
+    CircleImageView mypage_profile_pic;
     private FirebaseAuth mAuth ;
     DocumentSnapshot document;
 
@@ -41,14 +44,13 @@ public class MyPageFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_mypage, container, false);
-        //LinearLayout mypage_user_profile = view.findViewById(R.id.mypage_user_profile);
-        //mypage_user_profile.bringToFront();
+        mypage_profile_pic = view.findViewById(R.id.mypage_profile_pic);
         applyTextView = view.findViewById(R.id.mypage_apply_club);
         logoutTextView = view.findViewById(R.id.mypage_log_out);
         deleteTextView = view.findViewById(R.id.mypage_withdrawal);
         passwordResetTextView = view.findViewById(R.id.mypage_password_reset);
         mypage_profile_name = view.findViewById(R.id.mypage_profile_name);
-        String profile_name;
+
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -59,7 +61,7 @@ public class MyPageFragment extends Fragment {
                 if(task.isSuccessful()){
                     document = task.getResult();
                     if(!document.exists()){
-                        //동아리 이름이 들어갈지 모름 수정해야할지도..Source.valueOf("name") 부분 맞는지
+
                         db.collection("clubs").document(user.getUid()).get().
                                 addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
