@@ -46,6 +46,12 @@ public class ClubListFragment extends Fragment {
         TextView testTextView = view.findViewById(R.id.testTextView);
         Bundle bundle = this.getArguments();
         String result = bundle.getString("minor");
+
+
+        TextView checkTextView = view.findViewById(R.id.whitchminor);
+        checkTextView.setText(result);
+
+
         db.collection("clubs").whereEqualTo("minor", result).get().
                 addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

@@ -35,6 +35,7 @@ public class MyPageFragment extends Fragment {
     CircleImageView mypage_profile_pic;
     private FirebaseAuth mAuth ;
     DocumentSnapshot document;
+    String name = null;
 
     public MyPageFragment() {
     }
@@ -54,6 +55,10 @@ public class MyPageFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        if(name != null){
+            mypage_profile_name.setText(name);
+        }
 
         db.collection("users").document(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -76,10 +81,12 @@ public class MyPageFragment extends Fragment {
                     }
                     else {
                         mypage_profile_name.setText(document.get("name").toString());
+                        name = document.get("name").toString();
                     }
                 }
             }
         });
+
 
         passwordResetTextView.setOnClickListener(new View.OnClickListener() {
             @Override

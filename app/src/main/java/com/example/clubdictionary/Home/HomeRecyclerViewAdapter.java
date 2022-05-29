@@ -71,7 +71,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
 
             clubName = itemView.findViewById(R.id.clubName);
             major = itemView.findViewById(R.id.major);
-            minor = itemView.findViewById(R.id.minor);
+            //minor = itemView.findViewById(R.id.minor);
             icon = itemView.findViewById(R.id.icon);
             scrap = itemView.findViewById(R.id.scrap);
 

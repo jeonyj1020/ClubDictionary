@@ -52,8 +52,8 @@
             android:autoSizeTextType="uniform"
             android:fontFamily="@font/notosanskr_medium"
             android:includeFontPadding="false"
-            android:text="이메일(아이디)"
-            android:textColor="@color/black_191919" />
+            android:textColor="@color/black_191919"
+            android:text="이메일(아이디)"/>
 
         <View
             android:layout_width="match_parent"
