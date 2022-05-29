@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,6 +21,7 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public static final int CHILD = 1;
 
     private List<Item> data;
+    Context context;
 
     public ExpandableListAdapter(List<Item> data) {
         this.data = data;
@@ -28,7 +30,7 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int type) {
         View view = null;
-        Context context = parent.getContext();
+        context = parent.getContext();
         float dp = context.getResources().getDisplayMetrics().density;
         int subItemPaddingLeft = (int) (18 * dp);
         int subItemPaddingTopAndBottom = (int) (5 * dp);
@@ -41,11 +43,8 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             case CHILD:
                 LayoutInflater inflater2 = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 view = inflater2.inflate(R.layout.minor_category_item, parent, false);
-                LinearLayout minor_item_layout = view.findViewById(R.id.minor_item_layout);
-                TextView itemTextView = view.findViewById(R.id.minorTitle);
-
-                return new RecyclerView.ViewHolder(itemTextView) {
-                };
+                ListChildViewHolder childViewHolder = new ListChildViewHolder(view);
+                return childViewHolder;
         }
         return null;
     }
@@ -96,8 +95,16 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 });
                 break;
             case CHILD:
-                TextView itemTextView = (TextView) holder.itemView;
-                itemTextView.setText(data.get(position).text);
+                final ListChildViewHolder childItemController =(ListChildViewHolder) holder;
+                childItemController.minorTitle.setText(item.text);
+
+                childItemController.minor_item_layout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(context, item.text + " 선택", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
                 break;
         }
     }
@@ -127,6 +134,18 @@ public class ExpandableListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         }
     }
+
+    private static class ListChildViewHolder extends RecyclerView.ViewHolder {
+        public TextView minorTitle;
+        public LinearLayout minor_item_layout;
+
+        public ListChildViewHolder(View itemView) {
+            super(itemView);
+            minorTitle = (TextView) itemView.findViewById(R.id.minorTitle);
+            minor_item_layout = (LinearLayout) itemView.findViewById(R.id.minor_item_layout);
+        }
+    }
+
 
     public static class Item {
         public int type;
