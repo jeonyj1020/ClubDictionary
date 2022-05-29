@@ -51,6 +51,11 @@ public class HomeFragment extends Fragment {
     public HomeFragment() {
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        mContext = context;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,7 +66,6 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        mContext = container.getContext();
 
         view.findViewById(R.id.filter).setOnClickListener(onClickListener);
 

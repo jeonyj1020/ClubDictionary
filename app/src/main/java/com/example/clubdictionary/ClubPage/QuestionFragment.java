@@ -1,10 +1,15 @@
 package com.example.clubdictionary.ClubPage;
 
 import android.content.Context;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +23,13 @@ import java.util.ArrayList;
 public class QuestionFragment extends Fragment {
 
     Context mContext;
+    RecyclerView recyclerView;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        mContext = context;
+    }
 
     public static QuestionFragment newInstance(int number) {
         QuestionFragment questionFragment = new QuestionFragment();
@@ -36,12 +48,14 @@ public class QuestionFragment extends Fragment {
         }
     }
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = LayoutInflater.from(inflater.getContext()).inflate(R.layout.fragment_clubpage_question, container, false);
 
+        recyclerView = view.findViewById(R.id.quetion_list);
 
         ArrayList<sampleText> st = new ArrayList<>();
 
@@ -50,9 +64,7 @@ public class QuestionFragment extends Fragment {
         for(int i = 0; i < 10; i++){
             st.add(new sampleText(i + " 번째 질문", i + " 번째 답변"));
         }
-
-        RecyclerView recyclerView = view.findViewById(R.id.quetion_list);
-        QuestionRecyclerViewAdapter adapter = new QuestionRecyclerViewAdapter(st);
+        QuestionRecyclerViewAdapter adapter = new QuestionRecyclerViewAdapter(mContext, st);
         recyclerView.setAdapter(adapter);
 
         return view;
