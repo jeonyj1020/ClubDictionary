@@ -47,7 +47,7 @@
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/club_page_gridview_item.xml" value="0.22083333333333333" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_arts.xml" value="0.22175925925925927" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_bookmark.xml" value="0.21693840579710144" />
-        <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_bookmark_item.xml" value="0.22175925925925927" />
+        <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_bookmark_item.xml" value="0.264" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_category.xml" value="0.21693840579710144" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_category2.xml" value="0.16" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_club_list.xml" value="0.22175925925925927" />
@@ -56,10 +56,12 @@
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_clubpage_question.xml" value="0.128" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_group.xml" value="0.22083333333333333" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_home.xml" value="0.21693840579710144" />
-        <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_home_item.xml" value="0.264" />
+        <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_home_item.xml" value="0.536" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_home_item_viewpage.xml" value="0.22175925925925927" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_mypage.xml" value="0.2" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_religion.xml" value="0.22175925925925927" />
+        <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_sports.xml" value="0.22175925925925927" />
+        <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_study.xml" value="0.1" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/group_post_item.xml" value="0.22175925925925927" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/home_fragment.xml" value="0.21693840579710144" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/home_item.xml" value="0.176" />

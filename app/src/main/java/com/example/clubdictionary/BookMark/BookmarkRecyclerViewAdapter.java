@@ -56,6 +56,20 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
         holder.major.setText("#"+bookmarkItem.getMajor()+" ");
         holder.minor.setText("#"+bookmarkItem.getMinor()+" ");
         holder.bindProfileImage(bookmarkItem.getIconUrl());
+
+        holder.alarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(holder.isChecked) {
+                    holder.alarm.setImageResource(R.drawable.icon_alarmoff);
+                    holder.isChecked = false;
+                }
+                else {
+                    holder.alarm.setImageResource(R.drawable.icon_alarmon);
+                    holder.isChecked = true;
+                }
+            }
+        });
         //String text = bookmarkItemList.get(position);
         //holder.textView.setText(text);
     }
@@ -71,7 +85,9 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
         private TextView name;
         private TextView major;
         private TextView minor;
+        private ImageView alarm;
         private String iconUrl;
+        public boolean isChecked = false;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -81,6 +97,7 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
             name = itemView.findViewById(R.id.bookmark_item_name);
             major = itemView.findViewById(R.id.bookmark_item_major);
             minor = itemView.findViewById(R.id.bookmark_item_minor);
+            alarm = itemView.findViewById(R.id.alarm);
 
             /*itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
