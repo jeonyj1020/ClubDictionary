@@ -38,6 +38,12 @@
         android:hint="오픈카카오톡링크"
         android:textSize="20dp"
         android:fontFamily="@font/gmarket_sans_medium"/>
+    <TextView
+        android:id="@+id/toKakao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="10dp"
+        android:text="카카오톡 바로가기"/>
     <Button
         android:id="@+id/applyButton"
         android:layout_width="wrap_content"
