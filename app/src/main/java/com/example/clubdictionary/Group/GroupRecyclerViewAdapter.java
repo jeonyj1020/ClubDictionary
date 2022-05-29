@@ -2,6 +2,7 @@ package com.example.clubdictionary.Group;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,6 +75,17 @@ public class GroupRecyclerViewAdapter extends RecyclerView.Adapter<GroupRecycler
 
                 }
                 return true;
+            }
+        });
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent  = new Intent(view.getContext(), GroupPostActivity.class);
+                intent.putExtra("title", groupPostInfo.getTitle());
+                intent.putExtra("date", groupPostInfo.getDate());
+                intent.putExtra("content", groupPostInfo.getContent());
+                intent.putExtra("kakaoLink", groupPostInfo.getKakaoLink());
+                view.getContext().startActivity(intent);
             }
         });
     }

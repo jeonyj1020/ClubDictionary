@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ClubDictionary.NoActionBar">
         <activity
+            android:name=".Group.GroupPostActivity"
+            android:exported="false" />
+        <activity
             android:name=".Group.GroupWriteActivity"
             android:exported="false" />
         <activity
@@ -23,8 +26,7 @@
             android:exported="true" />
         <activity
             android:name=".ClubPage.ClubPageActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".UserManagement.SignUpActivity"
             android:exported="true" />
@@ -42,15 +44,8 @@
         </activity>
         <activity
             android:name=".FilterActivity"
-            android:exported="true" >
+            android:exported="true"></activity>
 
-
-        </activity>
-        <activity
-            android:name=".FilterActivity"
-            android:exported="true" >
-
-        </activity>
     </application>
 
 </manifest>
