@@ -482,13 +482,13 @@ public class HomeFragment extends Fragment {
     }
 
     public void queryByMinorAndOnlyRecruit(List<String> Minors, int max) {
-        db.collection("clubs").whereIn("minor", Minors)
-                .whereEqualTo("recruit", true).get()
+        db.collection("clubs").whereIn("minor", Minors).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         for (DocumentSnapshot documentSnapshot : task.getResult()) {
-                            documentSnapshot.getReference().collection("posts").get()
+                            documentSnapshot.getReference().collection("posts")
+                                    .whereEqualTo("recruit", true).get()
                                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                         @Override
                                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
