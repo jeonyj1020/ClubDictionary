@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.clubdictionary">
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ClubDictionary.NoActionBar"
-        android:largeHeap="true">
+        android:theme="@style/Theme.ClubDictionary.NoActionBar">
+        <activity
+            android:name=".QuestionWriteActivity"
+            android:exported="false" />
         <activity
             android:name=".Group.GroupPostActivity"
             android:exported="false" />
@@ -32,7 +36,7 @@
             android:exported="true" />
         <activity
             android:name=".ClubPage.ClubPageActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".UserManagement.SignUpActivity"
             android:exported="true" />
@@ -50,10 +54,10 @@
         </activity>
         <activity
             android:name=".FilterActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".WritePost.WriteContentsActivity"
-            android:exported="true"/>
+            android:exported="true" />
     </application>
 
 </manifest>

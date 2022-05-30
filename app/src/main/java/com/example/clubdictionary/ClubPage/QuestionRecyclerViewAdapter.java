@@ -63,6 +63,8 @@ public class QuestionRecyclerViewAdapter extends RecyclerView.Adapter<QuestionRe
         else if (position == 4) holder.isClub = 2;
         else holder.isClub = 0;
 
+
+
         if (holder.isClub == 0) holder.menuButton.setVisibility(View.GONE);
         else {
             holder.menuButton.setOnClickListener(new View.OnClickListener() {
@@ -122,8 +124,8 @@ public class QuestionRecyclerViewAdapter extends RecyclerView.Adapter<QuestionRe
             super(itemView);
 
             menuButton = itemView.findViewById(R.id.threeDotButton);
-            questionText = itemView.findViewById(R.id.questionText);
-            answerText = itemView.findViewById(R.id.answerText);
+            questionText = itemView.findViewById(R.id.question);
+            answerText = itemView.findViewById(R.id.answer);
 
         }
     }

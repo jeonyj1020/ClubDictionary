@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.clubdictionary.FilterActivity;
 import com.example.clubdictionary.MainActivity;
 import com.example.clubdictionary.R;
+// import com.example.clubdictionary.WritePost.WriteContentsActivity;
 import com.example.clubdictionary.WritePost.WriteContentsActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;

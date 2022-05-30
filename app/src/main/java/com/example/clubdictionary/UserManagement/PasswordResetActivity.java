@@ -83,7 +83,7 @@ public class PasswordResetActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
 
                             if (task.isSuccessful()) {
-                                Toast.makeText(PasswordResetActivity.this,"이메일을 보냈습니다.이메일 속 링크를 클릭해주세요.",Toast.LENGTH_SHORT).show();
+                                Toast.makeText(PasswordResetActivity.this,"웹메일 속 링크를 클릭해주세요.\n스팸메일함에 메일이 있을 수 있습니다.",Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(PasswordResetActivity.this, LoginActivity.class);
                                 startActivity(intent);
                                 finish();

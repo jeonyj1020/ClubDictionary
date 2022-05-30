@@ -1,5 +1,7 @@
 package com.example.clubdictionary.ClubPage;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -7,16 +9,21 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 public class ClubPageViewPagerAdapter extends FragmentStateAdapter {
 
-    String clubUid;
+    String name;
+
+    String Uid;
 
     public ClubPageViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
+
     }
 
-    public ClubPageViewPagerAdapter(@NonNull FragmentActivity fragmentActivity, String Uid) {
+    public ClubPageViewPagerAdapter(@NonNull FragmentActivity fragmentActivity, String name) {
         super(fragmentActivity);
-        this.clubUid = Uid;
+        this.name = name;
     }
+
+
 
     @NonNull
     @Override
@@ -27,7 +34,7 @@ public class ClubPageViewPagerAdapter extends FragmentStateAdapter {
             case 1:
                 return IntroFragment.newInstance(position);
             case 2:
-                return QuestionFragment.newInstance(position, clubUid);
+                return QuestionFragment.newInstance(position, name);
         }
         return null;
     }
@@ -36,4 +43,5 @@ public class ClubPageViewPagerAdapter extends FragmentStateAdapter {
     public int getItemCount() {
         return 3;
     }
+
 }
