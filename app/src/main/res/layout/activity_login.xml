@@ -23,10 +23,10 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
             android:layout_weight="356"
             android:autoSizeMaxTextSize="90sp"
             android:autoSizeMinTextSize="30sp"
@@ -44,21 +44,25 @@
             android:layout_weight="103" />
 
         <EditText
-            android:inputType="text"
-            android:layout_margin="5dp"
-            android:includeFontPadding="false"
             android:id="@+id/emailEditText_login"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="10dp"
+            android:layout_margin="5dp"
             android:layout_weight="126"
+            android:autoSizeMaxTextSize="90sp"
+            android:autoSizeMinTextSize="10sp"
+            android:autoSizeStepGranularity="1sp"
+            android:autoSizeTextType="uniform"
             android:background="@drawable/edittext_background"
             android:elevation="2dp"
-            android:gravity="center_vertical"
-            android:textSize="13dp"
-            android:padding="20dp"
             android:fontFamily="@font/notosanskr_medium"
+            android:gravity="center_vertical"
             android:hint="이메일을 입력해주세요"
-            android:textColor="@color/black_191919"  />
+            android:includeFontPadding="false"
+            android:inputType="text"
+            android:maxLines="1"
+            android:padding="20dp"
+            android:textColor="@color/black_191919" />
 
         <View
             android:layout_width="match_parent"
@@ -66,20 +70,23 @@
             android:layout_weight="12" />
 
         <EditText
-            android:inputType="textPassword"
-            android:background="@drawable/edittext_background"
-            android:elevation="2dp"
-            android:padding="20dp"
-            android:layout_margin="5dp"
-            android:includeFontPadding="false"
             android:id="@+id/passwordEditText_login"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="10dp"
+            android:layout_margin="5dp"
             android:layout_weight="126"
-            android:gravity="center_vertical"
-            android:textSize="13dp"
+            android:autoSizeMaxTextSize="90sp"
+            android:autoSizeMinTextSize="10sp"
+            android:autoSizeStepGranularity="1sp"
+            android:autoSizeTextType="uniform"
+            android:background="@drawable/edittext_background"
+            android:elevation="2dp"
             android:fontFamily="@font/notosanskr_medium"
+            android:gravity="center_vertical"
             android:hint="비밀번호를 입력해주세요"
+            android:includeFontPadding="false"
+            android:inputType="textPassword"
+            android:padding="20dp"
             android:textColor="@color/black_191919" />
 
         <View
@@ -93,13 +100,13 @@
             android:layout_weight="169">
 
             <Button
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
                 android:id="@+id/loginButton"
                 android:layout_width="match_parent"
                 android:layout_height="63dp"
                 android:layout_alignParentTop="true"
+                android:layout_marginStart="5dp"
                 android:layout_marginTop="-2dp"
+                android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
                 android:autoSizeMaxTextSize="100dp"
                 android:autoSizeMinTextSize="10dp"
@@ -119,13 +126,12 @@
         </RelativeLayout>
 
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="62"
-            android:weightSum="690"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="690">
 
             <View
                 android:layout_width="0dp"
@@ -133,32 +139,32 @@
                 android:layout_weight="141" />
 
             <TextView
-                android:includeFontPadding="false"
                 android:layout_width="0dp"
-                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_weight="242"
-                android:textColor="@color/black_191919"
-                android:fontFamily="@font/notosanskr_medium"
                 android:autoSizeMaxTextSize="100dp"
                 android:autoSizeMinTextSize="10dp"
                 android:autoSizeTextType="uniform"
-                android:text="비밀번호를 잊으셨나요?"/>
+                android:fontFamily="@font/notosanskr_medium"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="비밀번호를 잊으셨나요?"
+                android:textColor="@color/black_191919" />
 
 
             <TextView
                 android:id="@+id/gotopasswordResetButton"
-                android:includeFontPadding="false"
                 android:layout_width="0dp"
-                android:gravity="center"
                 android:layout_height="match_parent"
                 android:layout_weight="140"
-                android:textColor="@color/maintheme"
-                android:fontFamily="@font/notosanskr_medium"
                 android:autoSizeMaxTextSize="100dp"
                 android:autoSizeMinTextSize="10dp"
                 android:autoSizeTextType="uniform"
-                android:text="비밀번호 찾기"/>
+                android:fontFamily="@font/notosanskr_medium"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="비밀번호 찾기"
+                android:textColor="@color/maintheme" />
 
             <View
                 android:layout_width="0dp"
@@ -174,51 +180,51 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:weightSum="690"
+            android:layout_weight="62"
             android:orientation="horizontal"
-            android:layout_weight="62">
+            android:weightSum="690">
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="150" />
-            
-            <TextView
-                android:gravity="center"
-                android:layout_width="0dp"
-                android:includeFontPadding="false"
-                android:layout_height="match_parent"
-                android:layout_weight="263"
-                android:layout_gravity="center"
-                android:fontFamily="@font/notosanskr_medium"
-                android:autoSizeMaxTextSize="100dp"
-                android:autoSizeMinTextSize="10dp"
-                android:autoSizeTextType="uniform"
-                android:textColor="@color/gray_767676"
-                android:text="아직 회원이 아니신가요?"/>
 
             <TextView
-                android:gravity="center"
-                android:id="@+id/goToSignUp"
-                android:includeFontPadding="false"
                 android:layout_width="0dp"
-                android:layout_gravity="center"
                 android:layout_height="match_parent"
-                android:layout_weight="100"
-                android:text="회원 가입"
-                android:textStyle="bold"
-                android:fontFamily="@font/notosanskr_medium"
+                android:layout_gravity="center"
+                android:layout_weight="263"
                 android:autoSizeMaxTextSize="100dp"
                 android:autoSizeMinTextSize="10dp"
                 android:autoSizeTextType="uniform"
-                android:textColor="@color/black_191919"/>
+                android:fontFamily="@font/notosanskr_medium"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="아직 회원이 아니신가요?"
+                android:textColor="@color/gray_767676" />
+
+            <TextView
+                android:id="@+id/goToSignUp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="100"
+                android:autoSizeMaxTextSize="100dp"
+                android:autoSizeMinTextSize="10dp"
+                android:autoSizeTextType="uniform"
+                android:fontFamily="@font/notosanskr_medium"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="회원 가입"
+                android:textColor="@color/black_191919"
+                android:textStyle="bold" />
 
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="31"
-                android:src="@drawable/next_btn"
-                android:padding="4dp"/>
+                android:padding="4dp"
+                android:src="@drawable/next_btn" />
 
             <View
                 android:layout_width="0dp"
@@ -227,7 +233,6 @@
 
 
         </LinearLayout>
-
 
 
     </LinearLayout>
