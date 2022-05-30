@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WritePost.WriteContentsActivity">
+
+    <Button
+        android:id="@+id/exit"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="취소"/>
+
+    <Button
+        android:id="@+id/upload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="10dp"
+        android:text="게시물 등록하기"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/imageListRecyclerView"
+        app:layout_constraintTop_toBottomOf="@id/upload"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/hashTag"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/imageListRecyclerView"
+        android:layout_marginTop="15dp"
+        android:textSize="20dp"
+        android:hint="해쉬태그"
+        android:scrollbars="horizontal"/>
+
+    <EditText
+        android:id="@+id/contents"
+        app:layout_constraintTop_toBottomOf="@id/hashTag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/blackborder_edittext"
+        android:textSize="20dp"
+        android:gravity="top"
+        android:padding="10dp"
+        android:lines = "5"
+        android:scrollbars="vertical"
+        android:hint="  내용을 입력해주세요..."/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
