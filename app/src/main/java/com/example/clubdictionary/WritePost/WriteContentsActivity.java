@@ -2,6 +2,7 @@ package com.example.clubdictionary.WritePost;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,6 +11,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -50,6 +52,17 @@ public class WriteContentsActivity extends AppCompatActivity {
     DocumentReference clubRef = null;
 
     @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{ //toolbar의 back키 눌렀을 때 동작
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_contents);
@@ -69,6 +82,11 @@ public class WriteContentsActivity extends AppCompatActivity {
         contents = findViewById(R.id.contents);
         recruit = findViewById(R.id.recruit);
         //recruit.setOnClickListener(onClickListener);
+
+        Toolbar toolbar = findViewById(R.id.awc_tool_bar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {

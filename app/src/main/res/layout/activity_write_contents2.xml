@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Group.GroupWriteActivity">
+    android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/gw_tool_bar"
+        android:id="@+id/awc_tool_bar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentTop="true"
@@ -21,47 +18,40 @@
             android:fontFamily="@font/notosanskr_medium"
             android:gravity="center"
             android:includeFontPadding="false"
-            android:text="소모임 모집 글쓰기"
+            android:text="포스팅 글쓰기"
             android:textColor="@color/black_191919"
             android:textSize="18dp" />
 
     </androidx.appcompat.widget.Toolbar>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/gw_tool_bar"
-        android:layout_marginTop="10dp"
+        android:layout_below="@+id/awc_tool_bar"
         android:orientation="vertical"
         android:weightSum="1455">
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="55" />
+            android:layout_weight="50" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="35"
+            android:layout_weight="400"
             android:weightSum="786">
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="500" />
+                android:layout_weight="48" />
 
-            <TextView
-                android:id="@+id/toKakao"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/imageListRecyclerView"
                 android:layout_width="0dp"
-                android:layout_weight="238"
-                android:gravity="end"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/tool_bar"
-                android:layout_alignParentEnd="true"
-                android:text="카카오톡 바로가기"
-                android:textSize="10dp" />
+                android:layout_height="wrap_content"
+                android:layout_weight="690" />
 
             <View
                 android:layout_width="0dp"
@@ -69,6 +59,45 @@
                 android:layout_weight="48" />
 
         </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="20" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="50"
+            android:weightSum="786">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="550" />
+
+
+            <CheckBox
+                android:id="@+id/recruit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="188"
+                android:fontFamily="@font/notosanskr_medium"
+                android:includeFontPadding="false"
+                android:text="모집공고"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="48" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="20" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -83,13 +112,13 @@
 
 
             <EditText
-                android:id="@+id/title"
+                android:id="@+id/hashTag"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="690"
-                android:fontFamily="@font/notosanskr_medium"
                 android:background="@drawable/rectangular_background"
-                android:hint="소모임 이름 / 제목"
+                android:fontFamily="@font/notosanskr_medium"
+                android:hint="게시글을 해시태그로 나타내주세요"
                 android:includeFontPadding="false"
                 android:paddingStart="12dp"
                 android:paddingTop="17dp"
@@ -111,7 +140,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="110"
+            android:layout_weight="559"
             android:weightSum="786">
 
             <View
@@ -119,56 +148,17 @@
                 android:layout_height="match_parent"
                 android:layout_weight="48" />
 
-
             <EditText
-                android:id="@+id/kakaoLink"
+                android:id="@+id/contents"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="690"
-                android:fontFamily="@font/notosanskr_medium"
-                android:hint="카카오톡 링크"
                 android:background="@drawable/rectangular_background"
-                android:includeFontPadding="false"
-                android:paddingStart="12dp"
-                android:paddingTop="17dp"
-                android:paddingBottom="17dp"
-                android:textSize="14sp" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="48" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="10" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="913"
-            android:weightSum="786">
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="48" />
-
-
-            <EditText
-                android:id="@+id/content"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="690"
                 android:fontFamily="@font/notosanskr_medium"
-                android:background="@drawable/rectangular_background"
-                android:hint="모집할 소모임에 대해 간략하게 소개해주세요 ! "
+                android:gravity="top"
+                android:hint="내용을 입력해주세요"
                 android:includeFontPadding="false"
                 android:lines="20"
-                android:gravity="top"
                 android:paddingStart="12dp"
                 android:paddingTop="17dp"
                 android:paddingBottom="17dp"
@@ -198,7 +188,7 @@
                 android:layout_weight="48" />
 
             <Button
-                android:id="@+id/applyButton"
+                android:id="@+id/upload"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -206,9 +196,9 @@
                 android:background="@drawable/rectangular_background_button"
                 android:fontFamily="@font/notosanskr_medium"
                 android:includeFontPadding="false"
-                android:textSize="18sp"
-                android:text="확인"
-                android:textColor="@color/maintheme" />
+                android:text="게시물 등록하기"
+                android:textColor="@color/maintheme"
+                android:textSize="18sp" />
 
             <View
                 android:layout_width="0dp"
@@ -217,8 +207,15 @@
 
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="100"/>
+
 
     </LinearLayout>
+
+
 
 
 

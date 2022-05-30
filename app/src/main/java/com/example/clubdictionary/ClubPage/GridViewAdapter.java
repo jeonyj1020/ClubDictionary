@@ -2,10 +2,13 @@ package com.example.clubdictionary.ClubPage;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.example.clubdictionary.R;
@@ -45,12 +48,20 @@ public class GridViewAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.square_image, viewGroup, false);
 
-
             ImageView img = view.findViewById(R.id.square_image_icon);
-
-
+            //ImageButton ib = view.findViewById(R.id.item_dropdown_menu);
 
             img.setImageResource(postItem.getResId());
+
+/*            ib.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    PopupMenu popup = new PopupMenu(context, viewGroup);
+
+                    MenuInflater menuInflater = popup.getMenuInflater();
+                }
+            });*/
 
         }
         else{

@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/maintheme"
+    android:background="@color/white"
     android:layout_height="match_parent"
+    android:gravity="center"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/groupBoard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:fontFamily="@font/gmarket_sans_medium"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:gravity="center"
+        android:textColor="@color/maintheme"
+        android:background="@color/buttonTheme"
+        android:fontFamily="@font/notosanskr_medium"
+        android:includeFontPadding="false"
         android:text="소모임 게시판"
         android:textSize="30dp"/>
 

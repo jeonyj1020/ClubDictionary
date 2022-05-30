@@ -4,27 +4,27 @@
         android:id="@+id/home"
         android:enabled="true"
         android:icon="@drawable/home_navi_item"
-        android:title="home" />
+        android:title="메인 피드" />
     <item
         android:id="@+id/bookmark"
         android:enabled="true"
         android:icon="@drawable/bookmark_navi_item"
-        android:title="bookmark" />
+        android:title="찜 동아리" />
     <item
         android:id="@+id/category"
         android:enabled="true"
         android:icon="@drawable/category_navi_item"
-        android:title="category" />
+        android:title="동아리 목록" />
     <item
         android:id="@+id/group"
         android:enabled="true"
         android:icon="@drawable/group_navi_item"
-        android:title="group" />
+        android:title="소모임" />
     <item
         android:id="@+id/mypage"
         android:enabled="true"
         android:icon="@drawable/mypage_navi_item"
-        android:title="mypage" />
+        android:title="마이페이지" />
 
 
 </menu>

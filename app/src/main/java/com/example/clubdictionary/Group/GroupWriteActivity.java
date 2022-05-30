@@ -10,11 +10,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.clubdictionary.GroupPostInfo;
 import com.example.clubdictionary.R;
@@ -37,6 +39,18 @@ public class GroupWriteActivity extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     long lnow = System.currentTimeMillis();
     String now = String.valueOf(lnow);
+    Toolbar toolbar;
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{ //toolbar의 back키 눌렀을 때 동작
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +60,16 @@ public class GroupWriteActivity extends AppCompatActivity {
         EditText content = findViewById(R.id.content);
         Button applyButton = findViewById(R.id.applyButton);
         TextView toKakao = findViewById(R.id.toKakao);
+        toolbar = findViewById(R.id.gw_tool_bar);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
+
+
         toKakao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

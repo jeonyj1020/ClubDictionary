@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -194,9 +195,12 @@ public class ClubPageActivity extends AppCompatActivity {
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
                 TextView textView = new TextView(ClubPageActivity.this);
                 textView.setText(tabElement.get(position));
+                textView.setGravity(Gravity.CENTER);
                 tab.setCustomView(textView);
             }
         }).attach();
+
+        tabLayout.setTabTextColors(R.color.gray_dbdbdb, R.color.maintheme);
 
 
     }

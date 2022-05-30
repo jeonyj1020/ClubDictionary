@@ -23,14 +23,16 @@
             android:padding="5dp"
             android:text="익명"
             android:textSize="20dp"
-            android:fontFamily="@font/gmarket_sans_bold"/>
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosanskr_regular"/>
          <TextView
              android:padding="5dp"
              android:id="@+id/title"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
              android:layout_margin="3dp"
-             android:fontFamily="@font/gmarket_sans_medium"
+             android:includeFontPadding="false"
+             android:fontFamily="@font/notosanskr_regular"
              android:textSize="20dp"/>
         <TextView
             android:id="@+id/content"
@@ -39,12 +41,14 @@
             android:textSize="15dp"
             android:singleLine="true"
             android:ellipsize="end"
-            android:fontFamily="@font/gmarket_sans_medium"/>
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosanskr_regular"/>
         <TextView
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/gmarket_sans_medium"
+            android:includeFontPadding="false"
+            android:fontFamily="@font/notosanskr_regular"
             android:textSize="10dp"/>
         <TextView
             android:id="@+id/publisher"

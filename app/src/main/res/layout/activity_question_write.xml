@@ -6,30 +6,108 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ClubPage.QuestionWriteActivity">
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:fontFamily="@font/dx_poet_guana"
-        android:text="질문하기"
-        android:layout_margin="10dp"
-        />
-    <EditText
-        android:id="@+id/question"
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/qw_tool_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:maxLines="10"
-        android:hint="질문을 입력해주세요."/>
-    <Button
-        android:id="@+id/applyButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/dx_poet_guana"
-        android:backgroundTint="@color/maintheme"
-        android:textSize="10dp"
-        android:textColor="@color/white"
-        android:layout_gravity="center"
-        android:text="질문 등록하기"/>
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        app:contentInsetStart="0dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:fontFamily="@font/notosanskr_medium"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="질문하기"
+            android:textColor="@color/black_191919"
+            android:textSize="18dp" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/gw_tool_bar"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:weightSum="1455">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:weightSum="786">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="48" />
+
+
+            <EditText
+                android:id="@+id/question"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="690"
+                android:lines="20"
+                android:gravity="top"
+                android:fontFamily="@font/notosanskr_medium"
+                android:background="@drawable/rectangular_background"
+                android:hint="동아리에 관한 질문을 자유롭게 해주세요 ! \n# 무례하거나 문제가 있는 질문글은 삭제될 수 있습니다."
+                android:includeFontPadding="false"
+                android:paddingStart="12dp"
+                android:paddingTop="17dp"
+                android:paddingBottom="17dp"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="48" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:weightSum="786">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="48" />
+
+            <Button
+                android:id="@+id/applyButton"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_gravity="center"
+                android:layout_weight="690"
+                android:background="@drawable/rectangular_background_button"
+                android:fontFamily="@font/notosanskr_medium"
+                android:includeFontPadding="false"
+                android:textSize="18sp"
+                android:text="확인"
+                android:textColor="@color/maintheme" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="48" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
 </LinearLayout>

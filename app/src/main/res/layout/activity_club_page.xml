@@ -43,19 +43,18 @@
                         android:src="@drawable/mypage" />
 
                     <Button
-                        android:fontFamily="@font/notosanskr_medium"
-                        android:includeFontPadding="false"
                         android:id="@+id/registerUrl"
                         android:layout_width="match_parent"
                         android:layout_height="32dp"
                         android:layout_marginTop="13dp"
-                        android:background="@drawable/rectangular_background_button"
+                        android:background="@color/buttonTheme"
+                        android:fontFamily="@font/notosanskr_medium"
+                        android:includeFontPadding="false"
                         android:text="신청하기"
                         android:textColor="@color/maintheme"
-                        android:textSize="16dp"/>
+                        android:textSize="16dp" />
 
                 </LinearLayout>
-
 
 
                 <View
@@ -85,21 +84,21 @@
                             android:textSize="15sp" />
 
                         <TextView
-                            android:fontFamily="@font/notosanskr_medium"
-                            android:includeFontPadding="false"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
+                            android:fontFamily="@font/notosanskr_medium"
+                            android:includeFontPadding="false"
                             android:text="활동 시간"
                             android:textColor="@color/maintheme"
                             android:textSize="15sp" />
 
                         <TextView
-                            android:fontFamily="@font/notosanskr_medium"
-                            android:includeFontPadding="false"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
+                            android:fontFamily="@font/notosanskr_medium"
+                            android:includeFontPadding="false"
                             android:text="회비"
                             android:textColor="@color/maintheme"
                             android:textSize="15sp" />
@@ -113,30 +112,30 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:fontFamily="@font/notosanskr_medium"
-                            android:includeFontPadding="false"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/notosanskr_medium"
+                            android:includeFontPadding="false"
                             android:text=" : "
                             android:textColor="@color/maintheme"
                             android:textSize="15sp" />
 
                         <TextView
-                            android:fontFamily="@font/notosanskr_medium"
-                            android:includeFontPadding="false"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
+                            android:fontFamily="@font/notosanskr_medium"
+                            android:includeFontPadding="false"
                             android:text=" : "
                             android:textColor="@color/maintheme"
                             android:textSize="15sp" />
 
                         <TextView
-                            android:fontFamily="@font/notosanskr_medium"
-                            android:includeFontPadding="false"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
+                            android:fontFamily="@font/notosanskr_medium"
+                            android:includeFontPadding="false"
                             android:text=" : "
                             android:textColor="@color/maintheme"
                             android:textSize="15sp" />
@@ -150,33 +149,33 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:fontFamily="@font/notosanskr_medium"
-                            android:includeFontPadding="false"
                             android:id="@+id/day"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/notosanskr_medium"
+                            android:includeFontPadding="false"
                             android:text="월, 금"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 
                         <TextView
-                            android:fontFamily="@font/notosanskr_medium"
-                            android:includeFontPadding="false"
                             android:id="@+id/activityTime"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
+                            android:fontFamily="@font/notosanskr_medium"
+                            android:includeFontPadding="false"
                             android:text="19시 ~ 21시"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 
                         <TextView
-                            android:fontFamily="@font/notosanskr_medium"
-                            android:includeFontPadding="false"
                             android:id="@+id/money"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
+                            android:fontFamily="@font/notosanskr_medium"
+                            android:includeFontPadding="false"
                             android:text="2만원 / 학기"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
@@ -217,24 +216,23 @@
                         android:id="@+id/bookMark"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
+                        android:layout_marginEnd="24dp"
                         android:background="@color/white"
                         android:padding="5dp"
                         android:scaleType="centerInside"
                         android:src="@drawable/png_bookmark"
-                        android:layout_marginEnd="24dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.5" />
 
 
-
                     <TextView
-                        android:includeFontPadding="false"
-                        android:fontFamily="@font/notosanskr_medium"
                         android:id="@+id/nameTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/notosanskr_medium"
+                        android:includeFontPadding="false"
                         android:text="동아리 이름"
                         android:textColor="@color/black"
                         android:textSize="16dp"
@@ -256,10 +254,10 @@
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             app:tabIndicatorColor="@color/maintheme"
-            app:tabTextColor="@color/unselectedColor"
             app:tabSelectedTextColor="@color/maintheme"
-            android:background="@color/white" />
+            app:tabTextColor="@color/unselectedColor" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
