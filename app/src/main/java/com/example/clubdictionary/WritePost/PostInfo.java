@@ -10,12 +10,13 @@ public class PostInfo {
     private String upTime;
     private String hashTag;
     private String contents;
+    private boolean recruit;
     private ArrayList<String> imageUrlList;
 
     public PostInfo(){}
 
     public PostInfo(String name, String iconUrl, String major, String minor, String upTime,
-                    String hashTag, String contents, ArrayList<String> imageUrlList){
+                    String hashTag, String contents, ArrayList<String> imageUrlList, boolean recruit){
         this.name = name;
         this.iconUrl = iconUrl;
         this.major = major;
@@ -24,6 +25,7 @@ public class PostInfo {
         this.hashTag = hashTag;
         this.contents = contents;
         this.imageUrlList = imageUrlList;
+        this.recruit = recruit;
     }
 
 
@@ -89,5 +91,13 @@ public class PostInfo {
 
     public void setImageUrlList(ArrayList<String> imageUrlList) {
         this.imageUrlList = imageUrlList;
+    }
+
+    public boolean isRecruit() {
+        return recruit;
+    }
+
+    public void setRecruit(boolean recruit) {
+        this.recruit = recruit;
     }
 }

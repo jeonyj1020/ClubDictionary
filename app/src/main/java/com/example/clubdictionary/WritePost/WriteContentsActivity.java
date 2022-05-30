@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +43,7 @@ public class WriteContentsActivity extends AppCompatActivity {
     ImageListAdapter imageListAdapter;
     TextView hashTag, contents;
     Button exit, upload;
+    CheckBox recruit;
     int idx = 0;
 
     DocumentSnapshot clubDoc = null;
@@ -65,6 +67,8 @@ public class WriteContentsActivity extends AppCompatActivity {
 
         hashTag = findViewById(R.id.hashTag);
         contents = findViewById(R.id.contents);
+        recruit = findViewById(R.id.recruit);
+        //recruit.setOnClickListener(onClickListener);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -120,7 +124,8 @@ public class WriteContentsActivity extends AppCompatActivity {
 
                                                         PostInfo postInfo = new PostInfo((String) clubDoc.get("name"), (String) clubDoc.get("icon"),
                                                                 (String) clubDoc.get("major"), (String) clubDoc.get("minor"),
-                                                                upTime, hashTag.getText().toString(), contents.getText().toString(), imageUrlList);
+                                                                upTime, hashTag.getText().toString(), contents.getText().toString(), imageUrlList
+                                                        , recruit.isChecked());
                                                         clubRef.collection("posts").document(nowTimeString).set(postInfo)
                                                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                     @Override

@@ -63,11 +63,11 @@ public class HomeFragment extends Fragment {
     Map<String, List<String>> bookMark = null;
     FloatingActionButton writePostButton;
     ArrayList<String> allMinor = new ArrayList<String>(Arrays.asList(
-                    "idea",
-                    "it", "liberalArts", "nature", "idea",
-                    "band", "instrument", "song", "play", "art", "cook", "dance", "picture", "handicraft",
-                    "ball", "racket", "martialArts", "extreme", "archery", "game",
-                    "christian", "buddhism", "catholic", "transpiration"
+            "idea",
+            "it", "liberalArts", "nature", "idea",
+            "band", "instrument", "song", "play", "art", "cook", "dance", "picture", "handicraft",
+            "ball", "racket", "martialArts", "extreme", "archery", "game",
+            "christian", "buddhism", "catholic", "transpiration"
     ));
     ArrayList<PostInfo> postList = new ArrayList<>();
     ArrayList<String> intersectionClubs = new ArrayList<>();
@@ -258,24 +258,24 @@ public class HomeFragment extends Fragment {
         Log.e("filter", " \n" + filtering + "\n" + filteringBinary + "\n" + onlyRecruitChecked +
                 ", " + onlyFavoriteChecked + "\n" + bookMark);
 
-
+        postList.clear();
         String is = "";
-        if(onlyFavoriteChecked){
+        if (onlyFavoriteChecked) {
             intersectionClubs.clear();
-            for(String minor : bookMark.keySet()){
-                if(filtering.contains(minor)){
+            for (String minor : bookMark.keySet()) {
+                if (filtering.contains(minor)) {
                     List<String> clubs = bookMark.get(minor);
-                    for(int i = 0; i<clubs.size(); i++){
+                    for (int i = 0; i < clubs.size(); i++) {
                         intersectionClubs.add(clubs.get(i));
-                        is +=  clubs.get(i);
+                        is += clubs.get(i);
                     }
                 }
             }
         }
 
         exceptFiltering.clear();
-        for(String minor : allMinor){
-            if(!filtering.contains(minor)){
+        for (String minor : allMinor) {
+            if (!filtering.contains(minor)) {
                 exceptFiltering.add(minor);
             }
         }
@@ -283,98 +283,137 @@ public class HomeFragment extends Fragment {
         Log.e("intersection", is);
 
         // 찜한 동아리만 보기가 선택되면 intersectionClubs의 동아리 이름들로 쿼리
-        if(onlyFavoriteChecked){
-            if(intersectionClubs.size() == 0){
+        if (onlyFavoriteChecked) {
+            if (intersectionClubs.size() == 0) {
                 Toast.makeText(getActivity(), "필터링과 찜한 동아리 돌 다에 해당하는 동아리가 한 개도 없습니다!", Toast.LENGTH_SHORT).show();
-            }
-            else{
-                int ten = intersectionClubs.size()/10;
-                Log.e("size", ""+intersectionClubs.size());
-                for(int i = 0; i <= ten; i++){
-                    if(i != ten) {
-                        List<String> clubNames = intersectionClubs.subList(i * 10, (i+1) * 10 - 1);
-                        queryByClubName(clubNames,10, onlyRecruitChecked);
+            } else {
+                int ten = intersectionClubs.size() / 10;
+                Log.e("size", "" + intersectionClubs.size());
+                if (onlyRecruitChecked) {
+                    for (int i = 0; i <= ten; i++) {
+                        if (i != ten) {
+                            List<String> clubNames = intersectionClubs.subList(i * 10, (i + 1) * 10 - 1);
+                            queryByClubNameAndOnlyRecruit(clubNames, 10);
+                        } else {
+                            List<String> clubNames = intersectionClubs.subList(i * 10, intersectionClubs.size());
+                            Log.e("size", "" + clubNames.get(0));
+                            queryByClubNameAndOnlyRecruit(clubNames, clubNames.size());
+                        }
                     }
-                    else{
-                        List<String> clubNames = intersectionClubs.subList(i * 10, intersectionClubs.size());
-                        Log.e("size", ""+clubNames.get(0));
-                        queryByClubName(clubNames, clubNames.size(), onlyRecruitChecked);
+                } else {
+                    for (int i = 0; i <= ten; i++) {
+                        if (i != ten) {
+                            List<String> clubNames = intersectionClubs.subList(i * 10, (i + 1) * 10 - 1);
+                            queryByClubName(clubNames, 10);
+                        } else {
+                            List<String> clubNames = intersectionClubs.subList(i * 10, intersectionClubs.size());
+                            Log.e("size", "" + clubNames.get(0));
+                            queryByClubName(clubNames, clubNames.size());
+                        }
                     }
                 }
             }
         }
         // 찜한 동아리만 보기가 선택되지 않았으면, filtering의 소분류들로만 쿼리
-        else{
-            if(filtering == null || filtering.size() == allMinor.size()){
-                db.collectionGroup("posts").get()
-                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                for(DocumentSnapshot documentSnapshot : task.getResult()){
-                                    PostInfo postInfo = documentSnapshot.toObject(PostInfo.class);
-                                    postList.add(postInfo);
+        else {
+            if (filtering == null || filtering.size() == allMinor.size()) {
+                if (onlyRecruitChecked) {
+                    db.collectionGroup("posts")
+                            .whereEqualTo("recruit", true).get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                                        PostInfo postInfo = documentSnapshot.toObject(PostInfo.class);
+                                        postList.add(postInfo);
+                                    }
                                 }
-                            }
-                        });
-            }
-            else if(filtering.size() == 0){
+                            });
+                } else {
+                    db.collectionGroup("posts").get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                                        PostInfo postInfo = documentSnapshot.toObject(PostInfo.class);
+                                        postList.add(postInfo);
+                                    }
+                                }
+                            });
+                }
+            } else if (filtering.size() == 0) {
                 Toast.makeText(getActivity(), "소분류를 한 개도 선택하지 않아 게시물을 불러오지 않습니다!", Toast.LENGTH_SHORT).show();
-            }
-            else if(filtering.size() <= allMinor.size()/2){
-                int ten = filtering.size()/10;
-                for(int i = 0; i <= ten; i++){
-                    if(i != ten) {
-                        List<String> minors = filtering.subList(i * 10, (i+1) * 10 - 1);
-                        queryByMinor(minors, 10, onlyRecruitChecked);
+            } else if (filtering.size() <= allMinor.size() / 2) {
+                int ten = filtering.size() / 10;
+                if (onlyRecruitChecked) {
+                    for (int i = 0; i <= ten; i++) {
+                        if (i != ten) {
+                            List<String> minors = filtering.subList(i * 10, (i + 1) * 10 - 1);
+                            queryByMinorAndOnlyRecruit(minors, 10);
+                        } else {
+                            List<String> minors = filtering.subList(i * 10, filtering.size());
+                            queryByMinorAndOnlyRecruit(minors, minors.size());
+                        }
                     }
-                    else{
-                        List<String> minors = filtering.subList(i * 10, filtering.size());
-                        queryByMinor(minors, minors.size(), onlyRecruitChecked);
+                } else {
+                    for (int i = 0; i <= ten; i++) {
+                        if (i != ten) {
+                            List<String> minors = filtering.subList(i * 10, (i + 1) * 10 - 1);
+                            queryByMinor(minors, 10);
+                        } else {
+                            List<String> minors = filtering.subList(i * 10, filtering.size());
+                            queryByMinor(minors, minors.size());
+                        }
                     }
+                }
+            } else if (filtering.size() < allMinor.size()) {
+                int ten = exceptFiltering.size() / 10;
+                if(onlyRecruitChecked){
+                    for (int i = 0; i <= ten; i++) {
+                        if (i != ten) {
+                            List<String> minors = exceptFiltering.subList(i * 10, (i + 1) * 10 - 1);
+                            queryByMinorAndOnlyRecruit(minors, 10);
+                        } else {
+                            List<String> minors = exceptFiltering.subList(i * 10, exceptFiltering.size());
+                            queryByMinorAndOnlyRecruit(minors, minors.size());
+                        }
+                    }
+                }
+                else{
+                    for (int i = 0; i <= ten; i++) {
+                        if (i != ten) {
+                            List<String> minors = exceptFiltering.subList(i * 10, (i + 1) * 10 - 1);
+                            queryByMinor(minors, 10);
+                        } else {
+                            List<String> minors = exceptFiltering.subList(i * 10, exceptFiltering.size());
+                            queryByMinor(minors, minors.size());
+                        }
+                    }
+                }
 
-                }
-            }
-            else if(filtering.size() < allMinor.size()){
-                int ten = exceptFiltering.size()/10;
-                for(int i = 0; i <= ten; i++){
-                    if(i != ten) {
-                        List<String> minors = exceptFiltering.subList(i * 10, (i+1) * 10 - 1);
-                        queryByMinor(minors, 10, onlyRecruitChecked);
-                    }
-                    else{
-                        List<String> minors = exceptFiltering.subList(i * 10, exceptFiltering.size());
-                        queryByMinor(minors, minors.size(), onlyRecruitChecked);
-                    }
-                }
             }
         }
-
-
     }
 
-    public void queryByClubName(List<String> clubNames, int max, boolean onlyRecruitChecked){
+    public void queryByClubName(List<String> clubNames, int max) {
         db.collection("clubs").whereIn("name", clubNames).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        for(DocumentSnapshot documentSnapshot : task.getResult()){
+                        for (DocumentSnapshot documentSnapshot : task.getResult()) {
                             documentSnapshot.getReference().collection("posts").get()
                                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                         @Override
                                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                            for(DocumentSnapshot document : task.getResult()){
+                                            for (DocumentSnapshot document : task.getResult()) {
                                                 postList.add(document.toObject(PostInfo.class));
                                             }
-                                            if(max != 10) {
-                                                if (onlyRecruitChecked) {
-
-                                                } else {
-                                                    Log.e("size", "" + postList.size());
-                                                    for (PostInfo postInfo : postList) {
-                                                        Log.e("post", "" + postInfo.getName() + ", " + postInfo.getIconUrl()
-                                                                + ", " + postInfo.getMajor() + ", " + postInfo.getMinor()
-                                                                + ", " + postInfo.getUpTime());
-                                                    }
+                                            if (max != 10) {
+                                                Log.e("size", "" + postList.size());
+                                                for (PostInfo postInfo : postList) {
+                                                    Log.e("post", "" + postInfo.getName() + ", " + postInfo.getIconUrl()
+                                                            + ", " + postInfo.getMajor() + ", " + postInfo.getMinor()
+                                                            + ", " + postInfo.getUpTime());
                                                 }
                                             }
                                         }
@@ -384,30 +423,85 @@ public class HomeFragment extends Fragment {
                 });
     }
 
-    public void queryByMinor(List<String> Minors, int max, boolean onlyRecruitChecked){
+    public void queryByClubNameAndOnlyRecruit(List<String> clubNames, int max) {
+        db.collection("clubs").whereIn("name", clubNames).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                            documentSnapshot.getReference().collection("posts")
+                                    .whereEqualTo("recruit", true).get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            for (DocumentSnapshot document : task.getResult()) {
+                                                postList.add(document.toObject(PostInfo.class));
+                                            }
+                                            if (max != 10) {
+                                                Log.e("size", "" + postList.size());
+                                                for (PostInfo postInfo : postList) {
+                                                    Log.e("post", "" + postInfo.getName() + ", " + postInfo.getIconUrl()
+                                                            + ", " + postInfo.getMajor() + ", " + postInfo.getMinor()
+                                                            + ", " + postInfo.getUpTime());
+                                                }
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+                });
+    }
+
+    public void queryByMinor(List<String> Minors, int max) {
         db.collection("clubs").whereIn("minor", Minors).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        for(DocumentSnapshot documentSnapshot : task.getResult()){
+                        for (DocumentSnapshot documentSnapshot : task.getResult()) {
                             documentSnapshot.getReference().collection("posts").get()
                                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                         @Override
                                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                            for(DocumentSnapshot document : task.getResult()){
+                                            for (DocumentSnapshot document : task.getResult()) {
                                                 PostInfo postInfo = document.toObject(PostInfo.class);
                                                 postList.add(postInfo);
                                             }
-                                            if(max != 10) {
-                                                if (onlyRecruitChecked) {
+                                            if (max != 10) {
+                                                Log.e("size", "" + postList.size());
+                                                for (PostInfo postInfo : postList) {
+                                                    Log.e("post", "" + postInfo.getName() + ", " + postInfo.getIconUrl()
+                                                            + ", " + postInfo.getMajor() + ", " + postInfo.getMinor()
+                                                            + ", " + postInfo.getUpTime());
+                                                }
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+                });
+    }
 
-                                                } else {
-                                                    Log.e("size", "" + postList.size());
-                                                    for (PostInfo postInfo : postList) {
-                                                        Log.e("post", "" + postInfo.getName() + ", " + postInfo.getIconUrl()
-                                                                + ", " + postInfo.getMajor() + ", " + postInfo.getMinor()
-                                                                + ", " + postInfo.getUpTime());
-                                                    }
+    public void queryByMinorAndOnlyRecruit(List<String> Minors, int max) {
+        db.collection("clubs").whereIn("minor", Minors)
+                .whereEqualTo("recruit", true).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                            documentSnapshot.getReference().collection("posts").get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            for (DocumentSnapshot document : task.getResult()) {
+                                                PostInfo postInfo = document.toObject(PostInfo.class);
+                                                postList.add(postInfo);
+                                            }
+                                            if (max != 10) {
+                                                Log.e("size", "" + postList.size());
+                                                for (PostInfo postInfo : postList) {
+                                                    Log.e("post", "" + postInfo.getName() + ", " + postInfo.getIconUrl()
+                                                            + ", " + postInfo.getMajor() + ", " + postInfo.getMinor()
+                                                            + ", " + postInfo.getUpTime());
                                                 }
                                             }
                                         }

@@ -15,6 +15,17 @@
         android:layout_marginTop="10dp"
         android:text="취소"/>
 
+    <CheckBox
+        android:id="@+id/recruit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:textSize="15dp"
+        app:layout_constraintLeft_toRightOf="@id/exit"
+        app:layout_constraintRight_toLeftOf="@id/upload"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="모집공고"/>
+
     <Button
         android:id="@+id/upload"
         android:layout_width="wrap_content"
