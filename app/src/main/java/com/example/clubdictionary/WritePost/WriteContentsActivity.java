@@ -107,7 +107,7 @@ public class WriteContentsActivity extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                                         if (task.isSuccessful()) {
-                                            imageUrlList.add(postRef.getDownloadUrl().toString());
+                                            //imageUrlList.add(postRef.getDownloadUrl().);
                                             idx++;
                                             if (idx == imageList.size()) {
                                                 PostInfo postInfo = new PostInfo((String) clubDoc.get("name"), (String) clubDoc.get("icon"),
