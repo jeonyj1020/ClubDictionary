@@ -7,8 +7,15 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 public class ClubPageViewPagerAdapter extends FragmentStateAdapter {
 
+    String clubUid;
+
     public ClubPageViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
+    }
+
+    public ClubPageViewPagerAdapter(@NonNull FragmentActivity fragmentActivity, String Uid) {
+        super(fragmentActivity);
+        this.clubUid = Uid;
     }
 
     @NonNull
@@ -20,7 +27,7 @@ public class ClubPageViewPagerAdapter extends FragmentStateAdapter {
             case 1:
                 return IntroFragment.newInstance(position);
             case 2:
-                return QuestionFragment.newInstance(position);
+                return QuestionFragment.newInstance(position, clubUid);
         }
         return null;
     }

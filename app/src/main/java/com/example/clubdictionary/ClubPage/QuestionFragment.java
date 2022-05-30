@@ -24,6 +24,7 @@ public class QuestionFragment extends Fragment {
 
     Context mContext;
     RecyclerView recyclerView;
+    String clubUid;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -31,10 +32,11 @@ public class QuestionFragment extends Fragment {
         mContext = context;
     }
 
-    public static QuestionFragment newInstance(int number) {
+    public static QuestionFragment newInstance(int number, String clubUid) {
         QuestionFragment questionFragment = new QuestionFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("number", number);
+        bundle.putString("clubUid", clubUid);
         questionFragment.setArguments(bundle);
         return questionFragment;
     }
@@ -45,6 +47,7 @@ public class QuestionFragment extends Fragment {
 
         if (getArguments() != null) {
             int num =getArguments().getInt("number");
+            clubUid = getArguments().getString("clubUid");
         }
     }
 

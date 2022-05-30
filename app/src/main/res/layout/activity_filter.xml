@@ -7,17 +7,43 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tool_bar"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         app:contentInsetStart="0dp">
 
+
     </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tool_bar"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/notosanskr_medium"
+        android:gravity="center_vertical"
+        android:includeFontPadding="false"
+        android:text="원하시는 동아리를 선택해주세요"
+        android:textColor="@color/black"
+        android:textSize="22sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/title_bar"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="14dp"
+        android:background="@color/maintheme" />
 
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
         android:layout_above="@+id/bottom_linear"
-        android:layout_below="@+id/tool_bar">
+        android:layout_below="@+id/title_bar">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,18 +62,8 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/title_bar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="25dp"
-                    android:fontFamily="@font/notosanskr_medium"
-                    android:gravity="center_vertical"
-                    android:includeFontPadding="false"
-                    android:text="원하시는 동아리를 선택해주세요"
-                    android:textColor="@color/black"
-                    android:textSize="22sp" />
+
+
 
                 <LinearLayout
                     android:layout_width="match_parent"

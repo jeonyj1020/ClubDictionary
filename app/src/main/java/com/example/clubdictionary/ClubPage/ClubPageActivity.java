@@ -55,6 +55,8 @@ public class ClubPageActivity extends AppCompatActivity {
     CircleImageView icon;
     ImageButton apply_btn;
 
+    String clubUid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,22 +75,7 @@ public class ClubPageActivity extends AppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         ViewPager2 viewPager2 = findViewById(R.id.viewpager2);
 
-        ClubPageViewPagerAdapter clubPageViewPagerAdapter = new ClubPageViewPagerAdapter(this);
-        viewPager2.setAdapter(clubPageViewPagerAdapter);
 
-        ArrayList<String> tabElement = new ArrayList<>();
-        tabElement.add("게시물");
-        tabElement.add("소개글");
-        tabElement.add("Q&A");
-
-        new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                TextView textView = new TextView(ClubPageActivity.this);
-                textView.setText(tabElement.get(position));
-                tab.setCustomView(textView);
-            }
-        }).attach();
 
         apply_btn = findViewById(R.id.bookMark);
         TextView nameTextView, day, activityTime, money, registerUrl;
@@ -150,6 +137,8 @@ public class ClubPageActivity extends AppCompatActivity {
                                 clubName = clubInfo.getName();
                                 minor = clubInfo.getMinor();
                                 subscribers = clubInfo.getSubscribers();
+                                clubUid = clubInfo.getUid();
+
                                 String iconUrl = clubInfo.getIconUrl();
                                 Glide.with(ClubPageActivity.this).load(iconUrl).into(icon);
                                 icon.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -194,6 +183,23 @@ public class ClubPageActivity extends AppCompatActivity {
                 } else Log.d("task", "실패");
             }
         });
+
+        ClubPageViewPagerAdapter clubPageViewPagerAdapter = new ClubPageViewPagerAdapter(this, clubUid);
+        viewPager2.setAdapter(clubPageViewPagerAdapter);
+
+        ArrayList<String> tabElement = new ArrayList<>();
+        tabElement.add("게시물");
+        tabElement.add("소개글");
+        tabElement.add("Q&A");
+
+        new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
+            @Override
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                TextView textView = new TextView(ClubPageActivity.this);
+                textView.setText(tabElement.get(position));
+                tab.setCustomView(textView);
+            }
+        }).attach();
 
 
     }
