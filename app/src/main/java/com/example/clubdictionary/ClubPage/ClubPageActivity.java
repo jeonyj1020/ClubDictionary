@@ -55,8 +55,8 @@ public class ClubPageActivity extends AppCompatActivity {
     boolean bookMarked;
     CircleImageView icon;
     ImageButton apply_btn;
+    String name;
 
-    String clubUid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,7 +117,7 @@ public class ClubPageActivity extends AppCompatActivity {
         // FirebaseUser user  = FirebaseAuth.getInstance().getCurrentUser();
 
         Intent intent = getIntent();
-        String name = intent.getStringExtra("name");
+        name = intent.getStringExtra("name");
 
         db.collection("clubs").whereEqualTo("name", name).get().
                 addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -133,13 +133,9 @@ public class ClubPageActivity extends AppCompatActivity {
                                 day.setText(clubInfo.getDay());
                                 activityTime.setText(clubInfo.getActivityTime());
                                 money.setText(clubInfo.getMoney());
-
-
                                 clubName = clubInfo.getName();
                                 minor = clubInfo.getMinor();
                                 subscribers = clubInfo.getSubscribers();
-                                clubUid = clubInfo.getUid();
-
                                 String iconUrl = clubInfo.getIconUrl();
                                 Glide.with(ClubPageActivity.this).load(iconUrl).into(icon);
                                 icon.setScaleType(ImageView.ScaleType.CENTER_CROP);
@@ -185,9 +181,9 @@ public class ClubPageActivity extends AppCompatActivity {
             }
         });
 
-        ClubPageViewPagerAdapter clubPageViewPagerAdapter = new ClubPageViewPagerAdapter(this, clubUid);
+        ClubPageViewPagerAdapter clubPageViewPagerAdapter = new ClubPageViewPagerAdapter(this, name);
         viewPager2.setAdapter(clubPageViewPagerAdapter);
-
+        
         ArrayList<String> tabElement = new ArrayList<>();
         tabElement.add("게시물");
         tabElement.add("소개글");
@@ -258,5 +254,8 @@ public class ClubPageActivity extends AppCompatActivity {
 
         // 동아리의 subscribers에서 userUid 없애기
         clubDocRef.update("subscribers." + user.getUid(), FieldValue.delete());
+    }
+    public String getName(){
+        return name;
     }
 }

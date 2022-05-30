@@ -8,6 +8,17 @@ public class QuestionItem {
     String answerId;
     String itemId;
 
+    public QuestionItem() {
+    }
+
+    public QuestionItem(String question, String answer, String questionId, String answerId, String itemId) {
+        this.question = question;
+        this.answer = answer;
+        this.questionId = questionId;
+        this.answerId = answerId;
+        this.itemId = itemId;
+    }
+
     public String getQuestion() {
         return question;
     }
@@ -48,14 +59,5 @@ public class QuestionItem {
         this.itemId = itemId;
     }
 
-    public QuestionItem() {
-    }
 
-    public QuestionItem(String question, String answer, String questionId, String answerId, String itemId) {
-        this.question = question;
-        this.answer = answer;
-        this.questionId = questionId;
-        this.answerId = answerId;
-        this.itemId = itemId;
-    }
 }

@@ -24,6 +24,7 @@ public class PostFragment extends Fragment {
         PostFragment postFragment = new PostFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("number", number);
+
         postFragment.setArguments(bundle);
         return postFragment;
     }

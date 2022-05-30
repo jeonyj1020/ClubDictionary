@@ -3,6 +3,7 @@ package com.example.clubdictionary.ClubPage;
 import android.content.Context;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,7 +25,7 @@ public class QuestionFragment extends Fragment {
 
     Context mContext;
     RecyclerView recyclerView;
-    String clubUid;
+    String name;
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -32,11 +33,11 @@ public class QuestionFragment extends Fragment {
         mContext = context;
     }
 
-    public static QuestionFragment newInstance(int number, String clubUid) {
+    public static QuestionFragment newInstance(int number, String name) {
         QuestionFragment questionFragment = new QuestionFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("number", number);
-        bundle.putString("clubUid", clubUid);
+        bundle.putString("name", name);
         questionFragment.setArguments(bundle);
         return questionFragment;
     }
@@ -47,7 +48,8 @@ public class QuestionFragment extends Fragment {
 
         if (getArguments() != null) {
             int num =getArguments().getInt("number");
-            clubUid = getArguments().getString("clubUid");
+            name = getArguments().getString("name");
+            Log.e("0530", name);
         }
     }
 
