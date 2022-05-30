@@ -22,18 +22,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.clubdictionary.FilterActivity;
 import com.example.clubdictionary.MainActivity;
 import com.example.clubdictionary.R;
-// import com.example.clubdictionary.WritePost.WriteContentsActivity;
+import com.example.clubdictionary.WritePost.PostInfo;
 import com.example.clubdictionary.WritePost.WriteContentsActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.apphosting.datastore.testing.DatastoreTestTrace;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -47,7 +53,8 @@ public class HomeFragment extends Fragment {
     Context mContext;
 
     // 필터링 관련 변수들
-    private FirebaseUser user;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     DocumentReference docRef = null;
     ArrayList<String> filtering = new ArrayList<>();
     String filteringBinary = null;
@@ -62,6 +69,9 @@ public class HomeFragment extends Fragment {
                     "ball", "racket", "martialArts", "extreme", "archery", "game",
                     "christian", "buddhism", "catholic", "transpiration"
     ));
+    ArrayList<PostInfo> postList = new ArrayList<>();
+    ArrayList<String> intersectionClubs = new ArrayList<>();
+    ArrayList<String> exceptFiltering = new ArrayList<>();
 
     public HomeFragment() {
     }
@@ -87,10 +97,6 @@ public class HomeFragment extends Fragment {
 
         writePostButton = view.findViewById(R.id.writePostButton);
         writePostButton.setOnClickListener(onClickListener);
-
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
 
         docRef = db.collection("users").document(user.getUid());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -182,6 +188,7 @@ public class HomeFragment extends Fragment {
                     filteringBinary = data.getStringExtra("newFilteringBinary");
                     query();
                     break;
+
                 case 2:
                     if (resultCode == Activity.RESULT_OK) {
                         ArrayList<Uri> imageList = new ArrayList<>();
@@ -248,65 +255,165 @@ public class HomeFragment extends Fragment {
     private void query() {
         boolean onlyRecruitChecked = onlyRecruit.isChecked();
         boolean onlyFavoriteChecked = onlyFavorite.isChecked();
-        Log.d("filter", " \n" + filtering + "\n" + filteringBinary + "\n" + onlyRecruitChecked +
+        Log.e("filter", " \n" + filtering + "\n" + filteringBinary + "\n" + onlyRecruitChecked +
                 ", " + onlyFavoriteChecked + "\n" + bookMark);
 
-        ArrayList<String> intersection = new ArrayList<>();
+
+        String is = "";
         if(onlyFavoriteChecked){
+            intersectionClubs.clear();
             for(String minor : bookMark.keySet()){
                 if(filtering.contains(minor)){
                     List<String> clubs = bookMark.get(minor);
                     for(int i = 0; i<clubs.size(); i++){
-                        intersection.add(clubs.get(i));
+                        intersectionClubs.add(clubs.get(i));
+                        is +=  clubs.get(i);
                     }
                 }
             }
         }
 
-        if (filtering.size() == 0) {
-            // 맨 처음 회원가입한 후의 상태 - 이 때는 모든 동아리의 문서를 쿼리
-            if(filteringBinary == null){
-                if(onlyFavoriteChecked){
-
-                }
-                else{
-
-                }
+        exceptFiltering.clear();
+        for(String minor : allMinor){
+            if(!filtering.contains(minor)){
+                exceptFiltering.add(minor);
             }
-            // 유저가 펄터링에서 0개의 소분류를 선택했을 때
-            else {
+        }
 
-            }
-        } else {
-            if (filtering.size() <= allMinor.size()/2){
+        Log.e("intersection", is);
 
-            }
-            else if(filtering.size() == allMinor.size()){
-
+        // 찜한 동아리만 보기가 선택되면 intersectionClubs의 동아리 이름들로 쿼리
+        if(onlyFavoriteChecked){
+            if(intersectionClubs.size() == 0){
+                Toast.makeText(getActivity(), "필터링과 찜한 동아리 돌 다에 해당하는 동아리가 한 개도 없습니다!", Toast.LENGTH_SHORT).show();
             }
             else{
-
+                int ten = intersectionClubs.size()/10;
+                Log.e("size", ""+intersectionClubs.size());
+                for(int i = 0; i <= ten; i++){
+                    if(i != ten) {
+                        List<String> clubNames = intersectionClubs.subList(i * 10, (i+1) * 10 - 1);
+                        queryByClubName(clubNames,10, onlyRecruitChecked);
+                    }
+                    else{
+                        List<String> clubNames = intersectionClubs.subList(i * 10, intersectionClubs.size());
+                        Log.e("size", ""+clubNames.get(0));
+                        queryByClubName(clubNames, clubNames.size(), onlyRecruitChecked);
+                    }
+                }
             }
         }
-        /*if(onlyFavoriteChecked){
-            for(){
-
-            }
-        }
+        // 찜한 동아리만 보기가 선택되지 않았으면, filtering의 소분류들로만 쿼리
         else{
-            intersection = filtering;
-        }*/
-        /*ArrayList<Task> tasks = null;
-        for(int i = 0; i <= filtering.size()/10; i++) {
-            List<String> now = null;
-            if(filtering.size() >= 10 * i) {
-                now = filtering.subList(10 * i, 10 * i + 9);
+            if(filtering == null || filtering.size() == allMinor.size()){
+                db.collectionGroup("posts").get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                for(DocumentSnapshot documentSnapshot : task.getResult()){
+                                    PostInfo postInfo = documentSnapshot.toObject(PostInfo.class);
+                                    postList.add(postInfo);
+                                }
+                            }
+                        });
             }
-            else{
-                now = filtering.subList(10 * i, filtering.size() - 1);
+            else if(filtering.size() == 0){
+                Toast.makeText(getActivity(), "소분류를 한 개도 선택하지 않아 게시물을 불러오지 않습니다!", Toast.LENGTH_SHORT).show();
             }
-            Query query = clubsRef.whereIn("minor", now);
-            tasks.set(i, query.get());
-        }*/
+            else if(filtering.size() <= allMinor.size()/2){
+                int ten = filtering.size()/10;
+                for(int i = 0; i <= ten; i++){
+                    if(i != ten) {
+                        List<String> minors = filtering.subList(i * 10, (i+1) * 10 - 1);
+                        queryByMinor(minors, 10, onlyRecruitChecked);
+                    }
+                    else{
+                        List<String> minors = filtering.subList(i * 10, filtering.size());
+                        queryByMinor(minors, minors.size(), onlyRecruitChecked);
+                    }
+
+                }
+            }
+            else if(filtering.size() < allMinor.size()){
+                int ten = exceptFiltering.size()/10;
+                for(int i = 0; i <= ten; i++){
+                    if(i != ten) {
+                        List<String> minors = exceptFiltering.subList(i * 10, (i+1) * 10 - 1);
+                        queryByMinor(minors, 10, onlyRecruitChecked);
+                    }
+                    else{
+                        List<String> minors = exceptFiltering.subList(i * 10, exceptFiltering.size());
+                        queryByMinor(minors, minors.size(), onlyRecruitChecked);
+                    }
+                }
+            }
+        }
+
+
+    }
+
+    public void queryByClubName(List<String> clubNames, int max, boolean onlyRecruitChecked){
+        db.collection("clubs").whereIn("name", clubNames).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        for(DocumentSnapshot documentSnapshot : task.getResult()){
+                            documentSnapshot.getReference().collection("posts").get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            for(DocumentSnapshot document : task.getResult()){
+                                                postList.add(document.toObject(PostInfo.class));
+                                            }
+                                            if(max != 10) {
+                                                if (onlyRecruitChecked) {
+
+                                                } else {
+                                                    Log.e("size", "" + postList.size());
+                                                    for (PostInfo postInfo : postList) {
+                                                        Log.e("post", "" + postInfo.getName() + ", " + postInfo.getIconUrl()
+                                                                + ", " + postInfo.getMajor() + ", " + postInfo.getMinor()
+                                                                + ", " + postInfo.getUpTime());
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+                });
+    }
+
+    public void queryByMinor(List<String> Minors, int max, boolean onlyRecruitChecked){
+        db.collection("clubs").whereIn("minor", Minors).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        for(DocumentSnapshot documentSnapshot : task.getResult()){
+                            documentSnapshot.getReference().collection("posts").get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            for(DocumentSnapshot document : task.getResult()){
+                                                PostInfo postInfo = document.toObject(PostInfo.class);
+                                                postList.add(postInfo);
+                                            }
+                                            if(max != 10) {
+                                                if (onlyRecruitChecked) {
+
+                                                } else {
+                                                    Log.e("size", "" + postList.size());
+                                                    for (PostInfo postInfo : postList) {
+                                                        Log.e("post", "" + postInfo.getName() + ", " + postInfo.getIconUrl()
+                                                                + ", " + postInfo.getMajor() + ", " + postInfo.getMinor()
+                                                                + ", " + postInfo.getUpTime());
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+                });
     }
 }

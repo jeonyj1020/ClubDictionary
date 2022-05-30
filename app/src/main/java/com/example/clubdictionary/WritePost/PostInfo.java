@@ -12,6 +12,8 @@ public class PostInfo {
     private String contents;
     private ArrayList<String> imageUrlList;
 
+    public PostInfo(){}
+
     public PostInfo(String name, String iconUrl, String major, String minor, String upTime,
                     String hashTag, String contents, ArrayList<String> imageUrlList){
         this.name = name;

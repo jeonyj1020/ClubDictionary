@@ -135,7 +135,7 @@ public class BookmarkFragment extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (bookmarkItemList.size() == tenCnt * 10) {
-                                    List<String> now = clubList.subList(10 * tenCnt, clubList.size() - 1);
+                                    List<String> now = clubList.subList(10 * tenCnt, clubList.size());
                                     db.collection("clubs").whereIn("name", now).get()
                                             .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                                 @Override
