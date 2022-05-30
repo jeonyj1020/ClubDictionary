@@ -35,6 +35,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -45,6 +46,7 @@ public class HomeFragment extends Fragment {
     Context mContext;
 
     // 필터링 관련 변수들
+    private FirebaseUser user;
     DocumentReference docRef = null;
     ArrayList<String> filtering = new ArrayList<>();
     String filteringBinary = null;
@@ -52,12 +54,16 @@ public class HomeFragment extends Fragment {
     CheckBox onlyFavorite, onlyRecruit;
     Map<String, List<String>> bookMark = null;
     FloatingActionButton writePostButton;
-
-    private FirebaseUser user;
+    ArrayList<String> allMinor = new ArrayList<String>(Arrays.asList(
+                    "idea",
+                    "it", "liberalArts", "nature", "idea",
+                    "band", "instrument", "song", "play", "art", "cook", "dance", "picture", "handicraft",
+                    "ball", "racket", "martialArts", "extreme", "archery", "game",
+                    "christian", "buddhism", "catholic", "transpiration"
+    ));
 
     public HomeFragment() {
     }
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -85,7 +91,7 @@ public class HomeFragment extends Fragment {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
-        docRef = db.collection("clubs").document(user.getUid());
+        docRef = db.collection("users").document(user.getUid());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -96,10 +102,9 @@ public class HomeFragment extends Fragment {
                         docRef = db.collection("clubs").document(user.getUid());
                         writePostButton.setVisibility(View.VISIBLE);
                         getFiltering();
-                    }
-                    else {
+                    } else {
                         Log.e("###", "유저입니다");
-                        writePostButton.setVisibility(View.VISIBLE);
+                        //writePostButton.setVisibility(View.VISIBLE);
                         getFiltering();
                     }
                 }
@@ -126,7 +131,7 @@ public class HomeFragment extends Fragment {
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            switch (view.getId()){
+            switch (view.getId()) {
                 case R.id.filter:
                     Intent intent = new Intent(getActivity(), FilterActivity.class);
                     intent.putExtra("filteringBinary", filteringBinary);
@@ -138,25 +143,25 @@ public class HomeFragment extends Fragment {
                     checked.set(0, onlyRecruit.isChecked());
                     checked.set(1, onlyFavorite.isChecked());
 
-                    if(onlyFavorite.isChecked())
+                    if (onlyFavorite.isChecked())
 
-                    docRef.update("checked", checked)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
+                        docRef.update("checked", checked)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
 
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
 
-                                }
-                            });
+                                    }
+                                });
 
                     query();
                     break;
 
-                case R.id.writePostButton :
+                case R.id.writePostButton:
                     intent = new Intent(Intent.ACTION_PICK);
                     intent.setType("image/*");
                     intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
@@ -182,17 +187,14 @@ public class HomeFragment extends Fragment {
 
                         if (data.getClipData() == null) {
                             imageList.add(Uri.parse(data.getData().getPath()));
-                        }
-                        else {
+                        } else {
                             ClipData clipData = data.getClipData();
-                            if (clipData.getItemCount() > 10){
+                            if (clipData.getItemCount() > 10) {
                                 Toast.makeText(getActivity(), "사진은 10개까지 선택가능 합니다.", Toast.LENGTH_SHORT).show();
                                 return;
-                            }
-                            else if (clipData.getItemCount() == 1) {
+                            } else if (clipData.getItemCount() == 1) {
                                 imageList.add(clipData.getItemAt(0).getUri());
-                            }
-                            else if (clipData.getItemCount() > 1 && clipData.getItemCount() < 10) {
+                            } else if (clipData.getItemCount() > 1 && clipData.getItemCount() < 10) {
                                 for (int i = 0; i < clipData.getItemCount(); i++) {
                                     imageList.add((clipData.getItemAt(i).getUri()));
                                 }
@@ -202,8 +204,7 @@ public class HomeFragment extends Fragment {
                         Intent intent = new Intent(getActivity(), WriteContentsActivity.class);
                         intent.putExtra("imageList", imageList);
                         startActivity(intent);
-                    }
-                    else {
+                    } else {
                         Toast.makeText(getActivity(), "사진 선택을 취소하였습니다.", Toast.LENGTH_SHORT).show();
                     }
                     break;
@@ -211,11 +212,11 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    private void getFiltering(){
+    private void getFiltering() {
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     DocumentSnapshot documentSnapshot = task.getResult();
                     filtering = (ArrayList<String>) documentSnapshot.get("filtering");
                     filteringBinary = (String) documentSnapshot.get("filteringBinary");
@@ -249,6 +250,11 @@ public class HomeFragment extends Fragment {
         Log.d("filter", " \n" + filtering + "\n" + filteringBinary + "\n" + onlyRecruitChecked +
                 ", " + onlyFavoriteChecked + "\n" + bookMark);
 
+        if (filtering == null) {
+
+        } else {
+            //if (filtering)
+        }
         ArrayList<String> intersection = null;
         /*if(onlyFavoriteChecked){
             for(){

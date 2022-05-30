@@ -50,12 +50,12 @@ public class MemberInfo {
         this.phoneNum = phoneNum;
 
         this.bookMark = new HashMap<>();
-        this.filteringBinary = new String();
+        this.filteringBinary = null;
         this.checked = new ArrayList<Boolean>(Arrays.asList(false, false));
         this.scrap = new ArrayList<>();
         this.questionList = new ArrayList<>();
         this.alarmList = new ArrayList<>();
-        this.filtering = new ArrayList<>();
+        this.filtering = null;
     }
 
     public String getName() {
