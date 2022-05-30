@@ -33,6 +33,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.UUID;
 
 public class WriteContentsActivity extends AppCompatActivity {
@@ -84,9 +85,12 @@ public class WriteContentsActivity extends AppCompatActivity {
     private void uploadPost() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        String upTime = String.valueOf(System.currentTimeMillis());
+        long nowTime = System.currentTimeMillis();
+        String nowTimeString = String.valueOf(nowTime);
+        String upTime = getTime(nowTime);
         String userUid = user.getUid();
         ArrayList<String> imageUrlList = new ArrayList<>();
+
 
         clubRef = db.collection("clubs").document(userUid);
         db.collection("clubs").document(user.getUid()).get()
@@ -100,7 +104,7 @@ public class WriteContentsActivity extends AppCompatActivity {
                             for (Uri image : imageList) {
 
                                 StorageReference postRef = storage.getReference().child("clubs/" + userUid
-                                        + "/" + upTime + "/" + idx + ".jpg");
+                                        + "/" + nowTime + "/" + idx + ".jpg");
                                 UploadTask uploadTask = postRef.putFile(image);
 
                                 uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
@@ -113,10 +117,11 @@ public class WriteContentsActivity extends AppCompatActivity {
                                                     imageUrlList.add(uri.toString());
                                                     idx++;
                                                     if (idx == imageList.size()) {
+
                                                         PostInfo postInfo = new PostInfo((String) clubDoc.get("name"), (String) clubDoc.get("icon"),
                                                                 (String) clubDoc.get("major"), (String) clubDoc.get("minor"),
                                                                 upTime, hashTag.getText().toString(), contents.getText().toString(), imageUrlList);
-                                                        clubRef.collection("posts").document(upTime).set(postInfo)
+                                                        clubRef.collection("posts").document(nowTimeString).set(postInfo)
                                                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                     @Override
                                                                     public void onComplete(@NonNull Task<Void> task) {
@@ -138,5 +143,12 @@ public class WriteContentsActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    private String getTime(long nowTime){
+        Date date = new Date(nowTime);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMddHHmmss");
+        String getTime = dateFormat.format(date);
+        return getTime;
     }
 }
