@@ -1,6 +1,8 @@
 package com.example.clubdictionary;
 
 import android.content.Intent;
+import android.database.Observable;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +23,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FilterActivity extends AppCompatActivity {
@@ -36,9 +39,14 @@ public class FilterActivity extends AppCompatActivity {
     List<CheckBox> allList = new ArrayList<>();
     List<CheckBox> allChecked = new ArrayList<>();
     ArrayList<Integer> childCnt = new ArrayList<>();
-
     Toolbar toolbar;
-
+    ArrayList<String> allMinor = new ArrayList<String>(Arrays.asList(
+            "idea",
+            "it", "liberalArts", "nature", "idea",
+            "band", "instrument", "song", "play", "art", "cook", "dance", "picture", "handicraft",
+            "ball", "racket", "martialArts", "extreme", "archery", "game",
+            "christian", "buddhism", "catholic", "transpiration"
+    ));
 
     GridLayout society, study, arts, sports, religion;
     CheckBox societyChecked, studyChecked, artsChecked, sportsChecked, religionChecked;
@@ -153,7 +161,6 @@ public class FilterActivity extends AppCompatActivity {
         public void onClick(View view) {
             boolean allCheck;
             switch (view.getId()) {
-
                 case R.id.societyChecked:
                     allCheck = ((CheckBox) view).isChecked();
                     if (allCheck) {
@@ -172,12 +179,14 @@ public class FilterActivity extends AppCompatActivity {
                     if (allCheck) {
                         for (CheckBox now : studyList) {
                             now.setChecked(true);
+                            now.setTextColor(Color.RED);
                         }
                     } else {
                         for (CheckBox now : studyList) {
                             now.setChecked(false);
                         }
                     }
+
                     break;
 
                 case R.id.artsChecked:
@@ -232,10 +241,11 @@ public class FilterActivity extends AppCompatActivity {
 
                     ArrayList<String> newFiltering = new ArrayList<>();
 
-                    for(CheckBox now : allList){
+                    for(int idx = 0; idx < allList.size(); idx++){
+                        CheckBox now = allList.get(idx);
                         if(now.isChecked()) {
                             newFilteringBinary += "1";
-                            newFiltering.add(now.getText().toString());
+                            newFiltering.add(allMinor.get(idx));
                         }
                         else newFilteringBinary += "0";
                     }
