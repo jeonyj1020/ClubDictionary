@@ -68,6 +68,7 @@ public class FilterActivity extends AppCompatActivity {
 
         findViewById(R.id.apply).setOnClickListener(onClickListener);
         findViewById(R.id.allUnCheck).setOnClickListener(onClickListener);
+
         societyChecked = (CheckBox) findViewById(R.id.societyChecked);
         allChecked.add((CheckBox) societyChecked);
         studyChecked = (CheckBox) findViewById(R.id.studyChecked);
