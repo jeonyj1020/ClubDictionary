@@ -2,8 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_marginStart="24dp"
-    android:layout_marginEnd="24dp"
     android:layout_height="wrap_content">
 
     <androidx.appcompat.widget.Toolbar
@@ -24,26 +22,33 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:weightSum="786"
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/title_bar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="25dp"
-                android:fontFamily="@font/notosanskr_medium"
-                android:gravity="center_vertical"
-                android:includeFontPadding="false"
-                android:text="원하시는 동아리를 선택해주세요"
-                android:textColor="@color/black"
-                android:textSize="24dp" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="80"/>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="626"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/title_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="25dp"
+                    android:fontFamily="@font/notosanskr_medium"
+                    android:gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:text="원하시는 동아리를 선택해주세요"
+                    android:textColor="@color/black"
+                    android:textSize="22sp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -52,452 +57,465 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/notosanskr_regular"
-                            android:includeFontPadding="false"
-                            android:textColor="@color/black_191919"
-                            android:text="사회" />
-
-                        <CheckBox
-                            android:id="@+id/societyChecked"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="27dp"
-                            android:fontFamily="@font/notosanskr_regular"
-                            android:includeFontPadding="false"
-                            android:text="전체 선택"
-                            android:textColor="@color/black_191919" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="50dp"
-                        android:layout_marginTop="10dp">
-
-                        <GridLayout
-                            android:id="@+id/society"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:columnCount="3"
-                            android:orientation="horizontal"
-                            android:useDefaultMargins="true">
+                            android:orientation="horizontal">
 
-                            <CheckBox
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/notosanskr_regular"
                                 android:includeFontPadding="false"
-                                android:text="봉사"
+                                android:text="사회"
                                 android:textColor="@color/black_191919" />
 
-                        </GridLayout>
+                            <CheckBox
+                                android:id="@+id/societyChecked"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="27dp"
+                                android:fontFamily="@font/notosanskr_regular"
+                                android:includeFontPadding="false"
+                                android:text="전체 선택"
+                                android:textColor="@color/black_191919" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="50dp"
+                            android:layout_marginTop="10dp">
+
+                            <GridLayout
+                                android:id="@+id/society"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:columnCount="3"
+                                android:orientation="horizontal"
+                                android:useDefaultMargins="true">
+
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/notosanskr_regular"
+                                    android:includeFontPadding="false"
+                                    android:text="봉사"
+                                    android:textColor="@color/black_191919" />
+
+                            </GridLayout>
+
+                        </LinearLayout>
 
                     </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/notosanskr_regular"
-                            android:includeFontPadding="false"
-                            android:text="학술"
-                            android:textColor="@color/black_191919" />
-
-                        <CheckBox
-                            android:id="@+id/studyChecked"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="27dp"
-                            android:fontFamily="@font/notosanskr_regular"
-                            android:includeFontPadding="false"
-                            android:text="전체 선택"
-                            android:textColor="@color/black_191919" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="50dp"
-                        android:layout_marginTop="10dp">
-
-                        <GridLayout
-                            android:id="@+id/study"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:columnCount="2"
-                            android:orientation="horizontal"
-                            android:useDefaultMargins="true">
+                            android:orientation="horizontal">
 
-                            <CheckBox
-                                android:fontFamily="@font/notosanskr_regular"
-                                android:includeFontPadding="false"
-                                android:textColor="@color/black_191919"
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="인문" />
-
-                            <CheckBox
                                 android:fontFamily="@font/notosanskr_regular"
                                 android:includeFontPadding="false"
-                                android:textColor="@color/black_191919"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="진로/창업/발명" />
+                                android:text="학술"
+                                android:textColor="@color/black_191919" />
 
                             <CheckBox
-                                android:fontFamily="@font/notosanskr_regular"
-                                android:includeFontPadding="false"
-                                android:textColor="@color/black_191919"
+                                android:id="@+id/studyChecked"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="IT" />
-
-                            <CheckBox
+                                android:layout_marginLeft="27dp"
                                 android:fontFamily="@font/notosanskr_regular"
                                 android:includeFontPadding="false"
-                                android:textColor="@color/black_191919"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="자연" />
+                                android:text="전체 선택"
+                                android:textColor="@color/black_191919" />
 
-                        </GridLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="50dp"
+                            android:layout_marginTop="10dp">
+
+                            <GridLayout
+                                android:id="@+id/study"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:columnCount="2"
+                                android:orientation="horizontal"
+                                android:useDefaultMargins="true">
+
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/notosanskr_regular"
+                                    android:includeFontPadding="false"
+                                    android:text="인문"
+                                    android:textColor="@color/black_191919" />
+
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/notosanskr_regular"
+                                    android:includeFontPadding="false"
+                                    android:text="진로/창업/발명"
+                                    android:textColor="@color/black_191919" />
+
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/notosanskr_regular"
+                                    android:includeFontPadding="false"
+                                    android:text="IT"
+                                    android:textColor="@color/black_191919" />
+
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/notosanskr_regular"
+                                    android:includeFontPadding="false"
+                                    android:text="자연"
+                                    android:textColor="@color/black_191919" />
+
+                            </GridLayout>
+
+                        </LinearLayout>
 
                     </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
 
-                        <TextView
-                            android:fontFamily="@font/notosanskr_regular"
-                            android:includeFontPadding="false"
-                            android:textColor="@color/black_191919"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="문예" />
-
-                        <CheckBox
-                            android:fontFamily="@font/notosanskr_regular"
-                            android:includeFontPadding="false"
-                            android:textColor="@color/black_191919"
-                            android:id="@+id/artsChecked"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="27dp"
-                            android:text="전체 선택" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="50dp"
-                        android:layout_marginTop="10dp">
-
-                        <GridLayout
-                            android:id="@+id/arts"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:columnCount="2"
-                            android:orientation="horizontal"
-                            android:useDefaultMargins="true">
+                            android:orientation="horizontal">
 
-                            <CheckBox
-                                android:fontFamily="@font/notosanskr_regular"
-                                android:includeFontPadding="false"
-                                android:textColor="@color/black_191919"
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="밴드" />
-
-                            <CheckBox
                                 android:fontFamily="@font/notosanskr_regular"
                                 android:includeFontPadding="false"
-                                android:textColor="@color/black_191919"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="악기" />
+                                android:text="문예"
+                                android:textColor="@color/black_191919" />
 
                             <CheckBox
-                                android:fontFamily="@font/notosanskr_regular"
-                                android:includeFontPadding="false"
-                                android:textColor="@color/black_191919"
+                                android:id="@+id/artsChecked"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="노래" />
-
-                            <CheckBox
+                                android:layout_marginLeft="27dp"
                                 android:fontFamily="@font/notosanskr_regular"
                                 android:includeFontPadding="false"
-                                android:textColor="@color/black_191919"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="미술" />
+                                android:text="전체 선택"
+                                android:textColor="@color/black_191919" />
 
-                            <CheckBox
-                                android:fontFamily="@font/notosanskr_regular"
-                                android:includeFontPadding="false"
-                                android:textColor="@color/black_191919"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="사진/영상" />
+                        </LinearLayout>
 
-                            <CheckBox
-                                android:fontFamily="@font/notosanskr_regular"
-                                android:includeFontPadding="false"
-                                android:textColor="@color/black_191919"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="연극" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="50dp"
+                            android:layout_marginTop="10dp">
 
-                            <CheckBox
-                                android:fontFamily="@font/notosanskr_regular"
-                                android:includeFontPadding="false"
-                                android:textColor="@color/black_191919"
-                                android:layout_width="wrap_content"
+                            <GridLayout
+                                android:id="@+id/arts"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="댄스" />
+                                android:columnCount="2"
+                                android:orientation="horizontal"
+                                android:useDefaultMargins="true">
 
-                            <CheckBox
-                                android:fontFamily="@font/notosanskr_regular"
-                                android:includeFontPadding="false"
-                                android:textColor="@color/black_191919"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="수공예" />
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/notosanskr_regular"
+                                    android:includeFontPadding="false"
+                                    android:text="밴드"
+                                    android:textColor="@color/black_191919" />
 
-                            <CheckBox
-                                android:fontFamily="@font/notosanskr_regular"
-                                android:includeFontPadding="false"
-                                android:textColor="@color/black_191919"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="요리" />
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/notosanskr_regular"
+                                    android:includeFontPadding="false"
+                                    android:text="악기"
+                                    android:textColor="@color/black_191919" />
 
-                        </GridLayout>
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/notosanskr_regular"
+                                    android:includeFontPadding="false"
+                                    android:text="노래"
+                                    android:textColor="@color/black_191919" />
+
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/notosanskr_regular"
+                                    android:includeFontPadding="false"
+                                    android:text="미술"
+                                    android:textColor="@color/black_191919" />
+
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/notosanskr_regular"
+                                    android:includeFontPadding="false"
+                                    android:text="사진/영상"
+                                    android:textColor="@color/black_191919" />
+
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/notosanskr_regular"
+                                    android:includeFontPadding="false"
+                                    android:text="연극"
+                                    android:textColor="@color/black_191919" />
+
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/notosanskr_regular"
+                                    android:includeFontPadding="false"
+                                    android:text="댄스"
+                                    android:textColor="@color/black_191919" />
+
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/notosanskr_regular"
+                                    android:includeFontPadding="false"
+                                    android:text="수공예"
+                                    android:textColor="@color/black_191919" />
+
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/notosanskr_regular"
+                                    android:includeFontPadding="false"
+                                    android:text="요리"
+                                    android:textColor="@color/black_191919" />
+
+                            </GridLayout>
+
+                        </LinearLayout>
 
                     </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:fontFamily="@font/notosanskr_regular"
-                    android:includeFontPadding="false"
-                    android:textColor="@color/black_191919"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/notosanskr_regular"
+                        android:includeFontPadding="false"
+                        android:orientation="vertical"
+                        android:textColor="@color/black_191919">
 
-                        <TextView
-                            android:fontFamily="@font/notosanskr_regular"
-                            android:includeFontPadding="false"
-                            android:textColor="@color/black_191919"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="체육" />
-
-                        <CheckBox
-                            android:fontFamily="@font/notosanskr_regular"
-                            android:includeFontPadding="false"
-                            android:textColor="@color/black_191919"
-                            android:id="@+id/sportsChecked"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="27dp"
-                            android:text="전체 선택" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="50dp"
-                        android:layout_marginTop="10dp">
-
-                        <GridLayout
-                            android:id="@+id/sports"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:columnCount="2"
-                            android:orientation="horizontal"
-                            android:useDefaultMargins="true">
+                            android:orientation="horizontal">
 
-                            <CheckBox
-                                android:fontFamily="@font/notosanskr_regular"
-                                android:includeFontPadding="false"
-                                android:textColor="@color/black_191919"
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="구기" />
-
-                            <CheckBox
                                 android:fontFamily="@font/notosanskr_regular"
                                 android:includeFontPadding="false"
-                                android:textColor="@color/black_191919"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="라켓 스포츠" />
+                                android:text="체육"
+                                android:textColor="@color/black_191919" />
 
                             <CheckBox
-                                android:fontFamily="@font/notosanskr_regular"
-                                android:includeFontPadding="false"
-                                android:textColor="@color/black_191919"
+                                android:id="@+id/sportsChecked"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="무술" />
-
-                            <CheckBox
+                                android:layout_marginLeft="27dp"
                                 android:fontFamily="@font/notosanskr_regular"
                                 android:includeFontPadding="false"
-                                android:textColor="@color/black_191919"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="익스트림 스포츠" />
+                                android:text="전체 선택"
+                                android:textColor="@color/black_191919" />
 
-                            <CheckBox
-                                android:fontFamily="@font/notosanskr_regular"
-                                android:includeFontPadding="false"
-                                android:textColor="@color/black_191919"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="양궁" />
+                        </LinearLayout>
 
-                            <CheckBox
-                                android:fontFamily="@font/notosanskr_regular"
-                                android:includeFontPadding="false"
-                                android:textColor="@color/black_191919"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="게임" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="50dp"
+                            android:layout_marginTop="10dp">
 
-                        </GridLayout>
+                            <GridLayout
+                                android:id="@+id/sports"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:columnCount="2"
+                                android:orientation="horizontal"
+                                android:useDefaultMargins="true">
+
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/notosanskr_regular"
+                                    android:includeFontPadding="false"
+                                    android:text="구기"
+                                    android:textColor="@color/black_191919" />
+
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/notosanskr_regular"
+                                    android:includeFontPadding="false"
+                                    android:text="라켓 스포츠"
+                                    android:textColor="@color/black_191919" />
+
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/notosanskr_regular"
+                                    android:includeFontPadding="false"
+                                    android:text="무술"
+                                    android:textColor="@color/black_191919" />
+
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/notosanskr_regular"
+                                    android:includeFontPadding="false"
+                                    android:text="익스트림 스포츠"
+                                    android:textColor="@color/black_191919" />
+
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/notosanskr_regular"
+                                    android:includeFontPadding="false"
+                                    android:text="양궁"
+                                    android:textColor="@color/black_191919" />
+
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/notosanskr_regular"
+                                    android:includeFontPadding="false"
+                                    android:text="게임"
+                                    android:textColor="@color/black_191919" />
+
+                            </GridLayout>
+
+                        </LinearLayout>
 
                     </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
 
-                        <TextView
-                            android:fontFamily="@font/notosanskr_regular"
-                            android:includeFontPadding="false"
-                            android:textColor="@color/black_191919"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="종교" />
-
-                        <CheckBox
-                            android:fontFamily="@font/notosanskr_regular"
-                            android:includeFontPadding="false"
-                            android:textColor="@color/black_191919"
-                            android:id="@+id/religionChecked"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="27dp"
-                            android:text="전체 선택" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="50dp"
-                        android:layout_marginTop="10dp">
-
-                        <GridLayout
-                            android:id="@+id/religion"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:columnCount="2"
-                            android:orientation="horizontal"
-                            android:useDefaultMargins="true">
+                            android:orientation="horizontal">
 
-                            <CheckBox
-                                android:fontFamily="@font/notosanskr_regular"
-                                android:includeFontPadding="false"
-                                android:textColor="@color/black_191919"
+                            <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="기독교" />
-
-                            <CheckBox
                                 android:fontFamily="@font/notosanskr_regular"
                                 android:includeFontPadding="false"
-                                android:textColor="@color/black_191919"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="불교" />
+                                android:text="종교"
+                                android:textColor="@color/black_191919" />
 
                             <CheckBox
-                                android:fontFamily="@font/notosanskr_regular"
-                                android:includeFontPadding="false"
-                                android:textColor="@color/black_191919"
+                                android:id="@+id/religionChecked"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="가톨릭" />
-
-                            <CheckBox
+                                android:layout_marginLeft="27dp"
                                 android:fontFamily="@font/notosanskr_regular"
                                 android:includeFontPadding="false"
-                                android:textColor="@color/black_191919"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="증산도" />
+                                android:text="전체 선택"
+                                android:textColor="@color/black_191919" />
 
-                        </GridLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="50dp"
+                            android:layout_marginTop="10dp">
+
+                            <GridLayout
+                                android:id="@+id/religion"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:columnCount="2"
+                                android:orientation="horizontal"
+                                android:useDefaultMargins="true">
+
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/notosanskr_regular"
+                                    android:includeFontPadding="false"
+                                    android:text="기독교"
+                                    android:textColor="@color/black_191919" />
+
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/notosanskr_regular"
+                                    android:includeFontPadding="false"
+                                    android:text="불교"
+                                    android:textColor="@color/black_191919" />
+
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/notosanskr_regular"
+                                    android:includeFontPadding="false"
+                                    android:text="가톨릭"
+                                    android:textColor="@color/black_191919" />
+
+                                <CheckBox
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/notosanskr_regular"
+                                    android:includeFontPadding="false"
+                                    android:text="증산도"
+                                    android:textColor="@color/black_191919" />
+
+                            </GridLayout>
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
                 </LinearLayout>
+
 
             </LinearLayout>
 
 
-        </LinearLayout>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="80"/>
 
+
+        </LinearLayout>
 
     </ScrollView>
 
@@ -506,48 +524,59 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="20dp"
-        android:background="@color/white"
-        android:elevation="2dp"
-        android:weightSum="738"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/apply"
-            android:layout_width="0dp"
-            android:layout_weight="280"
-            android:layout_height="30dp"
-            android:autoSizeMaxTextSize="90sp"
-            android:autoSizeMinTextSize="10sp"
-            android:autoSizeStepGranularity="1sp"
-            android:autoSizeTextType="uniform"
-            android:fontFamily="@font/notosanskr_regular"
-            android:includeFontPadding="false"
-            android:padding="3dp"
-            android:textColor="@color/black_191919"
-            android:background="@drawable/rectangular_background_button"
-            android:text="적용" />
+        android:background="@android:color/transparent"
+        android:elevation="5dp"
+        android:orientation="horizontal"
+        android:weightSum="786">
 
         <View
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="130"/>
+            android:layout_weight="48" />
+
+        <Button
+            android:id="@+id/apply"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="280"
+            android:autoSizeMaxTextSize="90sp"
+            android:autoSizeMinTextSize="10sp"
+            android:autoSizeStepGranularity="1sp"
+            android:autoSizeTextType="uniform"
+            android:background="@drawable/rectangular_background_button"
+            android:fontFamily="@font/notosanskr_regular"
+            android:includeFontPadding="false"
+            android:padding="3dp"
+            android:text="적용"
+            android:textColor="@color/black_191919" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="130" />
 
         <Button
             android:id="@+id/allUnCheck"
             android:layout_width="0dp"
             android:layout_height="30dp"
+            android:layout_marginTop="10dp"
             android:layout_weight="280"
-            android:fontFamily="@font/notosanskr_regular"
-            android:textColor="@color/black_191919"
-            android:includeFontPadding="false"
             android:autoSizeMaxTextSize="90sp"
             android:autoSizeMinTextSize="10sp"
             android:autoSizeStepGranularity="1sp"
             android:autoSizeTextType="uniform"
-            android:padding="3dp"
             android:background="@drawable/rectangular_background_button"
-            android:text="모두 체크 해제" />
+            android:fontFamily="@font/notosanskr_regular"
+            android:includeFontPadding="false"
+            android:padding="3dp"
+            android:text="초기화"
+            android:textColor="@color/black_191919" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="48" />
 
     </LinearLayout>
 
