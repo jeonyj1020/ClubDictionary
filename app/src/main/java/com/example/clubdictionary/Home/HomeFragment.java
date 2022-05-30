@@ -85,7 +85,7 @@ public class HomeFragment extends Fragment {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
-        docRef = db.collection("users").document(user.getUid());
+        docRef = db.collection("clubs").document(user.getUid());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -99,7 +99,7 @@ public class HomeFragment extends Fragment {
                     }
                     else {
                         Log.e("###", "유저입니다");
-                        //writePostButton.setVisibility(View.VISIBLE);
+                        writePostButton.setVisibility(View.VISIBLE);
                         getFiltering();
                     }
                 }

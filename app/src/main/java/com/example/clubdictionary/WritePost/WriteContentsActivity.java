@@ -107,27 +107,30 @@ public class WriteContentsActivity extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                                         if (task.isSuccessful()) {
-                                            //imageUrlList.add(postRef.getDownloadUrl().);
-                                            idx++;
-                                            if (idx == imageList.size()) {
-                                                PostInfo postInfo = new PostInfo((String) clubDoc.get("name"), (String) clubDoc.get("icon"),
-                                                        (String) clubDoc.get("major"), (String) clubDoc.get("minor"),
-                                                        upTime, hashTag.getText().toString(), contents.getText().toString(), imageUrlList);
-                                                clubRef.collection("posts").document(upTime).set(postInfo)
-                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                            @Override
-                                                            public void onComplete(@NonNull Task<Void> task) {
-                                                                if (task.isSuccessful()) {
-                                                                    Toast.makeText(WriteContentsActivity.this, "업로드에 성공했습니다", Toast.LENGTH_SHORT).show();
-                                                                } else {
-                                                                    Toast.makeText(WriteContentsActivity.this, "업로드에 실패했습니다", Toast.LENGTH_SHORT).show();
-                                                                }
-                                                            }
-                                                        });
-                                            }
-                                        } else {
+                                            postRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                @Override
+                                                public void onSuccess(Uri uri) {
+                                                    imageUrlList.add(uri.toString());
+                                                    idx++;
+                                                    if (idx == imageList.size()) {
+                                                        PostInfo postInfo = new PostInfo((String) clubDoc.get("name"), (String) clubDoc.get("icon"),
+                                                                (String) clubDoc.get("major"), (String) clubDoc.get("minor"),
+                                                                upTime, hashTag.getText().toString(), contents.getText().toString(), imageUrlList);
+                                                        clubRef.collection("posts").document(upTime).set(postInfo)
+                                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                    @Override
+                                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                                        if (task.isSuccessful()) {
+                                                                            Toast.makeText(WriteContentsActivity.this, "업로드에 성공했습니다", Toast.LENGTH_SHORT).show();
+                                                                        }
+                                                                    }
+                                                                });
+                                                    }
+                                                }
+                                            });
+                                        }
+                                        else {
                                             Toast.makeText(WriteContentsActivity.this, "업로드에 실패했습니다", Toast.LENGTH_SHORT).show();
-                                            return;
                                         }
                                     }
                                 });
