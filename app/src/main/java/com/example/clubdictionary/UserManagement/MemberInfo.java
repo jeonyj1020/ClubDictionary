@@ -55,7 +55,7 @@ public class MemberInfo {
         this.scrap = new ArrayList<>();
         this.questionList = new ArrayList<>();
         this.alarmList = new ArrayList<>();
-        this.filtering = null;
+        this.filtering = new ArrayList<>();
     }
 
     public String getName() {

@@ -29,8 +29,7 @@ public class GroupRecyclerViewAdapter extends RecyclerView.Adapter<GroupRecycler
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     FirebaseFirestore db= FirebaseFirestore.getInstance();
 
-    public GroupRecyclerViewAdapter() {
-    }
+    public GroupRecyclerViewAdapter() {}
 
     public GroupRecyclerViewAdapter(ArrayList<GroupPostInfo> arrayList) {
         this.arrayList = arrayList;
@@ -108,9 +107,6 @@ public class GroupRecyclerViewAdapter extends RecyclerView.Adapter<GroupRecycler
             title = itemView.findViewById(R.id.title);
             content = itemView.findViewById(R.id.content);
             date = itemView.findViewById(R.id.date);
-
         }
-
     }
-
 }

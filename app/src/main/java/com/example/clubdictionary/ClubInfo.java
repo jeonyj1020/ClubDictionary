@@ -25,7 +25,7 @@ public class ClubInfo {
     private ArrayList<String> scrap;
     private ArrayList<String> questionList;
     private ArrayList<String> alarmList;
-    private ArrayList<String> subscribers;
+    private Map<String, Boolean> subscribers;
     private CollectionReference QnA;
     private CollectionReference posts;
     private Map<String, List<String>> bookMark;
@@ -35,7 +35,7 @@ public class ClubInfo {
     public ClubInfo(String uid, String iconUrl, String name, String day, String activityTime, String major, String minor,
                     String money, String registerUrl, String filteringBinary, String introduce, ArrayList<String> introducePicture,
                     ArrayList<Boolean> checked, ArrayList<String> scrap, ArrayList<String> questionList, ArrayList<String> alarmList,
-                    ArrayList<String> subscribers, ArrayList<String> filtering, Map<String, List<String>> bookMark) {
+                    Map<String, Boolean> subscribers, ArrayList<String> filtering, Map<String, List<String>> bookMark) {
         Uid = uid;
         this.iconUrl = iconUrl;
         this.name = name;
@@ -185,12 +185,13 @@ public class ClubInfo {
         this.alarmList = alarmList;
     }
 
-    public ArrayList<String> getSubscribers() {
+    public Map<String, Boolean> getSubscribers() {
         return subscribers;
     }
-    public void setSubscribers(ArrayList<String> subscribers) {
+    public void setSubscribers(Map<String, Boolean> subscribers) {
         this.subscribers = subscribers;
     }
+
     public CollectionReference getQnA() {
         return QnA;
     }

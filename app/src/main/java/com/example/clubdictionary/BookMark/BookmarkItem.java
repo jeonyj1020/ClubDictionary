@@ -5,16 +5,16 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class BookmarkItem {
 
     private String iconUrl, clubName, major, minor;
-    //private CircleImageView icon;
-    //private ImageView bookMark;
+    private boolean alarmChecked;
 
     public BookmarkItem(){}
 
-    public BookmarkItem(String iconUrl, String clubName, String major, String minor){
+    public BookmarkItem(String iconUrl, String clubName, String major, String minor, boolean alarmChecked){
         this.iconUrl = iconUrl;
         this.clubName = clubName;
         this.major = major;
         this.minor = minor;
+        this.alarmChecked = alarmChecked;
     }
 
     public String getIconUrl() {
@@ -51,11 +51,11 @@ public class BookmarkItem {
         this.minor = minor;
     }
 
-    /*public CircleImageView getIcon() {
-        return icon;
+    public boolean isAlarmChecked() {
+        return alarmChecked;
     }
 
-    public void setIcon(CircleImageView icon) {
-        this.icon = icon;
-    }*/
+    public void setAlarmChecked(boolean alarmChecked) {
+        this.alarmChecked = alarmChecked;
+    }
 }

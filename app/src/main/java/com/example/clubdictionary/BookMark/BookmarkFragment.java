@@ -122,9 +122,12 @@ public class BookmarkFragment extends Fragment {
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                 if (task.isSuccessful()) {
                                     for (QueryDocumentSnapshot document : task.getResult()) {
+                                        boolean alarmChecked = ((Map<String, Boolean>) document.get("subscribers"))
+                                                .containsKey(user.getUid());
                                         bookmarkItemList.add(new BookmarkItem(
                                                 (String) document.get("icon"), (String) document.get("name"),
-                                                (String) document.get("major"), (String) document.get("minor")));
+                                                (String) document.get("major"), (String) document.get("minor"),
+                                                alarmChecked));
                                     }
                                 }
                             }
@@ -139,18 +142,19 @@ public class BookmarkFragment extends Fragment {
                                                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                                     if (task.isSuccessful()) {
                                                         for (QueryDocumentSnapshot document : task.getResult()) {
+                                                            boolean alarmChecked = ((Map<String, Boolean>) document.get("subscribers"))
+                                                                    .containsKey(user.getUid());
                                                             bookmarkItemList.add(new BookmarkItem(
-                                                                    (String) document.get("iconUrl"), (String) document.get("name"),
-                                                                    (String) document.get("major"), (String) document.get("minor")));
+                                                                    (String) document.get("icon"), (String) document.get("name"),
+                                                                    (String) document.get("major"), (String) document.get("minor"),
+                                                                    alarmChecked));
+                                                            if(bookmarkItemList.size() == clubList.size()){
+                                                                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                                                                bookmarkRecyclerViewAdapter = new BookmarkRecyclerViewAdapter(bookmarkItemList, mContext);
+                                                                recyclerView.setAdapter(bookmarkRecyclerViewAdapter);
+                                                            }
                                                         }
                                                     }
-                                                }
-                                            }).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                                                    bookmarkRecyclerViewAdapter = new BookmarkRecyclerViewAdapter(bookmarkItemList, mContext);
-                                                    recyclerView.setAdapter(bookmarkRecyclerViewAdapter);
                                                 }
                                             });
                                 }
@@ -166,18 +170,21 @@ public class BookmarkFragment extends Fragment {
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
+                                    boolean alarmChecked = ((Map<String, Boolean>) document.get("subscribers"))
+                                            .containsKey(user.getUid());
                                     bookmarkItemList.add(new BookmarkItem(
                                             (String) document.get("iconUrl"), (String) document.get("name"),
-                                            (String) document.get("major"), (String) document.get("minor")));
+                                            (String) document.get("major"), (String) document.get("minor"),
+                                            true));
+                                    Log.e("alarmChecked", ""+alarmChecked);
+
+                                    if(bookmarkItemList.size() == clubList.size()){
+                                        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                                        bookmarkRecyclerViewAdapter = new BookmarkRecyclerViewAdapter(bookmarkItemList, mContext);
+                                        recyclerView.setAdapter(bookmarkRecyclerViewAdapter);
+                                    }
                                 }
                             }
-                        }
-                    }).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                            bookmarkRecyclerViewAdapter = new BookmarkRecyclerViewAdapter(bookmarkItemList, mContext);
-                            recyclerView.setAdapter(bookmarkRecyclerViewAdapter);
                         }
                     });
         }

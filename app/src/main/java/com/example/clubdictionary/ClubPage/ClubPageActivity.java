@@ -34,6 +34,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +51,7 @@ public class ClubPageActivity extends AppCompatActivity {
     String minor = null;
     String clubName = null;
     Map<String, List<String>> bookMark = new HashMap<>();
-    ArrayList<String> subscribers = new ArrayList<>();
+    Map<String, Boolean> subscribers = new HashMap<>();
     boolean bookMarked;
     CircleImageView icon;
     ImageButton apply_btn;
@@ -200,7 +201,17 @@ public class ClubPageActivity extends AppCompatActivity {
 
     private void getBookMark() {
         bookMark = (Map<String, List<String>>) userDoc.get("bookMark");
-        if (subscribers.contains(user.getUid())) {
+        for(String minor : bookMark.keySet()){
+            ArrayList<String> minorList = new ArrayList<>();
+            minorList = (ArrayList<String>) bookMark.get(minor);
+            for(String club : minorList){
+                Log.e(minor, club);
+            }
+        }
+        for(String userUid : subscribers.keySet()){
+            Log.e(userUid,  ""+subscribers.get(userUid));
+        }
+        if (subscribers.keySet().contains(user.getUid())) {
             bookMarked = true;
             apply_btn.setImageResource(R.drawable.png_bookmark_selected);
         } else {
@@ -212,29 +223,34 @@ public class ClubPageActivity extends AppCompatActivity {
     }
 
     private void addBookMark() {
-        List<String> newBookMark = new ArrayList<>();
-        if (bookMark.containsKey(minor)) {
-            newBookMark = bookMark.get(minor);
+        if( bookMark.containsKey("minor")){
+            bookMark.get("minor").add(clubName);
         }
-        newBookMark.add(clubName);
-        bookMark.put(minor, newBookMark);
-        userDocRef.update("bookMark", bookMark);
+        else {
+            List<String> newList = new ArrayList<>();
+            newList.add(clubName);
+            bookMark.put(minor, newList);
+        }
+        userDocRef.update("bookMark."+minor, FieldValue.arrayUnion(clubName));
 
         // 동아리의 subscribers에 userUid add
-        clubDocRef.update("subscribers", FieldValue.arrayUnion(user.getUid()));
+        clubDocRef.update("subscribers." + user.getUid(), true);
     }
 
     private void deleteBookMark() {
-        List<String> newBookMark = new ArrayList<>();
-        newBookMark = bookMark.get(minor);
-        newBookMark.remove(clubName);
-        if (newBookMark.isEmpty()) {
+        List<String> list = new ArrayList<>();
+        list = bookMark.get(minor);
+        list.remove(clubName);
+        if(list.isEmpty()){
+            userDocRef.update("bookMark."+minor, FieldValue.delete());
             bookMark.remove(minor);
-        } else bookMark.put(minor, newBookMark);
-
-        userDocRef.update("bookMark", bookMark);
+        }
+        else{
+            userDocRef.update("bookMark."+minor, FieldValue.arrayRemove(clubName));
+            bookMark.put(minor, list);
+        }
 
         // 동아리의 subscribers에서 userUid 없애기
-        clubDocRef.update("subscribers", FieldValue.arrayRemove(user.getUid()));
+        clubDocRef.update("subscribers." + user.getUid(), FieldValue.delete());
     }
 }
