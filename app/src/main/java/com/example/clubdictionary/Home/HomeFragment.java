@@ -250,12 +250,43 @@ public class HomeFragment extends Fragment {
         Log.d("filter", " \n" + filtering + "\n" + filteringBinary + "\n" + onlyRecruitChecked +
                 ", " + onlyFavoriteChecked + "\n" + bookMark);
 
-        if (filtering == null) {
-
-        } else {
-            //if (filtering)
+        ArrayList<String> intersection = new ArrayList<>();
+        if(onlyFavoriteChecked){
+            for(String minor : bookMark.keySet()){
+                if(filtering.contains(minor)){
+                    List<String> clubs = bookMark.get(minor);
+                    for(int i = 0; i<clubs.size(); i++){
+                        intersection.add(clubs.get(i));
+                    }
+                }
+            }
         }
-        ArrayList<String> intersection = null;
+
+        if (filtering.size() == 0) {
+            // 맨 처음 회원가입한 후의 상태 - 이 때는 모든 동아리의 문서를 쿼리
+            if(filteringBinary == null){
+                if(onlyFavoriteChecked){
+
+                }
+                else{
+
+                }
+            }
+            // 유저가 펄터링에서 0개의 소분류를 선택했을 때
+            else {
+
+            }
+        } else {
+            if (filtering.size() <= allMinor.size()/2){
+
+            }
+            else if(filtering.size() == allMinor.size()){
+
+            }
+            else{
+
+            }
+        }
         /*if(onlyFavoriteChecked){
             for(){
 
