@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clubdictionary.BookMark.BookmarkRecyclerViewAdapter;
+import com.example.clubdictionary.ClubInfo;
 import com.example.clubdictionary.R;
 
 import java.util.ArrayList;
@@ -18,10 +19,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ListRecyclerViewAdapter extends RecyclerView.Adapter<ListRecyclerViewAdapter.ViewHolder> {
 
-    private ArrayList<ListItem> data = new ArrayList<>();
+    private ArrayList<ClubInfo> data = new ArrayList<>();
     Context mContext;
 
-    public ListRecyclerViewAdapter(ArrayList<ListItem> data, Context mContext) {
+    public ListRecyclerViewAdapter(ArrayList<ClubInfo> data, Context mContext) {
         this.data = data;
         this.mContext = mContext;
     }
@@ -37,8 +38,8 @@ public class ListRecyclerViewAdapter extends RecyclerView.Adapter<ListRecyclerVi
     @Override
     public void onBindViewHolder(@NonNull ListRecyclerViewAdapter.ViewHolder holder, int position) {
 
-        ListItem item = data.get(position);
-        holder.clubName.setText(item.clubName);
+        ClubInfo item = data.get(position);
+        holder.clubName.setText(item.getName());
         //clubIcon도 해야됨
 
     }
@@ -59,11 +60,5 @@ public class ListRecyclerViewAdapter extends RecyclerView.Adapter<ListRecyclerVi
             clubName = itemView.findViewById(R.id.clubName);
             clubIcon = itemView.findViewById(R.id.clubIcon);
         }
-    }
-
-    public class ListItem {
-
-        public String iconUrl, clubName;
-
     }
 }

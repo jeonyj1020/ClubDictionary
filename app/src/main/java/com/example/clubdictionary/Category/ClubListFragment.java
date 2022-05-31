@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.clubdictionary.ClubInfo;
 import com.example.clubdictionary.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -35,7 +36,7 @@ public class ClubListFragment extends Fragment {
     }
 
     private Context mContext;
-    private ArrayList<ListRecyclerViewAdapter.ListItem> clubList = new ArrayList<>();
+    private ArrayList<ClubInfo> clubList = new ArrayList<>();
 
     @Override
     public void onAttach(@NonNull Context context) {
