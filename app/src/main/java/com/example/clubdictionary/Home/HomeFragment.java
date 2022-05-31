@@ -342,7 +342,7 @@ public class HomeFragment extends Fragment {
                             });
                 }
             } else if (filtering.size() == 0) {
-                Toast.makeText(getActivity(), "소분류를 한 개도 선택하지 않아 게시물을 불러오지 않습니다!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "소분류를 한 개도 선택하지 않아 게시물을 불러오지 않습니다!", Toast.LENGTH_SHORT).show();
             } else if (filtering.size() <= allMinor.size() / 2) {
                 int ten = filtering.size() / 10;
                 if (onlyRecruitChecked) {

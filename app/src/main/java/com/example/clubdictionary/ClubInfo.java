@@ -29,13 +29,13 @@ public class ClubInfo {
     private CollectionReference QnA;
     private CollectionReference posts;
     private Map<String, List<String>> bookMark;
-
+    private String phoneNum;
     public  ClubInfo(){}
 
     public ClubInfo(String uid, String iconUrl, String name, String day, String activityTime, String major, String minor,
                     String money, String registerUrl, String filteringBinary, String introduce, ArrayList<String> introducePicture,
                     ArrayList<Boolean> checked, ArrayList<String> scrap, ArrayList<String> questionList, ArrayList<String> alarmList,
-                    Map<String, Boolean> subscribers, ArrayList<String> filtering, Map<String, List<String>> bookMark) {
+                    Map<String, Boolean> subscribers, ArrayList<String> filtering, Map<String, List<String>> bookMark, String phoneNum) {
         Uid = uid;
         this.iconUrl = iconUrl;
         this.name = name;
@@ -55,6 +55,7 @@ public class ClubInfo {
         this.subscribers = subscribers;
         this.filtering = filtering;
         this.bookMark = bookMark;
+        this.phoneNum = phoneNum;
     }
 
     public String getUid() {
@@ -211,5 +212,13 @@ public class ClubInfo {
     public Map<String, List<String>> getBookMark(){return bookMark;}
     public void setBookMark(Map<String, List<String>> bookMark) {
         this.bookMark = bookMark;
+    }
+
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
     }
 }

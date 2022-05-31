@@ -4,6 +4,7 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/introduce"
         android:background="#F5FAFF"
         android:layout_margin="10dp"
         android:paddingTop="10dp"

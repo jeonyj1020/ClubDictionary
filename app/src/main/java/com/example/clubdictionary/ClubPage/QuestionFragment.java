@@ -1,6 +1,7 @@
 package com.example.clubdictionary.ClubPage;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 
@@ -26,7 +28,7 @@ public class QuestionFragment extends Fragment {
     Context mContext;
     RecyclerView recyclerView;
     String name;
-
+    Button writeQuestion;
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -61,7 +63,7 @@ public class QuestionFragment extends Fragment {
         View view = LayoutInflater.from(inflater.getContext()).inflate(R.layout.fragment_clubpage_question, container, false);
 
         recyclerView = view.findViewById(R.id.quetion_list);
-
+        writeQuestion  = view.findViewById(R.id.writeQuestion);
         ArrayList<sampleText> st = new ArrayList<>();
 
         st.add(new sampleText("마지막 질문", "답변은 얼마나 길어져도 괜찮을까 여기서 일정 길이 이상 들어가면 더보기가 나와야되는데 제대로 들어갈까답변은 얼마나 길어져도 괜찮을까 여기서 일정 길이 이상 들어가면 더보기가 나와야되는데 제대로 들어갈까?"));
@@ -71,7 +73,14 @@ public class QuestionFragment extends Fragment {
         }
         QuestionRecyclerViewAdapter adapter = new QuestionRecyclerViewAdapter(mContext, st);
         recyclerView.setAdapter(adapter);
-
+        writeQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), QuestionWriteActivity.class);
+                //intent.putString();
+                mContext.startActivity(intent);
+            }
+        });
         return view;
     }
 }

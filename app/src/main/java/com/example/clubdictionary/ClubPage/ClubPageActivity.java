@@ -119,18 +119,20 @@ public class ClubPageActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         name = intent.getStringExtra("name");
-
+        Log.e("dlfmadl anjsi tlqkfdk", name);
         db.collection("clubs").whereEqualTo("name", name).get().
                 addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            Log.e("시발", "되나 안되나" + task.getResult().size());
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 clubDocRef = document.getReference();
                                 Log.d(TAG, document.getId() + " => " + document.getData());
 
                                 ClubInfo clubInfo = document.toObject(ClubInfo.class);
                                 nameTextView.setText(clubInfo.getName());
+                                Log.e("!@#!@#", nameTextView.getText().toString());
                                 day.setText(clubInfo.getDay());
                                 activityTime.setText(clubInfo.getActivityTime());
                                 money.setText(clubInfo.getMoney());

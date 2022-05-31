@@ -32,7 +32,7 @@ public class ClubPageViewPagerAdapter extends FragmentStateAdapter {
             case 0:
                 return PostFragment.newInstance(position);
             case 1:
-                return IntroFragment.newInstance(position);
+                return IntroFragment.newInstance(position , name);
             case 2:
                 return QuestionFragment.newInstance(position, name);
         }

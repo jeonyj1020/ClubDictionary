@@ -1,9 +1,11 @@
 package com.example.clubdictionary.Category;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clubdictionary.BookMark.BookmarkRecyclerViewAdapter;
 import com.example.clubdictionary.ClubInfo;
+import com.example.clubdictionary.ClubPage.ClubPageActivity;
 import com.example.clubdictionary.R;
 
 import java.util.ArrayList;
@@ -41,7 +44,15 @@ public class ListRecyclerViewAdapter extends RecyclerView.Adapter<ListRecyclerVi
         ClubInfo item = data.get(position);
         holder.clubName.setText(item.getName());
         //clubIcon도 해야됨
-
+        //눌렀을때 클럽페이지로 이동하기
+        holder.clubListLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(holder.clubListLayout.getContext(), ClubPageActivity.class);
+                intent.putExtra("name", holder.clubName.getText().toString());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -53,10 +64,10 @@ public class ListRecyclerViewAdapter extends RecyclerView.Adapter<ListRecyclerVi
 
         TextView clubName;
         CircleImageView clubIcon;
-
+        LinearLayout clubListLayout;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            clubListLayout = itemView.findViewById(R.id.clubListLayout);
             clubName = itemView.findViewById(R.id.clubName);
             clubIcon = itemView.findViewById(R.id.clubIcon);
         }

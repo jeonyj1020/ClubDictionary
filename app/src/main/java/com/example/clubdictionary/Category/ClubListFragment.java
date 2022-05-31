@@ -66,8 +66,7 @@ public class ClubListFragment extends Fragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.clubListRecyclerView);
         ListRecyclerViewAdapter adapter = new ListRecyclerViewAdapter(clubList, mContext);
-        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-        recyclerView.setAdapter(adapter);
+
 
         //TextView checkTextView = view.findViewById(R.id.whitchminor);
         //checkTextView.setText(result);
@@ -83,7 +82,9 @@ public class ClubListFragment extends Fragment {
                                 //String name = document.getId();
                                 // ClubInfo club = document.toObject(ClubInfo.class);
                                 //String name = club.getName();
-                                String name = document.get("name").toString();
+                                ClubInfo clubInfo = document.toObject(ClubInfo.class);
+                                clubList.add(clubInfo);
+                                //String name = document.get("name").toString();
 
                                 /*
                                 testTextView.setText(name);
@@ -96,12 +97,15 @@ public class ClubListFragment extends Fragment {
                                     }
                                 });*/
                             }
+                            adapter.notifyDataSetChanged();
                         } else {
                             Toast.makeText(mContext, "정보를 불러오는데 실패하였습니다.", Toast.LENGTH_LONG).show();
                         }
                     }
                 });
 
+        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        recyclerView.setAdapter(adapter);
         return view;
     }
 }
