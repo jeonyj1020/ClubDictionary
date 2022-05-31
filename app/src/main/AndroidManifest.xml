@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ClubDictionary.NoActionBar">
         <activity
-            android:name=".QuestionWriteActivity"
+            android:name=".ClubPage.QuestionWriteActivity"
             android:exported="false" />
         <activity
             android:name=".Group.GroupPostActivity"
