@@ -43,11 +43,13 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 public class HomeFragment extends Fragment {
-
+    View view;
     RecyclerView recyclerView;
     HomeRecyclerViewAdapter homeRecyclerViewAdapter;
     Context mContext;
@@ -63,15 +65,16 @@ public class HomeFragment extends Fragment {
     Map<String, List<String>> bookMark = null;
     FloatingActionButton writePostButton;
     ArrayList<String> allMinor = new ArrayList<String>(Arrays.asList(
-            "idea",
-            "it", "liberalArts", "nature", "idea",
-            "band", "instrument", "song", "play", "art", "cook", "dance", "picture", "handicraft",
+            "volunteer",
+            "liberalArts", "idea", "it", "nature",
+            "band", "instrument", "song", "art", "picture", "play", "dance", "handicraft", "cook",
             "ball", "racket", "martialArts", "extreme", "archery", "game",
             "christian", "buddhism", "catholic", "transpiration"
     ));
     ArrayList<PostInfo> postList = new ArrayList<>();
     ArrayList<String> intersectionClubs = new ArrayList<>();
     ArrayList<String> exceptFiltering = new ArrayList<>();
+    int clubCnt = 0, cmp = 0;
 
     public HomeFragment() {
     }
@@ -84,7 +87,7 @@ public class HomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        view = inflater.inflate(R.layout.fragment_home, container, false);
         mContext = container.getContext();
 
         view.findViewById(R.id.filter).setOnClickListener(onClickListener);
@@ -121,16 +124,13 @@ public class HomeFragment extends Fragment {
         //ArrayList<HomeItem> testDataSet = new ArrayList<>();
 
         //테스트 용
-        ArrayList<String> testDataSet = new ArrayList<>();
+        /*ArrayList<String> testDataSet = new ArrayList<>();
 
         for (int i = 0; i < 10; i++) {
             testDataSet.add(i + "번째 아이템");
-        }
+        }*/
 
-        recyclerView = view.findViewById(R.id.fragmrnt_home_recyclerview);
-        homeRecyclerViewAdapter = new HomeRecyclerViewAdapter(testDataSet, mContext);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(homeRecyclerViewAdapter);
+
 
         return view;
     }
@@ -150,20 +150,18 @@ public class HomeFragment extends Fragment {
                     checked.set(0, onlyRecruit.isChecked());
                     checked.set(1, onlyFavorite.isChecked());
 
-                    if (onlyFavorite.isChecked())
+                    docRef.update("checked", checked)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
 
-                        docRef.update("checked", checked)
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
 
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-
-                                    }
-                                });
+                                }
+                            });
 
                     query();
                     break;
@@ -259,9 +257,11 @@ public class HomeFragment extends Fragment {
                 ", " + onlyFavoriteChecked + "\n" + bookMark);
 
         postList.clear();
+        intersectionClubs.clear();
+        exceptFiltering.clear();
+
         String is = "";
         if (onlyFavoriteChecked) {
-            intersectionClubs.clear();
             for (String minor : bookMark.keySet()) {
                 if (filtering.contains(minor)) {
                     List<String> clubs = bookMark.get(minor);
@@ -273,10 +273,11 @@ public class HomeFragment extends Fragment {
             }
         }
 
-        exceptFiltering.clear();
+        String exceptFilteringTest = "";
         for (String minor : allMinor) {
             if (!filtering.contains(minor)) {
                 exceptFiltering.add(minor);
+                exceptFilteringTest += minor + " ";
             }
         }
 
@@ -284,34 +285,38 @@ public class HomeFragment extends Fragment {
 
         // 찜한 동아리만 보기가 선택되면 intersectionClubs의 동아리 이름들로 쿼리
         if (onlyFavoriteChecked) {
-            if (intersectionClubs.size() == 0) {
-                Toast.makeText(getActivity(), "필터링과 찜한 동아리 돌 다에 해당하는 동아리가 한 개도 없습니다!", Toast.LENGTH_SHORT).show();
-            } else {
-                int ten = intersectionClubs.size() / 10;
-                Log.e("size", "" + intersectionClubs.size());
-                if (onlyRecruitChecked) {
-                    for (int i = 0; i <= ten; i++) {
-                        if (i != ten) {
-                            List<String> clubNames = intersectionClubs.subList(i * 10, (i + 1) * 10 - 1);
-                            queryByClubNameAndOnlyRecruit(clubNames, 10);
-                        } else {
-                            List<String> clubNames = intersectionClubs.subList(i * 10, intersectionClubs.size());
-                            Log.e("size", "" + clubNames.get(0));
-                            queryByClubNameAndOnlyRecruit(clubNames, clubNames.size());
-                        }
-                    }
+            if(filtering.size() > 0) {
+                if (intersectionClubs.size() == 0) {
+                    Toast.makeText(getActivity(), "필터링과 찜한 동아리 둘 다에 해당하는 동아리가 한 개도 없습니다!", Toast.LENGTH_SHORT).show();
                 } else {
-                    for (int i = 0; i <= ten; i++) {
-                        if (i != ten) {
-                            List<String> clubNames = intersectionClubs.subList(i * 10, (i + 1) * 10 - 1);
-                            queryByClubName(clubNames, 10);
-                        } else {
-                            List<String> clubNames = intersectionClubs.subList(i * 10, intersectionClubs.size());
-                            Log.e("size", "" + clubNames.get(0));
-                            queryByClubName(clubNames, clubNames.size());
+                    int ten = intersectionClubs.size() / 10;
+                    if (intersectionClubs.size() % 10 == 0) ten--;
+
+                    if (onlyRecruitChecked) {
+                        for (int i = 0; i <= ten; i++) {
+                            if (i != ten) {
+                                List<String> clubNames = intersectionClubs.subList(i * 10, (i + 1) * 10);
+                                queryByClubNameAndOnlyRecruit(clubNames, false);
+                            } else {
+                                List<String> clubNames = intersectionClubs.subList(i * 10, intersectionClubs.size());
+                                queryByClubNameAndOnlyRecruit(clubNames, true);
+                            }
+                        }
+                    } else {
+                        for (int i = 0; i <= ten; i++) {
+                            if (i != ten) {
+                                List<String> clubNames = intersectionClubs.subList(i * 10, (i + 1) * 10);
+                                queryByClubName(clubNames, false);
+                            } else {
+                                List<String> clubNames = intersectionClubs.subList(i * 10, intersectionClubs.size());
+                                queryByClubName(clubNames, true);
+                            }
                         }
                     }
                 }
+            }
+            else{
+                Toast.makeText(getContext(), "소분류를 한 개도 선택하지 않아 게시물을 불러오지 않습니다!", Toast.LENGTH_SHORT).show();
             }
         }
         // 찜한 동아리만 보기가 선택되지 않았으면, filtering의 소분류들로만 쿼리
@@ -324,8 +329,12 @@ public class HomeFragment extends Fragment {
                                 @Override
                                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                     for (DocumentSnapshot documentSnapshot : task.getResult()) {
-                                        PostInfo postInfo = documentSnapshot.toObject(PostInfo.class);
-                                        postList.add(postInfo);
+                                        postList.add(documentSnapshot.toObject(PostInfo.class));
+                                    }
+                                    for (PostInfo postInfo : postList) {
+                                        Log.e("post", "" + postInfo.getName() + ", " + postInfo.getIconUrl()
+                                                + ", " + postInfo.getMajor() + ", " + postInfo.getMinor()
+                                                + ", " + postInfo.getUpTime());
                                     }
                                 }
                             });
@@ -335,86 +344,95 @@ public class HomeFragment extends Fragment {
                                 @Override
                                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                     for (DocumentSnapshot documentSnapshot : task.getResult()) {
-                                        PostInfo postInfo = documentSnapshot.toObject(PostInfo.class);
-                                        postList.add(postInfo);
+                                        postList.add(documentSnapshot.toObject(PostInfo.class));
+                                    }
+                                    for (PostInfo postInfo : postList) {
+                                        Log.e("post", "" + postInfo.getName() + ", " + postInfo.getIconUrl()
+                                                + ", " + postInfo.getMajor() + ", " + postInfo.getMinor()
+                                                + ", " + postInfo.getUpTime());
                                     }
                                 }
                             });
                 }
             } else if (filtering.size() == 0) {
-                //Toast.makeText(getContext(), "소분류를 한 개도 선택하지 않아 게시물을 불러오지 않습니다!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "소분류를 한 개도 선택하지 않아 게시물을 불러오지 않습니다!", Toast.LENGTH_SHORT).show();
             } else if (filtering.size() <= allMinor.size() / 2) {
                 int ten = filtering.size() / 10;
+                if(filtering.size() % 10 == 0) ten--;
+
                 if (onlyRecruitChecked) {
                     for (int i = 0; i <= ten; i++) {
                         if (i != ten) {
-                            List<String> minors = filtering.subList(i * 10, (i + 1) * 10 - 1);
-                            queryByMinorAndOnlyRecruit(minors, 10);
+                            List<String> minors = filtering.subList(i * 10, (i + 1) * 10);
+                            queryByMinorAndOnlyRecruit(minors, false);
                         } else {
                             List<String> minors = filtering.subList(i * 10, filtering.size());
-                            queryByMinorAndOnlyRecruit(minors, minors.size());
+                            queryByMinorAndOnlyRecruit(minors,true);
                         }
                     }
                 } else {
                     for (int i = 0; i <= ten; i++) {
                         if (i != ten) {
-                            List<String> minors = filtering.subList(i * 10, (i + 1) * 10 - 1);
-                            queryByMinor(minors, 10);
+                            List<String> minors = filtering.subList(i * 10, (i + 1) * 10);
+                            queryByMinor(minors, false);
                         } else {
                             List<String> minors = filtering.subList(i * 10, filtering.size());
-                            queryByMinor(minors, minors.size());
+                            queryByMinor(minors, true);
                         }
                     }
                 }
             } else if (filtering.size() < allMinor.size()) {
                 int ten = exceptFiltering.size() / 10;
-                if(onlyRecruitChecked){
-                    for (int i = 0; i <= ten; i++) {
-                        if (i != ten) {
-                            List<String> minors = exceptFiltering.subList(i * 10, (i + 1) * 10 - 1);
-                            queryByMinorAndOnlyRecruit(minors, 10);
-                        } else {
-                            List<String> minors = exceptFiltering.subList(i * 10, exceptFiltering.size());
-                            queryByMinorAndOnlyRecruit(minors, minors.size());
-                        }
-                    }
-                }
-                else{
-                    for (int i = 0; i <= ten; i++) {
-                        if (i != ten) {
-                            List<String> minors = exceptFiltering.subList(i * 10, (i + 1) * 10 - 1);
-                            queryByMinor(minors, 10);
-                        } else {
-                            List<String> minors = exceptFiltering.subList(i * 10, exceptFiltering.size());
-                            queryByMinor(minors, minors.size());
-                        }
-                    }
-                }
+                if(exceptFiltering.size() % 10 == 0) ten--;
 
+                if (onlyRecruitChecked) {
+                    for (int i = 0; i <= ten; i++) {
+                        if (i != ten) {
+                            List<String> minors = exceptFiltering.subList(i * 10, (i + 1) * 10);
+                            queryByMinorNotInAndOnlyRecruit(minors, false);
+                        } else {
+                            List<String> minors = exceptFiltering.subList(i * 10, exceptFiltering.size());
+                            queryByMinorNotInAndOnlyRecruit(minors, true);
+                        }
+                    }
+                } else {
+                    for (int i = 0; i <= ten; i++) {
+                        if (i != ten) {
+                            List<String> minors = exceptFiltering.subList(i * 10, (i + 1) * 10);
+                            queryByMinorNotIn(minors, false);
+                        } else {
+                            List<String> minors = exceptFiltering.subList(i * 10, exceptFiltering.size());
+                            queryByMinorNotIn(minors, true);
+                        }
+                    }
+                }
             }
         }
     }
 
-    public void queryByClubName(List<String> clubNames, int max) {
+    public void queryByClubName(List<String> clubNames, boolean last) {
         db.collection("clubs").whereIn("name", clubNames).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                        QuerySnapshot queryDocumentSnapshots = task.getResult();
+                        clubCnt = 0;
+                        cmp = 0;
+                        for(DocumentSnapshot documentSnapshot : queryDocumentSnapshots){
+                            clubCnt++;
+                        }
+
+                        for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                             documentSnapshot.getReference().collection("posts").get()
                                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                         @Override
                                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            cmp++;
                                             for (DocumentSnapshot document : task.getResult()) {
                                                 postList.add(document.toObject(PostInfo.class));
                                             }
-                                            if (max != 10) {
-                                                Log.e("size", "" + postList.size());
-                                                for (PostInfo postInfo : postList) {
-                                                    Log.e("post", "" + postInfo.getName() + ", " + postInfo.getIconUrl()
-                                                            + ", " + postInfo.getMajor() + ", " + postInfo.getMinor()
-                                                            + ", " + postInfo.getUpTime());
-                                                }
+                                            if(last && cmp == clubCnt){
+                                                sortPostList();
                                             }
                                         }
                                     });
@@ -423,27 +441,30 @@ public class HomeFragment extends Fragment {
                 });
     }
 
-    public void queryByClubNameAndOnlyRecruit(List<String> clubNames, int max) {
+    public void queryByClubNameAndOnlyRecruit(List<String> clubNames, boolean last) {
         db.collection("clubs").whereIn("name", clubNames).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                        QuerySnapshot queryDocumentSnapshots = task.getResult();
+                        clubCnt = 0;
+                        cmp = 0;
+                        for(DocumentSnapshot documentSnapshot : queryDocumentSnapshots){
+                            clubCnt++;
+                        }
+
+                        for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                             documentSnapshot.getReference().collection("posts")
                                     .whereEqualTo("recruit", true).get()
                                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                         @Override
                                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            cmp++;
                                             for (DocumentSnapshot document : task.getResult()) {
                                                 postList.add(document.toObject(PostInfo.class));
                                             }
-                                            if (max != 10) {
-                                                Log.e("size", "" + postList.size());
-                                                for (PostInfo postInfo : postList) {
-                                                    Log.e("post", "" + postInfo.getName() + ", " + postInfo.getIconUrl()
-                                                            + ", " + postInfo.getMajor() + ", " + postInfo.getMinor()
-                                                            + ", " + postInfo.getUpTime());
-                                                }
+                                            if(last && cmp == clubCnt){
+                                                sortPostList();
                                             }
                                         }
                                     });
@@ -452,27 +473,29 @@ public class HomeFragment extends Fragment {
                 });
     }
 
-    public void queryByMinor(List<String> Minors, int max) {
+    public void queryByMinor(List<String> Minors, boolean last) {
         db.collection("clubs").whereIn("minor", Minors).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) { clubCnt = 0;
+                        QuerySnapshot queryDocumentSnapshots = task.getResult();
+                        clubCnt = 0;
+                        cmp = 0;
+                        for(DocumentSnapshot documentSnapshot : queryDocumentSnapshots){
+                            clubCnt++;
+                        }
+
+                        for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                             documentSnapshot.getReference().collection("posts").get()
                                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                         @Override
                                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            cmp++;
                                             for (DocumentSnapshot document : task.getResult()) {
-                                                PostInfo postInfo = document.toObject(PostInfo.class);
-                                                postList.add(postInfo);
+                                                postList.add(document.toObject(PostInfo.class));
                                             }
-                                            if (max != 10) {
-                                                Log.e("size", "" + postList.size());
-                                                for (PostInfo postInfo : postList) {
-                                                    Log.e("post", "" + postInfo.getName() + ", " + postInfo.getIconUrl()
-                                                            + ", " + postInfo.getMajor() + ", " + postInfo.getMinor()
-                                                            + ", " + postInfo.getUpTime());
-                                                }
+                                            if(last && cmp == clubCnt){
+                                                sortPostList();
                                             }
                                         }
                                     });
@@ -481,33 +504,110 @@ public class HomeFragment extends Fragment {
                 });
     }
 
-    public void queryByMinorAndOnlyRecruit(List<String> Minors, int max) {
+    public void queryByMinorAndOnlyRecruit(List<String> Minors, boolean last) {
         db.collection("clubs").whereIn("minor", Minors).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        for (DocumentSnapshot documentSnapshot : task.getResult()) {
+                        QuerySnapshot queryDocumentSnapshots = task.getResult();
+                        clubCnt = 0;
+                        cmp = 0;
+                        for(DocumentSnapshot documentSnapshot : queryDocumentSnapshots){
+                            clubCnt++;
+                        }
+
+                        for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                             documentSnapshot.getReference().collection("posts")
                                     .whereEqualTo("recruit", true).get()
                                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                         @Override
                                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            cmp++;
                                             for (DocumentSnapshot document : task.getResult()) {
-                                                PostInfo postInfo = document.toObject(PostInfo.class);
-                                                postList.add(postInfo);
+                                                postList.add(document.toObject(PostInfo.class));
                                             }
-                                            if (max != 10) {
-                                                Log.e("size", "" + postList.size());
-                                                for (PostInfo postInfo : postList) {
-                                                    Log.e("post", "" + postInfo.getName() + ", " + postInfo.getIconUrl()
-                                                            + ", " + postInfo.getMajor() + ", " + postInfo.getMinor()
-                                                            + ", " + postInfo.getUpTime());
-                                                }
+                                            if(last && cmp == clubCnt){
+                                                sortPostList();
                                             }
                                         }
                                     });
                         }
                     }
                 });
+    }
+
+    public void queryByMinorNotIn(List<String> Minors, boolean last) {
+        db.collection("clubs").whereNotIn("minor", Minors).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        QuerySnapshot queryDocumentSnapshots = task.getResult();
+                        clubCnt = 0;
+                        cmp = 0;
+                        for(DocumentSnapshot documentSnapshot : queryDocumentSnapshots){
+                            clubCnt++;
+                        }
+
+                        for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                            documentSnapshot.getReference().collection("posts").get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            cmp++;
+                                            for (DocumentSnapshot document : task.getResult()) {
+                                                postList.add(document.toObject(PostInfo.class));
+                                            }
+                                            if(last && cmp == clubCnt){
+                                                sortPostList();
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+                });
+    }
+
+    public void queryByMinorNotInAndOnlyRecruit(List<String> Minors, boolean last) {
+        db.collection("clubs").whereNotIn("minor", Minors).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        QuerySnapshot queryDocumentSnapshots = task.getResult();
+                        clubCnt = 0;
+                        cmp = 0;
+                        for(DocumentSnapshot documentSnapshot : queryDocumentSnapshots){
+                            clubCnt++;
+                        }
+
+                        for (DocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                            documentSnapshot.getReference().collection("posts")
+                                    .whereEqualTo("recruit", true).get()
+                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                            cmp++;
+                                            for (DocumentSnapshot document : task.getResult()) {
+                                                postList.add(document.toObject(PostInfo.class));
+                                            }
+                                            if(last && cmp == clubCnt){
+                                                sortPostList();
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+                });
+    }
+
+    public void sortPostList(){
+        Collections.sort(postList);
+        for (PostInfo postInfo : postList) {
+            Log.e("post", "" + postInfo.getUpTime() + ", "+ postInfo.getName() + ", " + postInfo.getIconUrl()
+                    + ", " + postInfo.getMajor() + ", " + postInfo.getMinor());
+        }
+        recyclerView = view.findViewById(R.id.fragmrnt_home_recyclerview);
+        homeRecyclerViewAdapter = new HomeRecyclerViewAdapter(postList, mContext);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setAdapter(homeRecyclerViewAdapter);
     }
 }

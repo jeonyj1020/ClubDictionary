@@ -19,6 +19,10 @@ import com.example.clubdictionary.ClubPage.ClubPageActivity;
 import com.example.clubdictionary.MainActivity;
 import com.example.clubdictionary.R;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
@@ -31,12 +35,16 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRecyclerViewAdapter.ViewHolder> {
     FirebaseStorage storage = FirebaseStorage.getInstance();
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    DocumentReference userRef;
+    String userUid = user.getUid();
 
     private ArrayList<BookmarkItem> bookMarkItemList;
     Context mContext;
 
-    public BookmarkRecyclerViewAdapter(ArrayList<BookmarkItem> bookMarkItemList, Context mContext) {
+    public BookmarkRecyclerViewAdapter(ArrayList<BookmarkItem> bookMarkItemList, DocumentReference userRef, Context mContext) {
         this.bookMarkItemList = bookMarkItemList;
+        this.userRef = userRef;
         this.mContext = mContext;
     }
 
@@ -54,11 +62,19 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
         BookmarkItem bookmarkItem = bookMarkItemList.get(position);
 
         //holder.icon.se
-
+        DocumentReference clubRef = bookmarkItem.getClubRef();
         holder.name.setText(bookmarkItem.getClubName());
         holder.major.setText("#"+bookmarkItem.getMajor()+" ");
         holder.minor.setText("#"+bookmarkItem.getMinor()+" ");
         holder.bindProfileImage(bookmarkItem.getIconUrl());
+        boolean alarmChecked = bookmarkItem.isAlarmChecked();
+        if(alarmChecked){
+            holder.alarm.setImageResource(R.drawable.icon_alarmon);
+        }
+        else{
+            holder.alarm.setImageResource(R.drawable.icon_alarmoff);
+        }
+
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,10 +89,14 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
                 if(holder.isChecked) {
                     holder.alarm.setImageResource(R.drawable.icon_alarmoff);
                     holder.isChecked = false;
+                    userRef.update("alarmList", FieldValue.arrayRemove(userUid));
+                    clubRef.update("subscribers." + userUid, false);
                 }
                 else {
                     holder.alarm.setImageResource(R.drawable.icon_alarmon);
                     holder.isChecked = true;
+                    userRef.update("alarmList", FieldValue.arrayUnion(userUid));
+                    clubRef.update("subscribers." + userUid, true);
                 }
             }
         });
@@ -97,7 +117,7 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
         private TextView minor;
         private ImageView alarm;
         private String iconUrl;
-        public boolean isChecked = false;
+        private boolean isChecked = false;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

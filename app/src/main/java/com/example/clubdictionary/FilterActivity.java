@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Observable;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
@@ -15,11 +16,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -28,6 +32,7 @@ import java.util.List;
 
 public class FilterActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    DocumentReference docRef;
     String filteringBinary;
     String newFilteringBinary = "";
 
@@ -41,9 +46,9 @@ public class FilterActivity extends AppCompatActivity {
     ArrayList<Integer> childCnt = new ArrayList<>();
     Toolbar toolbar;
     ArrayList<String> allMinor = new ArrayList<String>(Arrays.asList(
-            "idea",
-            "it", "liberalArts", "nature", "idea",
-            "band", "instrument", "song", "play", "art", "cook", "dance", "picture", "handicraft",
+            "volunteer",
+            "liberalArts", "idea", "it", "nature",
+            "band", "instrument", "song", "art", "picture", "play", "dance", "handicraft", "cook",
             "ball", "racket", "martialArts", "extreme", "archery", "game",
             "christian", "buddhism", "catholic", "transpiration"
     ));
@@ -179,7 +184,6 @@ public class FilterActivity extends AppCompatActivity {
                     if (allCheck) {
                         for (CheckBox now : studyList) {
                             now.setChecked(true);
-                            now.setTextColor(Color.RED);
                         }
                     } else {
                         for (CheckBox now : studyList) {
@@ -251,7 +255,22 @@ public class FilterActivity extends AppCompatActivity {
                     }
 
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                    DocumentReference docRef = db.collection("users").document(user.getUid());
+                    docRef = db.collection("users").document(user.getUid());
+                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot documentSnapshot = task.getResult();
+                                if (!documentSnapshot.exists()) {
+                                    Log.e("###", "클럽입니다");
+                                    docRef = db.collection("clubs").document(user.getUid());
+                                } else {
+                                    Log.e("###", "유저입니다");
+                                }
+                            }
+                        }
+                    });
+
                     docRef.update("filtering", newFiltering, "filteringBinary", newFilteringBinary)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override

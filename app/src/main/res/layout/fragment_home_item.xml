@@ -124,7 +124,7 @@
 
 
                 <TextView
-                    android:id="@+id/major"
+                    android:id="@+id/minor"
                     android:layout_width="0dp"
                     android:layout_weight="553"
                     android:layout_height="match_parent"

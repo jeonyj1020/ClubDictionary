@@ -2,6 +2,8 @@ package com.example.clubdictionary.WritePost;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -65,7 +67,7 @@ public class WriteContentsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_write_contents);
+        setContentView(R.layout.activity_write_contents2);
         imageList = (ArrayList<Uri>) getIntent().getSerializableExtra("imageList");
 
         recyclerView = findViewById(R.id.imageListRecyclerView);
@@ -73,8 +75,8 @@ public class WriteContentsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         recyclerView.setAdapter(imageListAdapter);
 
-        exit = findViewById(R.id.exit);
-        exit.setOnClickListener(onClickListener);
+        /*exit = findViewById(R.id.exit);
+        exit.setOnClickListener(onClickListener);*/
         upload = findViewById(R.id.upload);
         upload.setOnClickListener(onClickListener);
 
@@ -108,8 +110,8 @@ public class WriteContentsActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         long nowTime = System.currentTimeMillis();
-        String nowTimeString = String.valueOf(nowTime);
-        String upTime = getTime(nowTime);
+        long upTime = getTime(nowTime);
+        String upTimeString = String.valueOf(upTime);
         String userUid = user.getUid();
         ArrayList<String> imageUrlList = new ArrayList<>();
 
@@ -140,11 +142,11 @@ public class WriteContentsActivity extends AppCompatActivity {
                                                     idx++;
                                                     if (idx == imageList.size()) {
 
-                                                        PostInfo postInfo = new PostInfo((String) clubDoc.get("name"), (String) clubDoc.get("icon"),
+                                                        PostInfo postInfo = new PostInfo((String) clubDoc.get("name"), (String) clubDoc.get("iconUrl"),
                                                                 (String) clubDoc.get("major"), (String) clubDoc.get("minor"),
                                                                 upTime, hashTag.getText().toString(), contents.getText().toString(), imageUrlList
-                                                        , recruit.isChecked());
-                                                        clubRef.collection("posts").document(nowTimeString).set(postInfo)
+                                                        , recruit.isChecked(), user.getUid());
+                                                        clubRef.collection("posts").document(upTimeString).set(postInfo)
                                                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                     @Override
                                                                     public void onComplete(@NonNull Task<Void> task) {
@@ -168,10 +170,10 @@ public class WriteContentsActivity extends AppCompatActivity {
                 });
     }
 
-    private String getTime(long nowTime){
+    private long getTime(long nowTime){
         Date date = new Date(nowTime);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMddHHmmss");
-        String getTime = dateFormat.format(date);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMddHHmmssSSS");
+        long getTime = Long.valueOf(dateFormat.format(date));
         return getTime;
     }
 }

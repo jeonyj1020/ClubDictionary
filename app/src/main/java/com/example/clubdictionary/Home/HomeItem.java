@@ -9,21 +9,23 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeItem {
 
-    private String clubName, major, minor, upTime, icon, hashTag, contents;
-    ArrayList<String> images = new ArrayList<>(); // -> url로 가져옴
+    private String clubName, minor, iconUrl, hashTag, contents;
+    private long upTime;
+    private boolean recruit;
+    ArrayList<String> imageUrlList = new ArrayList<>(); // -> url로 가져옴
 
-    public HomeItem() {
-    }
+    public HomeItem() {}
 
-    public HomeItem(String clubName, String major, String minor, String upTime, String icon, String hashTag, String contents, ArrayList<String> images) {
+    public HomeItem(String clubName, String minor, long upTime, String iconUrl, String hashTag,
+                    String contents, ArrayList<String> imageUrlList, boolean recruit) {
         this.clubName = clubName;
-        this.major = major;
         this.minor = minor;
         this.upTime = upTime;
-        this.icon = icon;
+        this.iconUrl = iconUrl;
         this.hashTag = hashTag;
         this.contents = contents;
-        this.images = images;
+        this.imageUrlList = imageUrlList;
+        this.recruit = recruit;
     }
 
     public String getClubName() {
@@ -34,14 +36,6 @@ public class HomeItem {
         this.clubName = clubName;
     }
 
-    public String getMajor() {
-        return major;
-    }
-
-    public void setMajor(String major) {
-        this.major = major;
-    }
-
     public String getMinor() {
         return minor;
     }
@@ -50,20 +44,20 @@ public class HomeItem {
         this.minor = minor;
     }
 
-    public String getUpTime() {
+    public long getUpTime() {
         return upTime;
     }
 
-    public void setUpTime(String upTime) {
+    public void setUpTime(long upTime) {
         this.upTime = upTime;
     }
 
-    public String getIcon() {
-        return icon;
+    public String getIconUrl() {
+        return iconUrl;
     }
 
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setIconUrl(String icon) {
+        this.iconUrl = iconUrl;
     }
 
     public String getHashTag() {
@@ -82,11 +76,19 @@ public class HomeItem {
         this.contents = contents;
     }
 
-    public ArrayList<String> getImages() {
-        return images;
+    public ArrayList<String> getImageUrlList() {
+        return imageUrlList;
     }
 
-    public void setImages(ArrayList<String> images) {
-        this.images = images;
+    public void setImageUrlList(ArrayList<String> imagesUrl) {
+        this.imageUrlList = imageUrlList;
+    }
+
+    public boolean isRecruit() {
+        return recruit;
+    }
+
+    public void setRecruit(boolean recruit) {
+        this.recruit = recruit;
     }
 }

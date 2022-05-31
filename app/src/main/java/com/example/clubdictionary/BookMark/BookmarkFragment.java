@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -45,8 +46,10 @@ public class BookmarkFragment extends Fragment {
     BookmarkRecyclerViewAdapter bookmarkRecyclerViewAdapter;
     private FirebaseUser user;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    Map<String, List<String>> bookMark = new HashMap<>();
     DocumentSnapshot userDoc;
+    DocumentReference userRef;
+    Map<String, List<String>> bookMark = new HashMap<>();
+
     ArrayList<BookmarkItem> bookmarkItemList = new ArrayList<>();
     int tenCnt = 0;
 
@@ -59,8 +62,6 @@ public class BookmarkFragment extends Fragment {
 
         mContext = container.getContext();
 
-
-
         bookMark.clear();
         //bookmarkItemList.clear();
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -70,6 +71,7 @@ public class BookmarkFragment extends Fragment {
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if(task.isSuccessful()){
                             userDoc = task.getResult();
+                            userRef = userDoc.getReference();
                             if(!userDoc.exists()){
                                 db.collection("clubs").document(user.getUid()).get()
                                         .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -78,6 +80,7 @@ public class BookmarkFragment extends Fragment {
                                                 if(task.isSuccessful()){
                                                     Log.d("user", "동아리입니다");
                                                     userDoc = task.getResult();
+                                                    userRef = userDoc.getReference();
                                                     getBookMarkClubList();
                                                 }
                                             }
@@ -127,7 +130,7 @@ public class BookmarkFragment extends Fragment {
                                         bookmarkItemList.add(new BookmarkItem(
                                                 (String) document.get("icon"), (String) document.get("name"),
                                                 (String) document.get("major"), (String) document.get("minor"),
-                                                alarmChecked));
+                                                alarmChecked, document.getReference()));
                                     }
                                 }
                             }
@@ -147,10 +150,12 @@ public class BookmarkFragment extends Fragment {
                                                             bookmarkItemList.add(new BookmarkItem(
                                                                     (String) document.get("icon"), (String) document.get("name"),
                                                                     (String) document.get("major"), (String) document.get("minor"),
-                                                                    alarmChecked));
+                                                                    alarmChecked, document.getReference()));
+
                                                             if(bookmarkItemList.size() == clubList.size()){
                                                                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                                                                bookmarkRecyclerViewAdapter = new BookmarkRecyclerViewAdapter(bookmarkItemList, mContext);
+                                                                bookmarkRecyclerViewAdapter = new BookmarkRecyclerViewAdapter
+                                                                        (bookmarkItemList, userRef, mContext);
                                                                 recyclerView.setAdapter(bookmarkRecyclerViewAdapter);
                                                             }
                                                         }
@@ -175,12 +180,12 @@ public class BookmarkFragment extends Fragment {
                                     bookmarkItemList.add(new BookmarkItem(
                                             (String) document.get("iconUrl"), (String) document.get("name"),
                                             (String) document.get("major"), (String) document.get("minor"),
-                                            true));
+                                            alarmChecked, document.getReference()));
                                     Log.e("alarmChecked", ""+alarmChecked);
 
                                     if(bookmarkItemList.size() == clubList.size()){
                                         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                                        bookmarkRecyclerViewAdapter = new BookmarkRecyclerViewAdapter(bookmarkItemList, mContext);
+                                        bookmarkRecyclerViewAdapter = new BookmarkRecyclerViewAdapter(bookmarkItemList, userRef, mContext);
                                         recyclerView.setAdapter(bookmarkRecyclerViewAdapter);
                                     }
                                 }

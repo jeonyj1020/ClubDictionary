@@ -1,15 +1,19 @@
 package com.example.clubdictionary.BookMark;
 
+import com.google.firebase.firestore.DocumentReference;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class BookmarkItem {
 
     private String iconUrl, clubName, major, minor;
     private boolean alarmChecked;
+    private DocumentReference clubRef;
 
     public BookmarkItem(){}
 
-    public BookmarkItem(String iconUrl, String clubName, String major, String minor, boolean alarmChecked){
+    public BookmarkItem(String iconUrl, String clubName, String major, String minor, boolean alarmChecked,
+                        DocumentReference clubRef){
         this.iconUrl = iconUrl;
         this.clubName = clubName;
         this.major = major;
@@ -57,5 +61,13 @@ public class BookmarkItem {
 
     public void setAlarmChecked(boolean alarmChecked) {
         this.alarmChecked = alarmChecked;
+    }
+
+    public DocumentReference getClubRef() {
+        return clubRef;
+    }
+
+    public void setClubRef(DocumentReference clubRef) {
+        this.clubRef = clubRef;
     }
 }

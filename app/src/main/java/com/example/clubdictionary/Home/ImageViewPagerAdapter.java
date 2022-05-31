@@ -9,17 +9,18 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.clubdictionary.R;
 
 import java.util.ArrayList;
 
 public class ImageViewPagerAdapter extends RecyclerView.Adapter<ImageViewPagerAdapter.ViewHolder> {
 
-    ArrayList<String> images = new ArrayList<>();
+    ArrayList<String> imageUrlList = new ArrayList<>();
     Context context;
 
-    public ImageViewPagerAdapter(ArrayList<String> images, Context context) {
-        this.images = images;
+    public ImageViewPagerAdapter(ArrayList<String> imageUrlList, Context context) {
+        this.imageUrlList = imageUrlList;
         this.context = context;
     }
 
@@ -33,12 +34,12 @@ public class ImageViewPagerAdapter extends RecyclerView.Adapter<ImageViewPagerAd
 
     @Override
     public void onBindViewHolder(@NonNull ImageViewPagerAdapter.ViewHolder holder, int position) {
-        holder.bindSliderImage(images.get(position));
+        holder.bindSliderImage(imageUrlList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return images.size();
+        return imageUrlList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -52,7 +53,8 @@ public class ImageViewPagerAdapter extends RecyclerView.Adapter<ImageViewPagerAd
 
         public void bindSliderImage(String imageURL) {
             // 여기서 Url 통해서 가져온 아이템 imageView 에 load 하면 됨
-
+            Glide.with(context).load(imageURL).into(imageView);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
     }
 }
