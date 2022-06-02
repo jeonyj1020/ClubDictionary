@@ -77,7 +77,7 @@ public class QuestionFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), QuestionWriteActivity.class);
-                //intent.putString();
+                intent.putExtra("name", name);
                 mContext.startActivity(intent);
             }
         });

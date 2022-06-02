@@ -176,7 +176,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
     private void signUp(String check){
-        String email = ((EditText) findViewById(R.id.emailEditText)).getText().toString();
+        String email = ((EditText) findViewById(R.id.emailEditText)).getText().toString().trim();
         email+="@knu.ac.kr";
         String password = ((EditText) findViewById(R.id.passwordEditText)).getText().toString();
         String authNum = ((EditText) findViewById(R.id.authNumEditText)).getText().toString();
