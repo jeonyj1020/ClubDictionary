@@ -15,6 +15,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,7 +46,7 @@ public class QuestionWriteActivity extends AppCompatActivity {
 
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String name;
-    String questionStr, answerStr, answerId, questionId, itemId;
+    String questionStr, answerStr, answerId, questionId, itemId, itemTime;
     String clubUid;
 
 
@@ -81,19 +82,38 @@ public class QuestionWriteActivity extends AppCompatActivity {
                     }
                 }
             }
-        });
-
-        //질문자 전화번호 저장하기
-        db.collection("users").document(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        }).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    MemberInfo memberInfo = document.toObject(MemberInfo.class);
-                    questionId = memberInfo.getPhoneNum();
-                }
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                //질문자 전화번호 저장하기
+                db.collection("users").document(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            MemberInfo memberInfo = document.toObject(MemberInfo.class);
+                            if (memberInfo != null) {
+                                questionId = memberInfo.getPhoneNum();
+                            }
+                            else{
+                                db.collection("clubs").document(clubUid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                        if(task.isSuccessful()){
+                                            ClubInfo clubInfo = task.getResult().toObject(ClubInfo.class);
+                                            if (memberInfo != null) {
+                                                questionId = clubInfo.getPhoneNum();
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                        }
+                    }
+                });
             }
         });
+
         TextView title;
         Button applyButton;
         EditText question;
@@ -113,7 +133,8 @@ public class QuestionWriteActivity extends AppCompatActivity {
                     questionStr = question.getText().toString();
                     //자기가 질문한 글 거기에 추가가 되어야하고 db에도 질문글 단위로 추가가 되어야하고 알람은 동아리에게 가야한다.
                     //db 등록
-                    QuestionItem questionItem = new QuestionItem(questionStr, "", user.getUid(), clubUid,"");
+                    itemTime = String.valueOf(System.currentTimeMillis());
+                    QuestionItem questionItem = new QuestionItem(questionStr, "", user.getUid(), clubUid,"",itemTime);
                     Log.e("0602", " "+questionStr + " "+questionId + " "+answerId +" "+ clubUid);
                     db.collection("clubs").document(clubUid).collection("QnA")
                             .add(questionItem).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -157,7 +178,5 @@ public class QuestionWriteActivity extends AppCompatActivity {
             e.printStackTrace();
             toast("알림을 보내지 못했습니다.");
         }
-
-
     }
 }

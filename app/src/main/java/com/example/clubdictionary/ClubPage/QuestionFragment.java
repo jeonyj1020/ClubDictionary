@@ -27,7 +27,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -80,6 +83,7 @@ public class QuestionFragment extends Fragment {
         /*ArrayList<QuestionItem> st = new ArrayList<>();*/
         QuestionRecyclerViewAdapter adapter = new QuestionRecyclerViewAdapter(mContext, arrayList);
         //db 연동해서 붙이기
+
         db.collection("clubs").whereEqualTo("name", name).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -93,18 +97,17 @@ public class QuestionFragment extends Fragment {
         }).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                db.collection("clubs").document(clubUid).collection("QnA").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            for(QueryDocumentSnapshot document: task.getResult()){
-                                QuestionItem questionItem = document.toObject(QuestionItem.class);
-                                arrayList.add(questionItem);
-                            }
-                            adapter.notifyDataSetChanged();
-                        }
-                    }
-                });
+               db.collection("clubs").document(clubUid).collection("QnA").orderBy("itemTime", Query.Direction.DESCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
+                   @Override
+                   public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                       arrayList.clear();
+                       for(QueryDocumentSnapshot document : value){
+                           QuestionItem questionItem = document.toObject(QuestionItem.class);
+                           arrayList.add(questionItem);
+                       }
+                       adapter.notifyDataSetChanged();
+                   }
+               });
             }
         });
 

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.clubdictionary">
+
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
-
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
     <application
         android:allowBackup="true"
@@ -19,10 +19,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ClubDictionary.NoActionBar">
         <activity
+            android:name=".ClubPage.QuestionUpdateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ClubPage.AnswerWriteActivity"
+            android:exported="false" />
+        <activity
             android:name=".ClubPage.QuestionWriteActivity"
-            android:label="SMS Sender"
-            android:exported="false" >
-        </activity>
+            android:exported="false"
+            android:label="SMS Sender" />
         <activity
             android:name=".Group.GroupPostActivity"
             android:exported="false" />
@@ -63,16 +68,13 @@
             android:name=".WritePost.WriteContentsActivity"
             android:exported="true" />
 
-        <receiver android:name=".SmsReceiver"
+        <receiver
+            android:name=".SmsReceiver"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
-
-
     </application>
 
-
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
 </manifest>

@@ -1,6 +1,8 @@
 package com.example.clubdictionary.ClubPage;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.clubdictionary.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
 
 import org.w3c.dom.Text;
 
@@ -27,8 +31,8 @@ public class QuestionRecyclerViewAdapter extends RecyclerView.Adapter<QuestionRe
     ArrayList<QuestionItem> questionList = new ArrayList<>();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String nowUid = user.getUid();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    //ArrayList<sampleText> questionList = new ArrayList<>();
     Context mContext;
     // 2. sampleText to QuestionItem
     public QuestionRecyclerViewAdapter(Context context, ArrayList<QuestionItem> questionList) {
@@ -53,6 +57,7 @@ public class QuestionRecyclerViewAdapter extends RecyclerView.Adapter<QuestionRe
         holder.questionId = questionItem.getQuestionId();
         holder.itemId = questionItem.getItemId();
         //isClub 이부분을 조정해서 다루면 될듯
+        Log.e("오늘은 6월 4일", holder.answerId + " "+ holder.questionId + " "+ holder.itemId);
         /*
 
         int isWho 해서
@@ -67,16 +72,13 @@ public class QuestionRecyclerViewAdapter extends RecyclerView.Adapter<QuestionRe
         3. 아무것도 아닌 경우 -> setVisibility GONE으로 하면 됨
 
          */
-        if(user.getUid().equals(holder.questionId)){
+        if(nowUid.equals(holder.questionId)){
             holder.isClub = 1;
         }
         else if(user.getUid().equals(holder.answerId)){
             holder.isClub = 2;
         }
         //이건 4,5번째꺼에 메뉴 띄워 보려고 만든거
-        if (position == 3) holder.isClub = 1;
-        else if (position == 4) holder.isClub = 2;
-        else holder.isClub = 0;
 
 
 
@@ -90,7 +92,7 @@ public class QuestionRecyclerViewAdapter extends RecyclerView.Adapter<QuestionRe
                     MenuInflater menuInflater = popup.getMenuInflater();
 
 
-                    if (holder.isClub == 1)
+                    if (holder.isClub == 2)
                         menuInflater.inflate(R.menu.clubpage_question_menu_forclub, popup.getMenu());
                     else
                         menuInflater.inflate(R.menu.clubpage_question_menu_forwriter, popup.getMenu());
@@ -100,17 +102,33 @@ public class QuestionRecyclerViewAdapter extends RecyclerView.Adapter<QuestionRe
                     popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem menuItem) {
+                            Intent intent;
+
+                            Log.e("메뉴창 클릭 후", holder.questionId+ " " + holder.answerId+" "+holder.itemId );
+
                             switch (menuItem.getItemId()) {
+
                                 case R.id.answerIt:
-                                    //질문자에게 문자 보내기
+                                    intent = new Intent(mContext,AnswerWriteActivity.class);
+                                    intent.putExtra("questionId", holder.questionId);
+                                    intent.putExtra("answerId", holder.answerId);
+                                    intent.putExtra("itemId", holder.itemId);
                                     Toast.makeText(mContext, "답변하기 클릭", Toast.LENGTH_SHORT).show();
+                                    mContext.startActivity(intent);
                                     return true;
                                 case R.id.deleteIt:
-                                    //문서 삭제하기 문자 보내기(?)
+
+                                    db.collection("clubs").document(holder.answerId).collection("QnA").document(holder.itemId).delete();
                                     Toast.makeText(mContext, "삭제하기 클릭", Toast.LENGTH_SHORT).show();
                                     return true;
                                 case R.id.reWriteIt:
                                     //문서에서 답변 update하기 문자 보내기
+                                    //questionId answerId itemId
+                                    intent = new Intent(mContext, QuestionUpdateActivity.class);
+                                    intent.putExtra("questionId", holder.questionId);
+                                    intent.putExtra("answerId", holder.answerId);
+                                    intent.putExtra("itemId", holder.itemId);
+                                    mContext.startActivity(intent);
                                     Toast.makeText(mContext, "수정하기 클릭", Toast.LENGTH_SHORT).show();
                                     return true;
                                 default:

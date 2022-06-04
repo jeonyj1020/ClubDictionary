@@ -287,7 +287,7 @@ public class HomeFragment extends Fragment {
         if (onlyFavoriteChecked) {
             if(filtering.size() > 0) {
                 if (intersectionClubs.size() == 0) {
-                    Toast.makeText(getActivity(), "필터링과 찜한 동아리 둘 다에 해당하는 동아리가 한 개도 없습니다!", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getContext(), "필터링과 찜한 동아리 둘 다에 해당하는 동아리가 한 개도 없습니다!", Toast.LENGTH_SHORT).show();
                 } else {
                     int ten = intersectionClubs.size() / 10;
                     if (intersectionClubs.size() % 10 == 0) ten--;
