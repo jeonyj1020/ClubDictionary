@@ -56,5 +56,19 @@
         app:readMoreColor="@color/black"
         app:readMoreMaxLine="2"
         app:readMoreText="...더보기" />
-
+    <TextView
+        android:id="@+id/questionId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+    <TextView
+        android:id="@+id/answerId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+    <TextView
+        android:id="@+id/itemId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
 </LinearLayout>

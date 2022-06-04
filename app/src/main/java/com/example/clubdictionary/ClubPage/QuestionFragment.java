@@ -17,18 +17,31 @@ import android.widget.PopupMenu;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.clubdictionary.ClubInfo;
+import com.example.clubdictionary.GroupPostInfo;
 import com.example.clubdictionary.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
 public class QuestionFragment extends Fragment {
-
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     Context mContext;
     RecyclerView recyclerView;
     String name;
     Button writeQuestion;
+    String clubUid;
+    private ArrayList<QuestionItem> arrayList = new ArrayList<>();
+    public QuestionFragment(){}
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -64,15 +77,42 @@ public class QuestionFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.quetion_list);
         writeQuestion  = view.findViewById(R.id.writeQuestion);
-        ArrayList<sampleText> st = new ArrayList<>();
+        /*ArrayList<QuestionItem> st = new ArrayList<>();*/
+        QuestionRecyclerViewAdapter adapter = new QuestionRecyclerViewAdapter(mContext, arrayList);
+        //db 연동해서 붙이기
+        db.collection("clubs").whereEqualTo("name", name).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for(QueryDocumentSnapshot document: task.getResult()){
+                        ClubInfo clubInfo = document.toObject(ClubInfo.class);
+                        clubUid = clubInfo.getUid();
+                    }
+                }
+            }
+        }).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                db.collection("clubs").document(clubUid).collection("QnA").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            for(QueryDocumentSnapshot document: task.getResult()){
+                                QuestionItem questionItem = document.toObject(QuestionItem.class);
+                                arrayList.add(questionItem);
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+                    }
+                });
+            }
+        });
 
-        st.add(new sampleText("마지막 질문", "답변은 얼마나 길어져도 괜찮을까 여기서 일정 길이 이상 들어가면 더보기가 나와야되는데 제대로 들어갈까답변은 얼마나 길어져도 괜찮을까 여기서 일정 길이 이상 들어가면 더보기가 나와야되는데 제대로 들어갈까?"));
 
-        for(int i = 0; i < 10; i++){
-            st.add(new sampleText(i + " 번째 질문", i + " 번째 답변"));
-        }
-        QuestionRecyclerViewAdapter adapter = new QuestionRecyclerViewAdapter(mContext, st);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerView.setAdapter(adapter);
+
         writeQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
