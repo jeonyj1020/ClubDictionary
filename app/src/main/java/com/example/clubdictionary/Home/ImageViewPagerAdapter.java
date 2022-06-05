@@ -1,6 +1,7 @@
 package com.example.clubdictionary.Home;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +55,7 @@ public class ImageViewPagerAdapter extends RecyclerView.Adapter<ImageViewPagerAd
         public void bindSliderImage(String imageURL) {
             // 여기서 Url 통해서 가져온 아이템 imageView 에 load 하면 됨
             Glide.with(context).load(imageURL).into(imageView);
+            Log.e("###", "" + imageURL);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
     }

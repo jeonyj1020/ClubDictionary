@@ -15,14 +15,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
-import com.example.clubdictionary.BookMark.BookmarkItem;
 import com.example.clubdictionary.ClubPage.ClubPageActivity;
 import com.example.clubdictionary.R;
 import com.example.clubdictionary.WritePost.PostInfo;
+import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
 
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import me.relex.circleindicator.CircleIndicator;
+import me.relex.circleindicator.CircleIndicator3;
 
 public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerViewAdapter.ViewHolder>{
 
@@ -55,6 +57,12 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         holder.hashTag.setText(postInfo.getHashTag());
         holder.bindProfileImage(postInfo.getIconUrl());
         holder.clubUid = postInfo.getClubUid();
+
+        holder.viewPager2.setAdapter(new ImageViewPagerAdapter(holder.imageUrlList, context));
+        holder.viewPager2.setOffscreenPageLimit(1);
+
+        holder.mIndicator.setViewPager(holder.viewPager2);
+        holder.mIndicator.createIndicators(holder.imageUrlList.size(), 0);
 
         holder.clubName.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,7 +105,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         private CircleImageView icon;
         private ImageView scrap;
         private boolean isScrap;
-        private LinearLayout layoutIndicator;
+        private CircleIndicator3 mIndicator;
         private String clubUid;
 
         public ViewHolder(@NonNull View itemView) {
@@ -111,24 +119,12 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             upTime = itemView.findViewById(R.id.upTime);
             hashTag = itemView.findViewById(R.id.hashTag);
             contents = itemView.findViewById(R.id.contents);
-            viewPager2 = itemView.findViewById(R.id.viewpager2);
-            layoutIndicator = itemView.findViewById(R.id.layout_indicator);
+            viewPager2 = itemView.findViewById(R.id.home_viewpager2);
+            mIndicator = itemView.findViewById(R.id.indicator);
 
-            viewPager2.setOffscreenPageLimit(1);
-            viewPager2.setAdapter(new ImageViewPagerAdapter(imageUrlList, context));
-
-            viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-                @Override
-                public void onPageSelected(int position) {
-                    super.onPageSelected(position);
-                    setCurrentIndicator(position);
-                }
-            });
-
-            setupIndicators(imageUrlList.size());
         }
 
-        private void setupIndicators(int count) {
+        /*private void setupIndicators(int count) {
             ImageView[] indicators = new ImageView[count];
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -161,7 +157,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
                     ));
                 }
             }
-        }
+        }*/
 
         public void bindProfileImage(String iconUrl){
             Glide.with(context).load(iconUrl).into(icon);

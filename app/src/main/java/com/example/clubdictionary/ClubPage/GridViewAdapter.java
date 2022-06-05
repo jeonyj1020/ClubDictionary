@@ -7,7 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
@@ -47,9 +46,9 @@ public class GridViewAdapter extends BaseAdapter {
 
         if(view == null){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.square_image, viewGroup, false);
+            view = inflater.inflate(R.layout.square_image_with_menu, viewGroup, false);
 
-            ImageView img = view.findViewById(R.id.square_image_icon);
+            ImageView img = view.findViewById(R.id.square_image_icon_with_menu);
             //ImageButton ib = view.findViewById(R.id.item_dropdown_menu);
 
             ImageView threeDotBtn = view.findViewById(R.id.item_dropdown_menu);

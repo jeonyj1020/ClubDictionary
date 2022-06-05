@@ -35,7 +35,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -75,7 +74,7 @@ public class ClubPageActivity extends AppCompatActivity {
         collapsingToolbarLayout.setTitle("동아리 페이지");
 
         TabLayout tabLayout = findViewById(R.id.tabLayout);
-        ViewPager2 viewPager2 = findViewById(R.id.viewpager2);
+        ViewPager2 viewPager2 = findViewById(R.id.home_viewpager2);
 
 
 
