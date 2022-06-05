@@ -94,7 +94,10 @@
                 android:paddingStart="12dp"
                 android:paddingTop="17dp"
                 android:paddingBottom="17dp"
-                android:textSize="14sp" />
+                android:autoSizeMaxTextSize="100sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeStepGranularity="1dp"
+                android:autoSizeTextType="uniform" />
 
             <View
                 android:layout_width="0dp"
@@ -132,7 +135,10 @@
                 android:paddingStart="12dp"
                 android:paddingTop="17dp"
                 android:paddingBottom="17dp"
-                android:textSize="14sp" />
+                android:autoSizeMaxTextSize="100sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeStepGranularity="1dp"
+                android:autoSizeTextType="uniform" />
 
             <View
                 android:layout_width="0dp"
@@ -157,22 +163,24 @@
                 android:layout_height="match_parent"
                 android:layout_weight="48" />
 
-
             <EditText
                 android:id="@+id/content"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="690"
-                android:fontFamily="@font/notosanskr_medium"
+                android:autoSizeMaxTextSize="100sp"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeStepGranularity="1dp"
+                android:autoSizeTextType="uniform"
                 android:background="@drawable/rectangular_background"
-                android:hint="모집할 소모임에 대해 간략하게 소개해주세요 ! "
+                android:fontFamily="@font/notosanskr_medium"
+                android:gravity="top"
+                android:hint="소모임에 대해 간략하게 소개해주세요 ! "
                 android:includeFontPadding="false"
                 android:lines="20"
-                android:gravity="top"
                 android:paddingStart="12dp"
                 android:paddingTop="17dp"
-                android:paddingBottom="17dp"
-                android:textSize="14sp" />
+                android:paddingBottom="17dp" />
 
             <View
                 android:layout_width="0dp"
@@ -203,12 +211,12 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="690"
-                android:background="@drawable/rectangular_background_button"
+                android:background="@color/maintheme"
                 android:fontFamily="@font/notosanskr_medium"
                 android:includeFontPadding="false"
                 android:textSize="18sp"
                 android:text="확인"
-                android:textColor="@color/maintheme" />
+                android:textColor="@color/white" />
 
             <View
                 android:layout_width="0dp"

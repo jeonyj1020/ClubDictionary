@@ -29,6 +29,7 @@
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/drawable/round_background_border_black.xml" value="0.1535" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/drawable/round_background_border_main_theme.xml" value="0.1535" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout-v26/activity_login.xml" value="0.24947916666666667" />
+        <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_answer_write.xml" value="0.25" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_club_page.xml" value="0.264" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_filter.xml" value="0.2" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_find.xml" value="0.21693840579710144" />
@@ -42,6 +43,7 @@
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_memberinit.xml" value="0.21693840579710144" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_my_page.xml" value="0.21693840579710144" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_password_reset.xml" value="0.264" />
+        <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_question_update.xml" value="0.22175925925925927" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_question_write.xml" value="0.25" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_sign_up.xml" value="0.2" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_write_contents.xml" value="0.22175925925925927" />
@@ -67,6 +69,7 @@
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_home_item_viewpage.xml" value="0.22175925925925927" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_mypage.xml" value="0.2" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_religion.xml" value="0.22175925925925927" />
+        <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_society.xml" value="0.22175925925925927" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_sports.xml" value="0.22175925925925927" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/fragment_study.xml" value="0.1" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/group_post_item.xml" value="0.22175925925925927" />
@@ -82,6 +85,7 @@
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/square_image.xml" value="0.264" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/menu/activity_main_navigationbar_menu.xml" value="0.2187214611872146" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/menu/club_page_toolbar.xml" value="0.22083333333333333" />
+        <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/menu/clubpage_post_menu_forclub.xml" value="0.22175925925925927" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/menu/clubpage_question_menu.xml" value="0.22175925925925927" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/menu/clubpage_question_menu_forclub.xml" value="0.22175925925925927" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/menu/clubpage_question_menu_forwriter.xml" value="0.22083333333333333" />

@@ -2,6 +2,7 @@ package com.example.clubdictionary.ClubPage;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.Manifest;
 import android.content.Intent;
@@ -33,6 +34,12 @@ public class QuestionUpdateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_update);
+
+        Toolbar toolbar = findViewById(R.id.qu_tool_bar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         updateQuestion = findViewById(R.id.updateQuestion);
         updateButton = findViewById(R.id.updateButton);

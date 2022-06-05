@@ -35,10 +35,6 @@
         android:orientation="vertical"
         android:weightSum="1455">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="20dp" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="350dp"
@@ -55,16 +51,16 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="690"
-                android:lines="20"
-                android:gravity="top"
-                android:fontFamily="@font/notosanskr_medium"
+                android:textSize="15dp"
                 android:background="@drawable/rectangular_background"
-                android:hint="동아리에 관한 질문을 자유롭게 해주세요 ! \n# 무례하거나 문제가 있는 질문글은 삭제될 수 있습니다."
+                android:fontFamily="@font/notosanskr_medium"
+                android:gravity="top"
+                android:hint="동아리에 관한 질문을 자유롭게 해주세요 !"
                 android:includeFontPadding="false"
+                android:lines="20"
                 android:paddingStart="12dp"
-                android:paddingTop="17dp"
-                android:paddingBottom="17dp"
-                android:textSize="14sp" />
+                android:paddingTop="15dp"
+                android:paddingBottom="17dp" />
 
             <View
                 android:layout_width="0dp"
@@ -93,12 +89,12 @@
                 android:layout_height="44dp"
                 android:layout_gravity="center"
                 android:layout_weight="690"
-                android:background="@drawable/rectangular_background_button"
+                android:background="@color/maintheme"
                 android:fontFamily="@font/notosanskr_medium"
                 android:includeFontPadding="false"
                 android:textSize="18sp"
                 android:text="확인"
-                android:textColor="@color/maintheme" />
+                android:textColor="@color/white" />
 
             <View
                 android:layout_width="0dp"

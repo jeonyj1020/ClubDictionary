@@ -3,6 +3,7 @@ package com.example.clubdictionary.ClubPage;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -51,7 +52,36 @@ public class GridViewAdapter extends BaseAdapter {
             ImageView img = view.findViewById(R.id.square_image_icon);
             //ImageButton ib = view.findViewById(R.id.item_dropdown_menu);
 
+            ImageView threeDotBtn = view.findViewById(R.id.item_dropdown_menu);
+
             img.setImageResource(postItem.getResId());
+
+            threeDotBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    PopupMenu popup = new PopupMenu(context, threeDotBtn);
+                    MenuInflater menuInflater = popup.getMenuInflater();
+                    menuInflater.inflate(R.menu.clubpage_post_menu_forclub, popup.getMenu());
+                    popup.show();
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem menuItem) {
+
+                            switch (menuItem.getItemId()) {
+                                case R.id.fixIt:
+                                    Toast.makeText(context, "수정하기 클릭", Toast.LENGTH_SHORT).show();
+                                    return true;
+                                case R.id.deleteIt:
+                                    Toast.makeText(context, "삭제하기 클릭", Toast.LENGTH_SHORT).show();
+                                    return true;
+                                default:
+                                    return false;
+                            }
+                        }
+                    });
+                }
+            });
+
 
 /*            ib.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -75,6 +105,8 @@ public class GridViewAdapter extends BaseAdapter {
                 Toast.makeText(context, i + "번째 post", Toast.LENGTH_SHORT).show();
             }
         });
+
+
 
         return view;
     }

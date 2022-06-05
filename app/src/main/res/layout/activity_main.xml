@@ -25,7 +25,7 @@
             android:layout_height="match_parent"
             android:layout_weight="415"
             android:gravity="center"
-            android:fontFamily="@font/dx_poet_guana"
+            android:fontFamily="@font/dx_poet_guana_bold"
             android:textColor="@color/maintheme"
             android:maxLines="1"
             android:autoSizeTextType="uniform"

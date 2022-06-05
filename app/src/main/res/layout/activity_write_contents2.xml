@@ -193,11 +193,11 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="690"
-                android:background="@drawable/rectangular_background_button"
+                android:background="@color/maintheme"
                 android:fontFamily="@font/notosanskr_medium"
                 android:includeFontPadding="false"
                 android:text="게시물 등록하기"
-                android:textColor="@color/maintheme"
+                android:textColor="@color/white"
                 android:textSize="18sp" />
 
             <View

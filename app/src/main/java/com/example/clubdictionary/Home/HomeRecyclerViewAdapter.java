@@ -77,6 +77,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         holder.scrap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //holder.scrap.setImageResource(R.drawable.icon_scrap_selected);
                 // 스크랩 버튼 이미지 바뀌어야 함
             }
         });
