@@ -19,8 +19,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.clubdictionary.FilterActivity;
-import com.example.clubdictionary.MainActivity;
 import com.example.clubdictionary.R;
 import com.example.clubdictionary.WritePost.PostInfo;
 import com.example.clubdictionary.WritePost.WriteContentsActivity;
@@ -29,21 +27,15 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.apphosting.datastore.testing.DatastoreTestTrace;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -74,7 +66,8 @@ public class HomeFragment extends Fragment {
     ArrayList<PostInfo> postList = new ArrayList<>();
     ArrayList<String> intersectionClubs = new ArrayList<>();
     ArrayList<String> exceptFiltering = new ArrayList<>();
-    int clubCnt = 0, cmp = 0;
+    ArrayList<String> scrapList = new ArrayList<>();
+    int clubCnt = 0, cmp = 0, postCnt = 0;
 
     public HomeFragment() {
     }
@@ -111,11 +104,11 @@ public class HomeFragment extends Fragment {
                         Log.e("###", "클럽입니다");
                         docRef = db.collection("clubs").document(user.getUid());
                         writePostButton.setVisibility(View.VISIBLE);
-                        getFiltering();
+                        getData();
                     } else {
                         Log.e("###", "유저입니다");
                         //writePostButton.setVisibility(View.VISIBLE);
-                        getFiltering();
+                        getData();
                     }
                 }
             }
@@ -218,7 +211,7 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    private void getFiltering() {
+    private void getData() {
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -228,7 +221,8 @@ public class HomeFragment extends Fragment {
                     filteringBinary = (String) documentSnapshot.get("filteringBinary");
                     checked = (ArrayList<Boolean>) documentSnapshot.get("checked");
                     bookMark = (Map<String, List<String>>) documentSnapshot.get("bookMark");
-                            /*Map<String, List<String>> bookMark = new HashMap<>();
+                    scrapList = (ArrayList<String>) documentSnapshot.get("scrap");
+                     /*Map<String, List<String>> bookMark = new HashMap<>();
                             bookMark = (Map<String, List<String>>) documentSnapshot.get("bookMark");
                             List<String> newBookMark = new ArrayList<>();
 
@@ -328,13 +322,18 @@ public class HomeFragment extends Fragment {
                             .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    QuerySnapshot queryDocumentSnapshots = task.getResult();
+                                    postCnt = 0;
+                                    for(DocumentSnapshot documentSnapshot : queryDocumentSnapshots){
+                                        postCnt++;
+                                    }
+
                                     for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                         postList.add(documentSnapshot.toObject(PostInfo.class));
                                     }
-                                    for (PostInfo postInfo : postList) {
-                                        Log.e("post", "" + postInfo.getName() + ", " + postInfo.getIconUrl()
-                                                + ", " + postInfo.getMajor() + ", " + postInfo.getMinor()
-                                                + ", " + postInfo.getUpTime());
+
+                                    if(postList.size() == postCnt){
+                                        sortPostList();
                                     }
                                 }
                             });
@@ -343,13 +342,17 @@ public class HomeFragment extends Fragment {
                             .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    QuerySnapshot queryDocumentSnapshots = task.getResult();
+                                    postCnt = 0;
+                                    for(DocumentSnapshot documentSnapshot : queryDocumentSnapshots){
+                                        postCnt++;
+                                    }
+
                                     for (DocumentSnapshot documentSnapshot : task.getResult()) {
                                         postList.add(documentSnapshot.toObject(PostInfo.class));
                                     }
-                                    for (PostInfo postInfo : postList) {
-                                        Log.e("post", "" + postInfo.getName() + ", " + postInfo.getIconUrl()
-                                                + ", " + postInfo.getMajor() + ", " + postInfo.getMinor()
-                                                + ", " + postInfo.getUpTime());
+                                    if(postList.size() == postCnt){
+                                        sortPostList();
                                     }
                                 }
                             });
@@ -606,7 +609,7 @@ public class HomeFragment extends Fragment {
                     + ", " + postInfo.getMajor() + ", " + postInfo.getMinor());
         }
         recyclerView = view.findViewById(R.id.fragmrnt_home_recyclerview);
-        homeRecyclerViewAdapter = new HomeRecyclerViewAdapter(postList, mContext);
+        homeRecyclerViewAdapter = new HomeRecyclerViewAdapter(postList, mContext, docRef, scrapList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(homeRecyclerViewAdapter);
     }

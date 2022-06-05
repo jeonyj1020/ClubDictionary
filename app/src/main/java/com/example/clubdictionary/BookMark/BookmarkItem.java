@@ -19,6 +19,7 @@ public class BookmarkItem {
         this.major = major;
         this.minor = minor;
         this.alarmChecked = alarmChecked;
+        this.clubRef = clubRef;
     }
 
     public String getIconUrl() {

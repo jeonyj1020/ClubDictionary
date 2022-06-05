@@ -6,11 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -18,22 +16,27 @@ import com.bumptech.glide.Glide;
 import com.example.clubdictionary.ClubPage.ClubPageActivity;
 import com.example.clubdictionary.R;
 import com.example.clubdictionary.WritePost.PostInfo;
-import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import me.relex.circleindicator.CircleIndicator;
 import me.relex.circleindicator.CircleIndicator3;
 
 public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerViewAdapter.ViewHolder>{
 
     private ArrayList<PostInfo> postList;
     Context context;
+    DocumentReference userRef;
+    ArrayList<String> scrapList;
 
-    public HomeRecyclerViewAdapter(ArrayList<PostInfo> postList, Context context) {
+    public HomeRecyclerViewAdapter(ArrayList<PostInfo> postList, Context context, DocumentReference userRef,
+                                   ArrayList<String> scrapList) {
         this.postList = postList;
         this.context = context;
+        this.userRef = userRef;
+        this.scrapList = scrapList;
     }
 
     @NonNull
@@ -48,6 +51,16 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
     @Override
     public void onBindViewHolder(@NonNull HomeRecyclerViewAdapter.ViewHolder holder, int position) {
         PostInfo postInfo = postList.get(position);
+
+        String upTime = String.valueOf(postInfo.getUpTime());
+        if(scrapList.contains(upTime)){
+            holder.isScrap = true;
+            holder.scrap.setImageResource(R.drawable.icon_scrap_selected);
+        }
+        else{
+            holder.isScrap = false;
+            holder.scrap.setImageResource(R.drawable.icon_scrap);
+        }
 
         holder.clubName.setText(postInfo.getName());
         holder.minor.setText("#"+postInfo.getMinor()+" ");
@@ -85,11 +98,18 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
         holder.scrap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //holder.scrap.setImageResource(R.drawable.icon_scrap_selected);
-                // 스크랩 버튼 이미지 바뀌어야 함
+                if(holder.isScrap){
+                    holder.isScrap = false;
+                    holder.scrap.setImageResource(R.drawable.icon_scrap);
+                    userRef.update("scrap", FieldValue.arrayRemove(upTime));
+                }
+                else{
+                    holder.isScrap = true;
+                    holder.scrap.setImageResource(R.drawable.icon_scrap_selected);
+                    userRef.update("scrap", FieldValue.arrayUnion(upTime));
+                }
             }
         });
-        //holder.linearLayout.setOnClickListener(new View.OnClickListener() {
     }
 
     @Override

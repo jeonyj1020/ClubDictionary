@@ -25,6 +25,18 @@
             android:name=".ClubPage.AnswerWriteActivity"
             android:exported="false" />
         <activity
+            android:name=".ShowScrapPost"
+            android:exported="false" />
+        <activity
+            android:name=".ScrapItem"
+            android:exported="false" />
+        <activity
+            android:name=".ScrapAdapter"
+            android:exported="false" />
+        <activity
+            android:name=".ScrapListActivity"
+            android:exported="false" />
+        <activity
             android:name=".ClubPage.QuestionWriteActivity"
             android:exported="false"
             android:label="SMS Sender" />
@@ -62,10 +74,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FilterActivity"
+            android:name=".Home.FilterActivity"
             android:exported="true" />
+        <activity android:name=".MyPage.ShowScrapPost"
+            android:exported="true"/>
         <activity
             android:name=".WritePost.WriteContentsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MyPage.ScrapListActivity"
             android:exported="true" />
 
         <receiver

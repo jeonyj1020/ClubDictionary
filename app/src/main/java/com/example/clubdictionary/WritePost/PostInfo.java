@@ -1,8 +1,11 @@
 package com.example.clubdictionary.WritePost;
 
+import android.os.Parcelable;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class PostInfo implements Comparable<PostInfo>{
+public class PostInfo implements Comparable<PostInfo>, Serializable {
     private String name;
     private String iconUrl;
     private String major;

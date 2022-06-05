@@ -128,7 +128,7 @@
         android:layout_weight="54" />
 
     <TextView
-        android:id="@+id/mypage_cerify_univ"
+        android:id="@+id/mypage_scrap"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:fontFamily="@font/notosanskr_regular"

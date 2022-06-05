@@ -1,6 +1,8 @@
 package com.example.clubdictionary;
 
 public class GroupPostInfo {
+
+
     private String title;
     private String content;
     private String kakaoLink;
