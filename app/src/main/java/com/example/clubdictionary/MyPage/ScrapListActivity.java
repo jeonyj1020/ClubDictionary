@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class ScrapListActivity extends AppCompatActivity {
     ArrayList<PostInfo> scrapPostList;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
