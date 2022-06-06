@@ -71,7 +71,9 @@ public class GroupBoardActivity extends AppCompatActivity {
         if(swipeRefreshLayout.isRefreshing())swipeRefreshLayout.setRefreshing(false);
 
         FirebaseFirestore db= FirebaseFirestore.getInstance();
-        db.collection("group").orderBy("postUid", Query.Direction.DESCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
+
+        db.collection("group").orderBy("postUid", Query.Direction.DESCENDING)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 arrayList.clear();

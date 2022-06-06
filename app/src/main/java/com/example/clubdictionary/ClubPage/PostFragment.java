@@ -11,20 +11,35 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.clubdictionary.R;
+import com.example.clubdictionary.WritePost.PostInfo;
 import com.example.clubdictionary.view.ExpandableHeightGridView;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
 public class PostFragment extends Fragment {
-
+    String name;
+    ArrayList<PostInfo> postList = new ArrayList<>();
+    boolean isManager;
+    DocumentReference clubRef;
+    int postCnt, cmp;
     private ExpandableHeightGridView gridview = null;
     private GridViewAdapter adapter = null;
 
-    public static PostFragment newInstance(int number) {
+    public static PostFragment newInstance(int number, String name) {
         PostFragment postFragment = new PostFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("number", number);
-
+        bundle.putString("name", name);
         postFragment.setArguments(bundle);
         return postFragment;
     }
@@ -35,45 +50,53 @@ public class PostFragment extends Fragment {
 
         if (getArguments() != null) {
             int num = getArguments().getInt("number");
+            name = getArguments().getString("name");
         }
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-
         View view = LayoutInflater.from(inflater.getContext()).inflate(R.layout.fragment_clubpage_post, container, false);
 
-        gridview = (ExpandableHeightGridView) view.findViewById(R.id.post_gridview);
-        gridview.setExpanded(true);
-        adapter = new GridViewAdapter();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        adapter.addItem(new PostItem(R.drawable.cat01));
-        adapter.addItem(new PostItem(R.drawable.cat02));
-        adapter.addItem(new PostItem(R.drawable.cat03));
-        adapter.addItem(new PostItem(R.drawable.cat04));
-        adapter.addItem(new PostItem(R.drawable.cat05));
-        adapter.addItem(new PostItem(R.drawable.cat06));
-        adapter.addItem(new PostItem(R.drawable.cat07));
-        adapter.addItem(new PostItem(R.drawable.cat08));
-        adapter.addItem(new PostItem(R.drawable.cat04));
-        adapter.addItem(new PostItem(R.drawable.cat05));
-        adapter.addItem(new PostItem(R.drawable.cat06));
-        adapter.addItem(new PostItem(R.drawable.cat07));
-        adapter.addItem(new PostItem(R.drawable.cat08));
-        adapter.addItem(new PostItem(R.drawable.cat04));
-        adapter.addItem(new PostItem(R.drawable.cat05));
-        adapter.addItem(new PostItem(R.drawable.cat06));
-        adapter.addItem(new PostItem(R.drawable.cat07));
-        adapter.addItem(new PostItem(R.drawable.cat08));
-        adapter.addItem(new PostItem(R.drawable.cat04));
-        adapter.addItem(new PostItem(R.drawable.cat05));
-        adapter.addItem(new PostItem(R.drawable.cat06));
-        adapter.addItem(new PostItem(R.drawable.cat07));
-        adapter.addItem(new PostItem(R.drawable.cat08));
-
-        gridview.setAdapter(adapter);
+        db.collection("clubs").whereEqualTo("name", name).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        for(QueryDocumentSnapshot now : task.getResult()){
+                            clubRef = now.getReference();
+                            String Uid = (String) now.get("Uid");
+                            if(Uid == user.getUid()) isManager = true;
+                            else isManager = false;
+                        }
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        clubRef.collection("posts").orderBy("upTime", Query.Direction.DESCENDING)
+                                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        QuerySnapshot querySnapshot = task.getResult();
+                                        cmp =0;
+                                        postCnt = querySnapshot.size();
+                                        for(DocumentSnapshot now : querySnapshot){
+                                            cmp++;
+                                            postList.add(now.toObject(PostInfo.class));
+                                            if(postCnt == cmp){
+                                                gridview = (ExpandableHeightGridView) view.findViewById(R.id.post_gridview);
+                                                gridview.setExpanded(true);
+                                                adapter = new GridViewAdapter(postList, isManager, getContext());
+                                                gridview.setAdapter(adapter);
+                                            }
+                                        }
+                                    }
+                                });
+                    }
+                });
 
         return view;
     }

@@ -1,6 +1,7 @@
 package com.example.clubdictionary.ClubPage;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,26 +12,36 @@ import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.example.clubdictionary.MyPage.ShowScrapPost;
 import com.example.clubdictionary.R;
+import com.example.clubdictionary.WritePost.PostInfo;
 
 import java.util.ArrayList;
 
 public class GridViewAdapter extends BaseAdapter {
+    Context context;
+    ArrayList<PostInfo> postList = new ArrayList<PostInfo>();
+    boolean isManager;
 
-    ArrayList<PostItem> items = new ArrayList<PostItem>();
+    public GridViewAdapter(ArrayList<PostInfo> postList, boolean isManager, Context context){
+        this.postList = postList;
+        this.isManager = isManager;
+        this.context = context;
+    }
 
     @Override
     public int getCount() {
-        return items.size();
+        return postList.size();
     }
 
-    public void addItem(PostItem item){
-        items.add(item);
+    public void addItem(PostInfo post){
+        postList.add(post);
     }
 
     @Override
     public Object getItem(int i) {
-        return items.get(i);
+        return postList.get(i);
     }
 
     @Override
@@ -40,58 +51,17 @@ public class GridViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-
         final Context context = viewGroup.getContext();
-        final PostItem postItem = items.get(i);
+        final PostInfo post = postList.get(i);
 
         if(view == null){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.square_image_with_menu, viewGroup, false);
+            view = inflater.inflate(R.layout.square_image, viewGroup, false);
 
-            ImageView img = view.findViewById(R.id.square_image_icon_with_menu);
-            //ImageButton ib = view.findViewById(R.id.item_dropdown_menu);
-
-            ImageView threeDotBtn = view.findViewById(R.id.item_dropdown_menu);
-
-            img.setImageResource(postItem.getResId());
-
-            threeDotBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    PopupMenu popup = new PopupMenu(context, threeDotBtn);
-                    MenuInflater menuInflater = popup.getMenuInflater();
-                    menuInflater.inflate(R.menu.clubpage_post_menu_forclub, popup.getMenu());
-                    popup.show();
-                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                        @Override
-                        public boolean onMenuItemClick(MenuItem menuItem) {
-
-                            switch (menuItem.getItemId()) {
-                                case R.id.fixIt:
-                                    Toast.makeText(context, "수정하기 클릭", Toast.LENGTH_SHORT).show();
-                                    return true;
-                                case R.id.deleteIt:
-                                    Toast.makeText(context, "삭제하기 클릭", Toast.LENGTH_SHORT).show();
-                                    return true;
-                                default:
-                                    return false;
-                            }
-                        }
-                    });
-                }
-            });
-
-
-/*            ib.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    PopupMenu popup = new PopupMenu(context, viewGroup);
-
-                    MenuInflater menuInflater = popup.getMenuInflater();
-                }
-            });*/
-
+            ImageView img = view.findViewById(R.id.square_image_icon);
+            String firstImageUrl = post.getImageUrlList().get(0);
+            Glide.with(context).load(firstImageUrl).into(img);
+            img.setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
         else{
             View change_view = new View(context);
@@ -101,11 +71,12 @@ public class GridViewAdapter extends BaseAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view2) {
-                Toast.makeText(context, i + "번째 post", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, ShowPostActivity.class);
+                intent.putExtra("post", post);
+                intent.putExtra("isManager", isManager);
+                context.startActivity(intent);
             }
         });
-
-
 
         return view;
     }

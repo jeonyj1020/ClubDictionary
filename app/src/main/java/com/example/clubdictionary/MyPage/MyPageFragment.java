@@ -47,10 +47,7 @@ public class MyPageFragment extends Fragment {
     private FirebaseAuth mAuth ;
     DocumentSnapshot document;
     String name = null;
-    DocumentReference userRef;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-    int scrapCnt, cmp;
-    ArrayList<PostInfo> scrapPostList = new ArrayList<>();
+    String type;
 
     public MyPageFragment() {
     }
@@ -86,10 +83,10 @@ public class MyPageFragment extends Fragment {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                 if (task.isSuccessful()) {
-                                    userRef = document.getReference();
                                     document = task.getResult();
                                     mypage_profile_name.setText(document.get("name").toString());
                                     Log.d("type", "클럽입니다");
+                                    type = "clubs";
                                 }
                             }
                         });
@@ -97,7 +94,7 @@ public class MyPageFragment extends Fragment {
                     else {
                         mypage_profile_name.setText(document.get("name").toString());
                         name = document.get("name").toString();
-                        userRef = document.getReference();
+                        type = "users";
                     }
                 }
             }
@@ -184,51 +181,12 @@ public class MyPageFragment extends Fragment {
         myScrapList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<String> scrapList= (ArrayList<String>) document.get("scrap");
-                ArrayList<Long> scrapListUpTime = new ArrayList<>();
-                for(String upTime : scrapList){
-                    scrapListUpTime.add(Long.parseLong(upTime));
-                }
-                int ten = scrapList.size() / 10;
-                if(scrapList.size() % 10 == 0) ten--;
-                scrapPostList.clear();
-                for (int i = 0; i <= ten; i++) {
-                    if (i != ten) {
-                        List<Long> scrap = scrapListUpTime.subList(i * 10, (i + 1) * 10);
-                        queryByUpTime(scrap, false);
-                    } else {
-                        List<Long> scrap = scrapListUpTime.subList(i * 10, scrapListUpTime.size());
-                        queryByUpTime(scrap, true);
-                    }
-                }
+                Intent intent = new Intent(getActivity(), ScrapListActivity.class);
+                intent.putExtra("type", type);
+                startActivity(intent);
             }
         });
+
         return view;
-    }
-
-    private void queryByUpTime(List<Long> scrap, boolean last){
-        db.collectionGroup("posts").whereIn("upTime", scrap).get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        QuerySnapshot queryDocumentSnapshots = task.getResult();
-                        scrapCnt = 0;
-                        cmp = 0;
-                        for(DocumentSnapshot documentSnapshot : queryDocumentSnapshots){
-                            scrapCnt++;
-                        }
-
-                        for(DocumentSnapshot documentSnapshot : queryDocumentSnapshots){
-                            scrapPostList.add(documentSnapshot.toObject(PostInfo.class));
-                            cmp++;
-                            if(last && cmp == scrapCnt) {
-                                Log.e("size", ""+scrapPostList.size());
-                                Intent intent = new Intent(getActivity(), ScrapListActivity.class);
-                                intent.putExtra("scrapPostList", scrapPostList);
-                                startActivity(intent);
-                            }
-                        }
-                    }
-                });
     }
 }

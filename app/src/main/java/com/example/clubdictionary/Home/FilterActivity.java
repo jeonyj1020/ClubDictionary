@@ -263,34 +263,40 @@ public class FilterActivity extends AppCompatActivity {
                                 if (!documentSnapshot.exists()) {
                                     Log.e("###", "클럽입니다");
                                     docRef = db.collection("clubs").document(user.getUid());
+                                    update(newFiltering);
                                 } else {
                                     Log.e("###", "유저입니다");
+                                    update(newFiltering);
                                 }
                             }
                         }
                     });
 
-                    docRef.update("filtering", newFiltering, "filteringBinary", newFilteringBinary)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                    Toast.makeText(FilterActivity.this, "펄터링을 수정했습니다",
-                                            Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent();
-                                    intent.putStringArrayListExtra("newFiltering", newFiltering);
-                                    intent.putExtra("newFilteringBinary", newFilteringBinary);
-                                    setResult(RESULT_OK, intent);
-                                    finish();
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(FilterActivity.this, "펄터링 수정에 실패했습니다!",
-                                            Toast.LENGTH_SHORT).show();
-                                }
-                            });
+
                     break;
             }
         }
     };
+
+    private void update(ArrayList<String> newFiltering){
+        docRef.update("filtering", newFiltering, "filteringBinary", newFilteringBinary)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(FilterActivity.this, "펄터링을 수정했습니다",
+                                Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent();
+                        intent.putStringArrayListExtra("newFiltering", newFiltering);
+                        intent.putExtra("newFilteringBinary", newFilteringBinary);
+                        setResult(RESULT_OK, intent);
+                        finish();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(FilterActivity.this, "펄터링 수정에 실패했습니다!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
 }

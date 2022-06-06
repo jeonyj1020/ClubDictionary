@@ -23,6 +23,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <Button
+            android:id="@+id/upload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginRight="10dp"
+            android:text="완료"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
@@ -205,7 +214,20 @@
         android:scaleType="centerInside"
         android:src="@drawable/icon_scrap" />
 
-    <TextView
+    <EditText
+        android:id="@+id/hashTag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:textColor="@color/maintheme"
+        android:autoSizeMaxTextSize="100dp"
+        android:autoSizeMinTextSize="10dp"
+        android:autoSizeStepGranularity="1dp"
+        android:autoSizeTextType="uniform"
+        android:fontFamily="@font/notosanskr_regular"
+        android:includeFontPadding="false"/>
+    <!--<TextView
         android:id="@+id/hashTag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -218,25 +240,20 @@
         android:autoSizeStepGranularity="1dp"
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/notosanskr_regular"
-        android:includeFontPadding="false" />
+        android:includeFontPadding="false" />-->
 
-    <kr.co.prnd.readmore.ReadMoreTextView
+    <EditText
         android:id="@+id/contents"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:text="여기에 내용 띠워 넣고 몇줄까지 보이게 할지 정하고\n더보기..."
         android:textColor="@color/black_191919"
         android:autoSizeMaxTextSize="100dp"
         android:autoSizeMinTextSize="10dp"
         android:autoSizeStepGranularity="1dp"
         android:autoSizeTextType="uniform"
         android:fontFamily="@font/notosanskr_regular"
-        android:includeFontPadding="false"
-        app:readMoreColor="@color/black"
-        app:readMoreMaxLine="2"
-        app:readMoreText="...더보기" />
-
+        android:includeFontPadding="false"/>
 
 </LinearLayout>

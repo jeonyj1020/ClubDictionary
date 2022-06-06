@@ -304,6 +304,7 @@ public class ClubPageActivity extends AppCompatActivity {
         // 동아리의 subscribers에서 userUid 없애기
         clubDocRef.update("subscribers." + user.getUid(), FieldValue.delete());
     }
+
     public String getName(){
         return name;
     }

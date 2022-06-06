@@ -19,25 +19,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ClubDictionary.NoActionBar">
         <activity
-            android:name=".IntroUpdateActivity"
-            android:exported="false" />
-        <activity
             android:name=".ClubPage.QuestionUpdateActivity"
             android:exported="false" />
         <activity
             android:name=".ClubPage.AnswerWriteActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ShowScrapPost"
-            android:exported="false" />
-        <activity
-            android:name=".ScrapItem"
-            android:exported="false" />
-        <activity
-            android:name=".ScrapAdapter"
-            android:exported="false" />
-        <activity
-            android:name=".ScrapListActivity"
             android:exported="false" />
         <activity
             android:name=".ClubPage.QuestionWriteActivity"
@@ -88,7 +73,12 @@
         <activity
             android:name=".MyPage.ScrapListActivity"
             android:exported="true" />
-
+        <activity
+            android:name=".ClubPage.ShowPostActivity"
+            android:exported="true" />
+        <activity android:name=".ClubPage.EditPostActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="true"/>
         <receiver
             android:name=".SmsReceiver"
             android:exported="true">

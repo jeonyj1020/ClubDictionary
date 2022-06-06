@@ -1,5 +1,6 @@
 package com.example.clubdictionary.Home;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;

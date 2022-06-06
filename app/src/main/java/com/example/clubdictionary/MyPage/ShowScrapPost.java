@@ -1,10 +1,12 @@
 package com.example.clubdictionary.MyPage;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,8 +21,14 @@ import com.example.clubdictionary.ClubPage.ClubPageActivity;
 import com.example.clubdictionary.Home.ImageViewPagerAdapter;
 import com.example.clubdictionary.R;
 import com.example.clubdictionary.WritePost.PostInfo;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -34,7 +42,10 @@ public class ShowScrapPost extends AppCompatActivity {
     ImageButton backButton, scrap;
     boolean isScrap;
     DocumentReference userRef;
-    ImageView menu;
+    String type;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    String upTimeString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +53,19 @@ public class ShowScrapPost extends AppCompatActivity {
         setContentView(R.layout.activity_show_scrap_post);
         PostInfo scrapPost;
         CircleImageView icon;
+        ArrayList<String> scrapList;
 
         scrapPost = (PostInfo) getIntent().getSerializableExtra("scrapPost");
+        scrapList = getIntent().getStringArrayListExtra("scrapList");
+        type = getIntent().getStringExtra("type");
+
+        db.collection(type).document(user.getUid()).get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        userRef = task.getResult().getReference();
+                    }
+                });
 
         icon = findViewById(R.id.icon);
         Glide.with(this).load(scrapPost.getIconUrl()).into(icon);
@@ -53,8 +75,9 @@ public class ShowScrapPost extends AppCompatActivity {
         clubName.setText(scrapPost.getName());
         clubName.setOnClickListener(onClickListener);
 
+        upTimeString = String.valueOf(scrapPost.getUpTime());
         upTime = findViewById(R.id.upTime);
-        upTime.setText(String.valueOf(scrapPost.getUpTime()));
+        upTime.setText(upTimeString);
 
         minor = findViewById(R.id.minor);
         minor.setText(scrapPost.getMinor());
@@ -81,8 +104,15 @@ public class ShowScrapPost extends AppCompatActivity {
         scrap = findViewById(R.id.scrap);
         scrap.setOnClickListener(onClickListener);
 
-        menu = findViewById(R.id.item_dropdown_menu);
-        menu.setOnClickListener(onClickListener);
+        String upTime = String.valueOf(scrapPost.getUpTime());
+        if(scrapList.contains(upTime)){
+            isScrap = true;
+            scrap.setImageResource(R.drawable.icon_scrap_selected);
+        }
+        else{
+            isScrap = false;
+            scrap.setImageResource(R.drawable.icon_scrap);
+        }
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -97,43 +127,30 @@ public class ShowScrapPost extends AppCompatActivity {
                     break;
 
                 case R.id.back_btn:
-                    ShowScrapPost.super.onBackPressed();
+                    onBackPressed();
                     break;
 
                 case R.id.scrap :
                     if(isScrap){
                         isScrap = false;
                         scrap.setImageResource(R.drawable.icon_scrap);
-                        userRef.update("scrap", FieldValue.arrayRemove(upTime));
+                        userRef.update("scrap", FieldValue.arrayRemove(upTimeString));
                     }
                     else{
                         isScrap = true;
                         scrap.setImageResource(R.drawable.icon_scrap_selected);
-                        userRef.update("scrap", FieldValue.arrayUnion(upTime));
+                        userRef.update("scrap", FieldValue.arrayUnion(upTimeString));
                     }
-
-                case R.id.item_dropdown_menu:
-                    PopupMenu popup = new PopupMenu(ShowScrapPost.this, menu);
-                    MenuInflater menuInflater = popup.getMenuInflater();
-                    menuInflater.inflate(R.menu.clubpage_post_menu_forclub, popup.getMenu());
-                    popup.show();
-                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                        @Override
-                        public boolean onMenuItemClick(MenuItem menuItem) {
-
-                            switch (menuItem.getItemId()) {
-                                case R.id.fixIt:
-                                    Toast.makeText(ShowScrapPost.this, "수정하기 클릭", Toast.LENGTH_SHORT).show();
-                                    return true;
-                                case R.id.deleteIt:
-                                    Toast.makeText(ShowScrapPost.this, "삭제하기 클릭", Toast.LENGTH_SHORT).show();
-                                    return true;
-                                default:
-                                    return false;
-                            }
-                        }
-                    });
+                    break;
             }
         }
     };
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Log.e("return", "ok");
+        setResult(1);
+        finish();
+    }
 }
