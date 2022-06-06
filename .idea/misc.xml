@@ -36,6 +36,7 @@
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_group_board.xml" value="0.1" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_group_post.xml" value="0.22175925925925927" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_group_write.xml" value="0.264" />
+        <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_intro_update.xml" value="0.22175925925925927" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_member_init.xml" value="0.176" />
@@ -45,6 +46,7 @@
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_password_reset.xml" value="0.264" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_question_update.xml" value="0.22175925925925927" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_question_write.xml" value="0.25" />
+        <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_scrap_adapter.xml" value="0.22175925925925927" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_show_scrap_post.xml" value="0.264" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_sign_up.xml" value="0.2" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/activity_write_contents.xml" value="0.22175925925925927" />

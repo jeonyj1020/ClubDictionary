@@ -19,6 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ClubDictionary.NoActionBar">
         <activity
+            android:name=".IntroUpdateActivity"
+            android:exported="false" />
+        <activity
             android:name=".ClubPage.QuestionUpdateActivity"
             android:exported="false" />
         <activity
@@ -76,8 +79,9 @@
         <activity
             android:name=".Home.FilterActivity"
             android:exported="true" />
-        <activity android:name=".MyPage.ShowScrapPost"
-            android:exported="true"/>
+        <activity
+            android:name=".MyPage.ShowScrapPost"
+            android:exported="true" />
         <activity
             android:name=".WritePost.WriteContentsActivity"
             android:exported="true" />

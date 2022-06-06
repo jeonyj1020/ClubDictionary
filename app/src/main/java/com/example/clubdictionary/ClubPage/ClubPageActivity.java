@@ -59,7 +59,7 @@ public class ClubPageActivity extends AppCompatActivity {
     CircleImageView icon;
     ImageButton apply_btn;
     String name;
-
+    ClubInfo clubInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,31 +83,7 @@ public class ClubPageActivity extends AppCompatActivity {
          *
          * */
         
-        dropDownMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                PopupMenu popup = new PopupMenu(ClubPageActivity.this, dropDownMenu);
-                MenuInflater menuInflater = popup.getMenuInflater();
-                menuInflater.inflate(R.menu.club_page_main_menu_forclub, popup.getMenu());
-                popup.show();
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem menuItem) {
 
-                        switch (menuItem.getItemId()) {
-                            case R.id.fixIntro:
-                                Toast.makeText(ClubPageActivity.this, "상단 소개 수정하기 클릭", Toast.LENGTH_SHORT).show();
-                                return true;
-                            case R.id.fixIntroSlide:
-                                Toast.makeText(ClubPageActivity.this, "소개 슬라이드 수정하기 클릭", Toast.LENGTH_SHORT).show();
-                                return true;
-                            default:
-                                return false;
-                        }
-                    }
-                });
-            }
-        });
 
         CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.club_activity_collapsebar);
         collapsingToolbarLayout.setTitle("동아리 페이지");
@@ -168,7 +144,7 @@ public class ClubPageActivity extends AppCompatActivity {
                                 clubDocRef = document.getReference();
                                 Log.d(TAG, document.getId() + " => " + document.getData());
 
-                                ClubInfo clubInfo = document.toObject(ClubInfo.class);
+                                clubInfo = document.toObject(ClubInfo.class);
                                 nameTextView.setText(clubInfo.getName());
                                 Log.e("!@#!@#", nameTextView.getText().toString());
                                 day.setText(clubInfo.getDay());
@@ -241,7 +217,36 @@ public class ClubPageActivity extends AppCompatActivity {
         }).attach();
 
         tabLayout.setTabTextColors(R.color.gray_dbdbdb, R.color.maintheme);
+        dropDownMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popup = new PopupMenu(ClubPageActivity.this, dropDownMenu);
+                MenuInflater menuInflater = popup.getMenuInflater();
+                menuInflater.inflate(R.menu.club_page_main_menu_forclub, popup.getMenu());
+                popup.show();
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
 
+                        Intent intent;
+
+                        switch (menuItem.getItemId()) {
+                            case R.id.fixIntro:
+                                intent = new Intent(ClubPageActivity.this, IntroUpdateActivity.class);
+                                intent.putExtra("day", clubInfo.getDay());
+                                intent.putExtra("money", clubInfo.getMoney());
+                                intent.putExtra("time", clubInfo.getActivityTime());
+                                intent.putExtra("registerUrl", clubInfo.getRegisterUrl());
+                                intent.putExtra("introduce", clubInfo.getIntroduce());
+                                startActivity(intent);
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+                });
+            }
+        });
 
     }
 

@@ -2,8 +2,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/fixIntro"
-        android:title="동아리 상단 소개 수정" />
-    <item
-        android:id="@+id/fixIntroSlide"
-        android:title="동아리 소개 슬라이드 수정" />
+        android:title="동아리 소개 수정" />
 </menu>
