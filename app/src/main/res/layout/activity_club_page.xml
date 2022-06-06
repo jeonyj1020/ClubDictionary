@@ -216,13 +216,12 @@
                         android:id="@+id/bookMark"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:layout_marginEnd="24dp"
                         android:background="@color/white"
                         android:padding="5dp"
                         android:scaleType="centerInside"
                         android:src="@drawable/png_bookmark"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/cp_item_dropdown_menu"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.5" />
 
@@ -241,6 +240,21 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+
+                    <ImageButton
+                        android:id="@+id/cp_item_dropdown_menu"
+                        android:layout_width="40sp"
+                        android:layout_height="40sp"
+                        android:background="@android:color/transparent"
+                        android:paddingLeft="10sp"
+                        android:paddingTop="10sp"
+                        android:paddingRight="10sp"
+                        android:paddingBottom="10sp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/icon_threedot"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

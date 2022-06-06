@@ -11,9 +11,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,6 +72,42 @@ public class ClubPageActivity extends AppCompatActivity {
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setDisplayShowTitleEnabled(false);
 
+        ImageButton dropDownMenu = findViewById(R.id.cp_item_dropdown_menu);
+        
+        /*
+         * 만약 해당 동아리 계정이 아니면
+         * dropDownMenu.setVisibility(View.GONE);
+         * 해주면 됨
+         *
+         *
+         *
+         * */
+        
+        dropDownMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PopupMenu popup = new PopupMenu(ClubPageActivity.this, dropDownMenu);
+                MenuInflater menuInflater = popup.getMenuInflater();
+                menuInflater.inflate(R.menu.club_page_main_menu_forclub, popup.getMenu());
+                popup.show();
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+
+                        switch (menuItem.getItemId()) {
+                            case R.id.fixIntro:
+                                Toast.makeText(ClubPageActivity.this, "상단 소개 수정하기 클릭", Toast.LENGTH_SHORT).show();
+                                return true;
+                            case R.id.fixIntroSlide:
+                                Toast.makeText(ClubPageActivity.this, "소개 슬라이드 수정하기 클릭", Toast.LENGTH_SHORT).show();
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+                });
+            }
+        });
 
         CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.club_activity_collapsebar);
         collapsingToolbarLayout.setTitle("동아리 페이지");
