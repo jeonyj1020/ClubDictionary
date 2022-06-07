@@ -60,7 +60,7 @@ public class ClubPageActivity extends AppCompatActivity {
     ImageButton apply_btn;
     String name;
     ClubInfo clubInfo;
-
+    String clubUid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -145,6 +145,7 @@ public class ClubPageActivity extends AppCompatActivity {
                                 Log.d(TAG, document.getId() + " => " + document.getData());
 
                                 clubInfo = document.toObject(ClubInfo.class);
+                                clubUid = clubInfo.getUid();
                                 nameTextView.setText(clubInfo.getName());
                                 Log.e("!@#!@#", nameTextView.getText().toString());
                                 day.setText(clubInfo.getDay());
@@ -168,6 +169,53 @@ public class ClubPageActivity extends AppCompatActivity {
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                        String tmp = user.getUid();
+                        Log.e("0607!!", tmp+clubUid);
+                        if(tmp.trim().equals(clubUid.trim())){
+                            Log.e("같다!", "같다!!");
+                            dropDownMenu.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    PopupMenu popup = new PopupMenu(ClubPageActivity.this, dropDownMenu);
+                                    MenuInflater menuInflater = popup.getMenuInflater();
+                                    menuInflater.inflate(R.menu.club_page_main_menu_forclub, popup.getMenu());
+                                    popup.show();
+                                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                                        @Override
+                                        public boolean onMenuItemClick(MenuItem menuItem) {
+
+                                            Intent intent;
+
+                                            switch (menuItem.getItemId()) {
+                                                case R.id.fixIntro:
+                                                    intent = new Intent(ClubPageActivity.this, IntroUpdateActivity.class);
+                                                    intent.putExtra("name",name);
+                                                    intent.putExtra("clubUid", clubInfo.getUid());
+                                                    intent.putExtra("day", clubInfo.getDay());
+                                                    intent.putExtra("money", clubInfo.getMoney());
+                                                    intent.putExtra("activityTime", clubInfo.getActivityTime());
+                                                    intent.putExtra("registerUrl", clubInfo.getRegisterUrl());
+                                                    intent.putExtra("introduce", clubInfo.getIntroduce());
+                                                    finish();
+                                                    startActivity(intent);
+                                                    return true;
+                                                default:
+                                                    return false;
+                                            }
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                        else{
+                            Log.e("여기도 실행", "여기도 실행");
+                            dropDownMenu.setVisibility(View.GONE);
                         }
                     }
                 });
@@ -217,36 +265,8 @@ public class ClubPageActivity extends AppCompatActivity {
         }).attach();
 
         tabLayout.setTabTextColors(R.color.gray_dbdbdb, R.color.maintheme);
-        dropDownMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                PopupMenu popup = new PopupMenu(ClubPageActivity.this, dropDownMenu);
-                MenuInflater menuInflater = popup.getMenuInflater();
-                menuInflater.inflate(R.menu.club_page_main_menu_forclub, popup.getMenu());
-                popup.show();
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem menuItem) {
 
-                        Intent intent;
 
-                        switch (menuItem.getItemId()) {
-                            case R.id.fixIntro:
-                                intent = new Intent(ClubPageActivity.this, IntroUpdateActivity.class);
-                                intent.putExtra("day", clubInfo.getDay());
-                                intent.putExtra("money", clubInfo.getMoney());
-                                intent.putExtra("time", clubInfo.getActivityTime());
-                                intent.putExtra("registerUrl", clubInfo.getRegisterUrl());
-                                intent.putExtra("introduce", clubInfo.getIntroduce());
-                                startActivity(intent);
-                                return true;
-                            default:
-                                return false;
-                        }
-                    }
-                });
-            }
-        });
 
     }
 

@@ -21,6 +21,8 @@
         <activity
             android:name=".ClubPage.QuestionUpdateActivity"
             android:exported="false" />
+        <activity android:name=".ClubPage.IntroUpdateActivity"
+            android:exported="false"/>
         <activity
             android:name=".ClubPage.AnswerWriteActivity"
             android:exported="false" />
