@@ -13,6 +13,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -55,8 +56,8 @@ public class WriteContentsActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:{ //toolbar의 back키 눌렀을 때 동작
+        switch (item.getItemId()) {
+            case android.R.id.home: { //toolbar의 back키 눌렀을 때 동작
                 finish();
                 return true;
             }
@@ -69,21 +70,21 @@ public class WriteContentsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_contents2);
         imageList = (ArrayList<Uri>) getIntent().getSerializableExtra("imageList");
-
+        for (Uri now : imageList) {
+            Log.e("uri : ", now.toString());
+        }
         recyclerView = findViewById(R.id.imageListRecyclerView);
         imageListAdapter = new ImageListAdapter(imageList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         recyclerView.setAdapter(imageListAdapter);
 
-        /*exit = findViewById(R.id.exit);
-        exit.setOnClickListener(onClickListener);*/
+
         upload = findViewById(R.id.upload);
         upload.setOnClickListener(onClickListener);
 
         hashTag = findViewById(R.id.hashTag);
         contents = findViewById(R.id.contents);
         recruit = findViewById(R.id.recruit);
-        //recruit.setOnClickListener(onClickListener);
 
         Toolbar toolbar = findViewById(R.id.awc_tool_bar);
         setSupportActionBar(toolbar);
@@ -126,12 +127,12 @@ public class WriteContentsActivity extends AppCompatActivity {
                             FirebaseStorage storage = FirebaseStorage.getInstance();
                             idx = 0;
                             for (Uri image : imageList) {
-
+                                Log.e("image uri : ", image.toString());
                                 StorageReference postRef = storage.getReference().child("clubs/" + userUid
-                                        + "/" + nowTime + "/" + idx + ".jpg");
-                                UploadTask uploadTask = postRef.putFile(image);
+                                        + "/" + upTime + "/" + idx + ".jpg");
+                                idx++;
 
-                                uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                                postRef.putFile(image).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                                         if (task.isSuccessful()) {
@@ -139,13 +140,13 @@ public class WriteContentsActivity extends AppCompatActivity {
                                                 @Override
                                                 public void onSuccess(Uri uri) {
                                                     imageUrlList.add(uri.toString());
-                                                    idx++;
-                                                    if (idx == imageList.size()) {
-
+                                                    //Log.e("imageUrlList :", url.toString());
+                                                    if (imageUrlList.size() == imageList.size()) {
                                                         PostInfo postInfo = new PostInfo((String) clubDoc.get("name"), (String) clubDoc.get("iconUrl"),
                                                                 (String) clubDoc.get("major"), (String) clubDoc.get("minor"),
                                                                 upTime, hashTag.getText().toString(), contents.getText().toString(), imageUrlList
-                                                        , recruit.isChecked(), user.getUid());
+                                                                , recruit.isChecked(), user.getUid());
+
                                                         clubRef.collection("posts").document(upTimeString).set(postInfo)
                                                                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                     @Override
@@ -159,9 +160,6 @@ public class WriteContentsActivity extends AppCompatActivity {
                                                 }
                                             });
                                         }
-                                        else {
-                                            Toast.makeText(WriteContentsActivity.this, "업로드에 실패했습니다", Toast.LENGTH_SHORT).show();
-                                        }
                                     }
                                 });
                             }
@@ -170,7 +168,7 @@ public class WriteContentsActivity extends AppCompatActivity {
                 });
     }
 
-    private long getTime(long nowTime){
+    private long getTime(long nowTime) {
         Date date = new Date(nowTime);
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyMMddHHmmssSSS");
         long getTime = Long.valueOf(dateFormat.format(date));

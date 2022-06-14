@@ -191,15 +191,16 @@ public class HomeFragment extends Fragment {
                             if (clipData.getItemCount() > 10) {
                                 Toast.makeText(getActivity(), "사진은 10개까지 선택가능 합니다.", Toast.LENGTH_SHORT).show();
                                 return;
-                            } else if (clipData.getItemCount() == 1) {
-                                imageList.add(clipData.getItemAt(0).getUri());
-                            } else if (clipData.getItemCount() > 1 && clipData.getItemCount() < 10) {
+                            } else {
                                 for (int i = 0; i < clipData.getItemCount(); i++) {
                                     imageList.add((clipData.getItemAt(i).getUri()));
                                 }
                             }
                         }
 
+                        for(Uri now : imageList){
+                            Log.e("uri : ", now.toString());
+                        }
                         Intent intent = new Intent(getActivity(), WriteContentsActivity.class);
                         intent.putExtra("imageList", imageList);
                         startActivity(intent);

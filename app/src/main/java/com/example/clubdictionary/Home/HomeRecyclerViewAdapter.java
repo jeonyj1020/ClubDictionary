@@ -3,6 +3,7 @@ package com.example.clubdictionary.Home;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,10 @@ import com.example.clubdictionary.WritePost.PostInfo;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import me.relex.circleindicator.CircleIndicator3;
@@ -65,13 +69,48 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
 
         holder.clubName.setText(postInfo.getName());
         holder.minor.setText("#"+postInfo.getMinor()+" ");
-        holder.upTime.setText(String.valueOf(postInfo.getUpTime()));
+        // 22 06 14 20 15 42 655
+        long upTimeLong = 0;
+        try {
+            upTimeLong = new SimpleDateFormat("yyMMddHHmmssSSS").parse(upTime).getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long dif = (System.currentTimeMillis() - upTimeLong)/1000;
+
+        String upTimeText;
+        long cmp;
+        if(dif < 1) {
+            upTimeText = "방금 전";
+        }
+        else if(dif < 60){
+            upTimeText = dif + "초 전";
+        }
+        else if(dif < 3600){
+            upTimeText = dif/60 + "분 전";
+        }
+        else if(dif < 3600 * 24){
+            upTimeText = dif/3600 + "시간 전";
+        }
+        else if(dif < 3600 * 24 * 30){
+            upTimeText = dif/(3600*24) + "일 전";
+        }
+        else if(dif < 3600 * 24 * 30 * 12){
+            upTimeText = dif/(3600*24*30) + "달 전";
+        }
+        else{
+            upTimeText = dif/(3600*24*30*12) + "년 전";
+        }
+
+        holder.upTimeTextView.setText(upTimeText);
         holder.imageUrlList = postInfo.getImageUrlList();
         holder.contents.setText(postInfo.getContents());
         holder.hashTag.setText(postInfo.getHashTag());
         holder.bindProfileImage(postInfo.getIconUrl());
         holder.clubUid = postInfo.getClubUid();
-
+        for(String url : holder.imageUrlList) {
+            Log.e("홈리사이클러 : ", url);
+        }
         holder.viewPager2.setAdapter(new ImageViewPagerAdapter(holder.imageUrlList, context));
         holder.viewPager2.setOffscreenPageLimit(1);
 
@@ -120,7 +159,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView clubName, minor, hashTag, contents, upTime;
+        private TextView clubName, minor, hashTag, contents, upTimeTextView;
         private ArrayList<String> imageUrlList = new ArrayList<>();
         private ViewPager2 viewPager2;
         private CircleImageView icon;
@@ -137,7 +176,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
             minor = itemView.findViewById(R.id.minor);
             icon = itemView.findViewById(R.id.icon);
             scrap = itemView.findViewById(R.id.scrap);
-            upTime = itemView.findViewById(R.id.upTime);
+            upTimeTextView = itemView.findViewById(R.id.upTime);
             hashTag = itemView.findViewById(R.id.hashTag);
             contents = itemView.findViewById(R.id.contents);
             viewPager2 = itemView.findViewById(R.id.home_viewpager2);

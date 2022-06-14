@@ -91,6 +91,7 @@
         <entry key="..\:/Users/ajh/AndroidStudioProjects/ClubDictionary/app/src/main/res/layout/activity_filter.xml" value="0.152" />
         <entry key="..\:/Users/ajh/AndroidStudioProjects/ClubDictionary/app/src/main/res/layout/activity_login.xml" value="0.2421875" />
         <entry key="..\:/Users/ajh/AndroidStudioProjects/ClubDictionary/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/ajh/AndroidStudioProjects/ClubDictionary/app/src/main/res/layout/activity_member_init.xml" value="0.14895833333333333" />
         <entry key="..\:/Users/ajh/AndroidStudioProjects/ClubDictionary/app/src/main/res/layout/activity_scrap_adapter.xml" value="0.203125" />
         <entry key="..\:/Users/ajh/AndroidStudioProjects/ClubDictionary/app/src/main/res/layout/activity_scrap_item.xml" value="0.19947916666666668" />
         <entry key="..\:/Users/ajh/AndroidStudioProjects/ClubDictionary/app/src/main/res/layout/activity_scrap_list.xml" value="0.19947916666666668" />
@@ -101,6 +102,7 @@
         <entry key="..\:/Users/ajh/AndroidStudioProjects/ClubDictionary/app/src/main/res/layout/activity_write_contents_item.xml" value="0.10030395136778116" />
         <entry key="..\:/Users/ajh/AndroidStudioProjects/ClubDictionary/app/src/main/res/layout/fragment_category.xml" value="0.2421875" />
         <entry key="..\:/Users/ajh/AndroidStudioProjects/ClubDictionary/app/src/main/res/layout/fragment_club_list.xml" value="0.12604166666666666" />
+        <entry key="..\:/Users/ajh/AndroidStudioProjects/ClubDictionary/app/src/main/res/layout/fragment_clubpage_intro.xml" value="0.14895833333333333" />
         <entry key="..\:/Users/ajh/AndroidStudioProjects/ClubDictionary/app/src/main/res/layout/fragment_clubpage_post.xml" value="0.19947916666666668" />
         <entry key="..\:/Users/ajh/AndroidStudioProjects/ClubDictionary/app/src/main/res/layout/fragment_home.xml" value="0.12604166666666666" />
         <entry key="..\:/Users/ajh/AndroidStudioProjects/ClubDictionary/app/src/main/res/layout/fragment_home_item.xml" value="0.1" />

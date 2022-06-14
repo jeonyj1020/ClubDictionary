@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,6 +69,7 @@ public class BookmarkRecyclerViewAdapter extends RecyclerView.Adapter<BookmarkRe
         holder.minor.setText("#"+bookmarkItem.getMinor()+" ");
         holder.bindProfileImage(bookmarkItem.getIconUrl());
         boolean alarmChecked = bookmarkItem.isAlarmChecked();
+        Log.e("알람", ""+alarmChecked);
         if(alarmChecked){
             holder.alarm.setImageResource(R.drawable.icon_alarmon);
         }

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.example.clubdictionary.R;
 import com.example.clubdictionary.WritePost.PostInfo;
@@ -49,20 +50,26 @@ public class ScrapListActivity extends AppCompatActivity {
                         DocumentSnapshot document = task.getResult();
                         scrapList = (ArrayList<String>) document.get("scrap");
                         ArrayList<Long> scrapListUpTime = new ArrayList<>();
-                        for (String upTime : scrapList) {
-                            scrapListUpTime.add(Long.parseLong(upTime));
+                        if(scrapList.size() == 0){
+                            Toast.makeText(ScrapListActivity.this, "좋아요한 게시글이 없습니다!",
+                                    Toast.LENGTH_SHORT).show();
                         }
+                        else {
+                            for (String upTime : scrapList) {
+                                scrapListUpTime.add(Long.parseLong(upTime));
+                            }
 
-                        int ten = scrapList.size() / 10;
-                        if (scrapList.size() % 10 == 0) ten--;
-                        scrapPostList.clear();
-                        for (int i = 0; i <= ten; i++) {
-                            if (i != ten) {
-                                List<Long> scrap = scrapListUpTime.subList(i * 10, (i + 1) * 10);
-                                queryByUpTime(scrap, false);
-                            } else {
-                                List<Long> scrap = scrapListUpTime.subList(i * 10, scrapListUpTime.size());
-                                queryByUpTime(scrap, true);
+                            int ten = scrapList.size() / 10;
+                            if (scrapList.size() % 10 == 0) ten--;
+                            scrapPostList.clear();
+                            for (int i = 0; i <= ten; i++) {
+                                if (i != ten) {
+                                    List<Long> scrap = scrapListUpTime.subList(i * 10, (i + 1) * 10);
+                                    queryByUpTime(scrap, false);
+                                } else {
+                                    List<Long> scrap = scrapListUpTime.subList(i * 10, scrapListUpTime.size());
+                                    queryByUpTime(scrap, true);
+                                }
                             }
                         }
                     }

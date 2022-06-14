@@ -34,7 +34,6 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.squareImageView.setImageURI(imageList.get(position));
-        holder.imageDescription.setText((position + 1) + "번째 사진");
     }
 
     @Override
@@ -44,13 +43,11 @@ public class ImageListAdapter extends RecyclerView.Adapter<ImageListAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         SquareImageView squareImageView;
-        TextView imageDescription;
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
 
             squareImageView = itemView.findViewById(R.id.imageItem);
-            imageDescription = itemView.findViewById(R.id.imageDescription);
         }
     }
 }

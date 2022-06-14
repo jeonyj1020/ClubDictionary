@@ -3,6 +3,7 @@ package com.example.clubdictionary.MyPage;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.MediaMetadata;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.clubdictionary.ClubPage.ClubPageActivity;
 import com.example.clubdictionary.R;
 import com.example.clubdictionary.UserManagement.LoginActivity;
 import com.example.clubdictionary.UserManagement.MemberInfo;
@@ -42,7 +44,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MyPageFragment extends Fragment {
 
-    TextView passwordResetTextView, applyTextView,logoutTextView,deleteTextView, mypage_profile_name, myScrapList;
+    TextView passwordResetTextView, applyTextView,logoutTextView,deleteTextView, mypage_profile_name,
+            myScrapList, myClubTextView;
     CircleImageView mypage_profile_pic;
     private FirebaseAuth mAuth ;
     DocumentSnapshot document;
@@ -64,6 +67,7 @@ public class MyPageFragment extends Fragment {
         passwordResetTextView = view.findViewById(R.id.mypage_password_reset);
         mypage_profile_name = view.findViewById(R.id.mypage_profile_name);
         myScrapList = view.findViewById(R.id.mypage_scrap);
+        myClubTextView = view.findViewById(R.id.mypage_club_managing);
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -87,6 +91,8 @@ public class MyPageFragment extends Fragment {
                                     mypage_profile_name.setText(document.get("name").toString());
                                     Log.d("type", "클럽입니다");
                                     type = "clubs";
+                                    myClubTextView.setTextColor(getResources().getColor(R.color.black_191919));
+                                    myClubTextView.setClickable(true);
                                 }
                             }
                         });
@@ -174,7 +180,6 @@ public class MyPageFragment extends Fragment {
                             }
                         })
                         .show();
-
             }
         });
 
@@ -187,6 +192,14 @@ public class MyPageFragment extends Fragment {
             }
         });
 
+        myClubTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ClubPageActivity.class);
+                intent.putExtra("name", document.get("name").toString());
+                startActivity(intent);
+            }
+        });
         return view;
     }
 }

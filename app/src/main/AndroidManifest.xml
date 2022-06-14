@@ -79,7 +79,7 @@
             android:name=".ClubPage.ShowPostActivity"
             android:exported="true" />
         <activity android:name=".ClubPage.EditPostActivity"
-            android:windowSoftInputMode="adjustResize"
+
             android:exported="true"/>
         <receiver
             android:name=".SmsReceiver"

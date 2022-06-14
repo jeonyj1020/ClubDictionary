@@ -132,7 +132,7 @@ public class FilterActivity extends AppCompatActivity {
         }
         childCnt.add(religionList.size());
 
-        Toast.makeText(this, ""+filteringBinary, Toast.LENGTH_LONG).show();
+        //.makeText(this, ""+filteringBinary, Toast.LENGTH_LONG).show();
         if (filteringBinary == null) {
             for (CheckBox now : allList) {
                 now.setChecked(true);

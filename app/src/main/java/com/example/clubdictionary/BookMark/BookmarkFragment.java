@@ -126,7 +126,8 @@ public class BookmarkFragment extends Fragment {
                                 if (task.isSuccessful()) {
                                     for (QueryDocumentSnapshot document : task.getResult()) {
                                         boolean alarmChecked = ((Map<String, Boolean>) document.get("subscribers"))
-                                                .containsKey(user.getUid());
+                                                .get(user.getUid());
+                                        Log.e("알람 프래그먼트", ""+alarmChecked);
                                         bookmarkItemList.add(new BookmarkItem(
                                                 (String) document.get("icon"), (String) document.get("name"),
                                                 (String) document.get("major"), (String) document.get("minor"),
@@ -146,7 +147,7 @@ public class BookmarkFragment extends Fragment {
                                                     if (task.isSuccessful()) {
                                                         for (QueryDocumentSnapshot document : task.getResult()) {
                                                             boolean alarmChecked = ((Map<String, Boolean>) document.get("subscribers"))
-                                                                    .containsKey(user.getUid());
+                                                                    .get(user.getUid());
                                                             bookmarkItemList.add(new BookmarkItem(
                                                                     (String) document.get("icon"), (String) document.get("name"),
                                                                     (String) document.get("major"), (String) document.get("minor"),
@@ -176,7 +177,7 @@ public class BookmarkFragment extends Fragment {
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     boolean alarmChecked = ((Map<String, Boolean>) document.get("subscribers"))
-                                            .containsKey(user.getUid());
+                                            .get(user.getUid());
                                     bookmarkItemList.add(new BookmarkItem(
                                             (String) document.get("iconUrl"), (String) document.get("name"),
                                             (String) document.get("major"), (String) document.get("minor"),
