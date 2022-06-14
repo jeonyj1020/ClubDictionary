@@ -29,7 +29,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/startButton"
+        android:layout_above="@+id/applyButton"
         android:layout_below="@+id/aiu_tool_bar">
 
         <LinearLayout
@@ -56,7 +56,7 @@
             <EditText
                 android:id="@+id/day"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/notosanskr_medium"
                 android:includeFontPadding="false"
@@ -83,7 +83,7 @@
             <EditText
                 android:id="@+id/time"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/notosanskr_medium"
                 android:includeFontPadding="false"
@@ -108,7 +108,7 @@
             <EditText
                 android:id="@+id/money"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/notosanskr_medium"
                 android:includeFontPadding="false"
@@ -133,7 +133,7 @@
             <EditText
                 android:id="@+id/applyLink"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/notosanskr_medium"
                 android:includeFontPadding="false"
@@ -168,7 +168,6 @@
                 android:paddingTop="10dp"
                 android:textColor="@color/black_191919"
                 android:textSize="14sp" />
-
 
 
         </LinearLayout>

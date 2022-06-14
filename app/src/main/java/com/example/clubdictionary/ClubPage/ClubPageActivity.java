@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -179,6 +180,7 @@ public class ClubPageActivity extends AppCompatActivity {
                         Log.e("0607!!", tmp+clubUid);
                         if(tmp.trim().equals(clubUid.trim())){
                             Log.e("같다!", "같다!!");
+                            apply_btn.setVisibility(View.GONE);
                             dropDownMenu.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
