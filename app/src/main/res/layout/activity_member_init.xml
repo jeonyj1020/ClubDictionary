@@ -74,7 +74,7 @@
                 android:includeFontPadding="false"
                 android:inputType="text"
                 android:textColor="@color/black_191919"
-                android:textSize="14sp"/>
+                android:textSize="10sp"/>
 
         </LinearLayout>
 
@@ -113,7 +113,7 @@
             android:includeFontPadding="false"
             android:inputType="number"
             android:textColor="@color/black_191919"
-            android:textSize="14sp"/>
+            android:textSize="10sp"/>
 
         <View
             android:layout_width="match_parent"
@@ -145,7 +145,7 @@
             android:inputType="text"
             android:includeFontPadding="false"
             android:textColor="@color/black_191919"
-            android:textSize="14sp" />
+            android:textSize="10sp"/>
 
         <View
             android:layout_width="match_parent"
@@ -177,8 +177,7 @@
             android:includeFontPadding="false"
             android:inputType="number"
             android:textColor="@color/black_191919"
-            android:textSize="14sp" />
-
+            android:textSize="10sp"/>
 
         <View
             android:layout_width="match_parent"

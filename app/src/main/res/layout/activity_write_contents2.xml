@@ -24,196 +24,177 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/awc_tool_bar"
-        android:orientation="vertical"
-        android:weightSum="1455">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="50" />
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="400"
-            android:weightSum="786">
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="48" />
+            android:layout_height="match_parent"
+            android:layout_below="@+id/awc_tool_bar"
+            android:orientation="vertical"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/imageListRecyclerView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:layout_weight="690" />
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="50"
+                android:weightSum="786">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="550" />
+
+
+                <CheckBox
+                    android:id="@+id/recruit"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="188"
+                    android:fontFamily="@font/notosanskr_medium"
+                    android:includeFontPadding="false"
+                    android:text="모집공고"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="48" />
+
+            </LinearLayout>
+
             <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="20" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="110"
+                android:weightSum="786">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="48" />
+
+
+                <EditText
+                    android:id="@+id/hashTag"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="690"
+                    android:background="@drawable/rectangular_background"
+                    android:fontFamily="@font/notosanskr_medium"
+                    android:hint="게시글을 해시태그로 나타내주세요"
+                    android:includeFontPadding="false"
+                    android:paddingStart="12dp"
+                    android:paddingTop="17dp"
+                    android:paddingBottom="17dp"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="48" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="559"
+                android:weightSum="786">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="48" />
+
+                <EditText
+                    android:id="@+id/contents"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="690"
+                    android:background="@drawable/rectangular_background"
+                    android:fontFamily="@font/notosanskr_medium"
+                    android:gravity="top"
+                    android:hint="내용을 입력해주세요"
+                    android:includeFontPadding="false"
+                    android:lines="20"
+                    android:paddingStart="12dp"
+                    android:paddingTop="17dp"
+                    android:paddingBottom="17dp"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="48" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="48" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="88"
+                android:weightSum="786">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="48" />
+
+                <Button
+                    android:id="@+id/upload"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="690"
+                    android:background="@color/maintheme"
+                    android:fontFamily="@font/notosanskr_medium"
+                    android:includeFontPadding="false"
+                    android:text="게시물 등록하기"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="48" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="100"/>
+
 
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="20" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="50"
-            android:weightSum="786">
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="550" />
-
-
-            <CheckBox
-                android:id="@+id/recruit"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="188"
-                android:fontFamily="@font/notosanskr_medium"
-                android:includeFontPadding="false"
-                android:text="모집공고"
-                android:textSize="14sp" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="48" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="20" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="110"
-            android:weightSum="786">
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="48" />
-
-
-            <EditText
-                android:id="@+id/hashTag"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="690"
-                android:background="@drawable/rectangular_background"
-                android:fontFamily="@font/notosanskr_medium"
-                android:hint="게시글을 해시태그로 나타내주세요"
-                android:includeFontPadding="false"
-                android:paddingStart="12dp"
-                android:paddingTop="17dp"
-                android:paddingBottom="17dp"
-                android:textSize="14sp" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="48" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="10" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="559"
-            android:weightSum="786">
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="48" />
-
-            <EditText
-                android:id="@+id/contents"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="690"
-                android:background="@drawable/rectangular_background"
-                android:fontFamily="@font/notosanskr_medium"
-                android:gravity="top"
-                android:hint="내용을 입력해주세요"
-                android:includeFontPadding="false"
-                android:lines="20"
-                android:paddingStart="12dp"
-                android:paddingTop="17dp"
-                android:paddingBottom="17dp"
-                android:textSize="14sp" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="48" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="48" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="88"
-            android:weightSum="786">
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="48" />
-
-            <Button
-                android:id="@+id/upload"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="690"
-                android:background="@color/maintheme"
-                android:fontFamily="@font/notosanskr_medium"
-                android:includeFontPadding="false"
-                android:text="게시물 등록하기"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="48" />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="100"/>
-
-
-    </LinearLayout>
+    </ScrollView>
 
 
 
