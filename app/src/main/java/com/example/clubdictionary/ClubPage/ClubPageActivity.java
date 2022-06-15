@@ -113,7 +113,7 @@ public class ClubPageActivity extends AppCompatActivity {
                     apply_btn.setImageResource(R.drawable.png_bookmark_selected);
                     // 이미지 설정?
                 }
-                Toast.makeText(ClubPageActivity.this, "" + bookMarked, Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -291,8 +291,6 @@ public class ClubPageActivity extends AppCompatActivity {
             bookMarked = false;
             apply_btn.setImageResource(R.drawable.png_bookmark);
         }
-        //Log.d("bookMark", bookMark.get("ball").get(0) + ", " + bookMark.get("ball").get(1));
-        //Toast.makeText(this, ""+bookMarked, Toast.LENGTH_SHORT).show();
     }
 
     private void addBookMark() {

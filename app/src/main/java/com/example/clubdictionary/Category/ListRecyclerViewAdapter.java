@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.clubdictionary.BookMark.BookmarkRecyclerViewAdapter;
 import com.example.clubdictionary.ClubInfo;
 import com.example.clubdictionary.ClubPage.ClubPageActivity;
@@ -43,6 +45,7 @@ public class ListRecyclerViewAdapter extends RecyclerView.Adapter<ListRecyclerVi
 
         ClubInfo item = data.get(position);
         holder.clubName.setText(item.getName());
+        holder.bindProfileImage(item.getIconUrl());
         //clubIcon도 해야됨
         //눌렀을때 클럽페이지로 이동하기
         holder.clubListLayout.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +73,11 @@ public class ListRecyclerViewAdapter extends RecyclerView.Adapter<ListRecyclerVi
             clubListLayout = itemView.findViewById(R.id.clubListLayout);
             clubName = itemView.findViewById(R.id.clubName);
             clubIcon = itemView.findViewById(R.id.clubIcon);
+        }
+
+        public void bindProfileImage(String iconUrl){
+            Glide.with(mContext).load(iconUrl).into(clubIcon);
+            clubIcon.setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
     }
 }
