@@ -20,6 +20,7 @@
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1205" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/drawable/icon_dot.xml" value="0.1535" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/drawable/icon_dot_selected.xml" value="0.1535" />
+        <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/drawable/loading_background.xml" value="0.1535" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/drawable/rectangular_background.xml" value="0.1535" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/drawable/rectangular_background_border.xml" value="0.104" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/drawable/rectangular_background_button.xml" value="0.1205" />
@@ -82,6 +83,7 @@
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/home_item_viewpage.xml" value="0.1" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/layout_clubpage_toolbar.xml" value="0.264" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/list_header.xml" value="0.264" />
+        <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/loading.xml" value="0.22175925925925927" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/major_category_item.xml" value="0.264" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/minor_category_item.xml" value="0.264" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/layout/question_item.xml" value="0.264" />
@@ -96,6 +98,9 @@
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/menu/clubpage_question_menu_forclub.xml" value="0.22175925925925927" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/menu/clubpage_question_menu_forwriter.xml" value="0.22083333333333333" />
         <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/menu/filte_toolber.xml" value="0.2484375" />
+        <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1535" />
+        <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/mipmap-anydpi-v26/ic_launcher_sds.xml" value="0.1205" />
+        <entry key="..\:/AndroidStudio/ClubDictionary/app/src/main/res/mipmap-anydpi-v26/ic_launcher_sds_round.xml" value="0.1205" />
         <entry key="..\:/Users/ajh/AndroidStudioProjects/ClubDictionary/app/src/main/res/layout/activity_filter.xml" value="0.152" />
         <entry key="..\:/Users/ajh/AndroidStudioProjects/ClubDictionary/app/src/main/res/layout/activity_login.xml" value="0.2421875" />
         <entry key="..\:/Users/ajh/AndroidStudioProjects/ClubDictionary/app/src/main/res/layout/activity_main.xml" value="0.1" />

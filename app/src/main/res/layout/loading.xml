@@ -3,20 +3,22 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="@drawable/loading_background">
+    android:orientation="vertical">
 
     <ProgressBar
         android:id="@+id/loading_image"
         android:layout_width="100dp"
+        android:layout_gravity="center"
         android:layout_height="100dp"
         android:indeterminateDrawable="@drawable/loading_circle_rotate"/>
 
     <TextView
         android:id="@+id/loading_text"
         android:layout_width="wrap_content"
-        android:gravity="center_vertical"
+        android:gravity="center_vertical"   
         android:layout_marginTop="20dp"
+        android:fontFamily="@font/notosanskr_medium"
+        android:includeFontPadding="false"
         android:textSize="20dp"
         android:text="로딩 중입니다"
         android:layout_height="wrap_content"/>
