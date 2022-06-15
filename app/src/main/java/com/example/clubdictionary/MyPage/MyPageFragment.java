@@ -102,6 +102,7 @@ public class MyPageFragment extends Fragment {
                         mypage_profile_name.setText(document.get("name").toString());
                         name = document.get("name").toString();
                         type = "users";
+                        myClubTextView.setClickable(false);
                     }
                 }
             }
