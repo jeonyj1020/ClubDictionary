@@ -150,7 +150,7 @@
 
                         <TextView
                             android:id="@+id/day"
-                            android:layout_width="wrap_content"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/notosanskr_medium"
                             android:includeFontPadding="false"
@@ -160,7 +160,7 @@
 
                         <TextView
                             android:id="@+id/activityTime"
-                            android:layout_width="wrap_content"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:fontFamily="@font/notosanskr_medium"
@@ -171,7 +171,7 @@
 
                         <TextView
                             android:id="@+id/money"
-                            android:layout_width="wrap_content"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:fontFamily="@font/notosanskr_medium"

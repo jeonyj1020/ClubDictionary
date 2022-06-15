@@ -179,8 +179,8 @@ public class ClubPageActivity extends AppCompatActivity {
                         String tmp = user.getUid();
                         Log.e("0607!!", tmp+clubUid);
                         if(tmp.trim().equals(clubUid.trim())){
-                            Log.e("같다!", "같다!!");
-                            apply_btn.setVisibility(View.GONE);
+                            Log.e("같다!", "같다!!");/*
+                            apply_btn.setVisibility(View.GONE);*/
                             dropDownMenu.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
