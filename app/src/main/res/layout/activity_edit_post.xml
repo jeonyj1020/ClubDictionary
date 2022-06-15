@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    android:orientation="vertical">
+    android:layout_marginTop="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/tb"
+        android:layout_alignParentTop="true"
         android:orientation="horizontal">
 
         <ImageButton
@@ -34,226 +35,239 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center_vertical"
-        android:weightSum="786"
-        android:layout_marginTop="10dp">
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="24"/>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tb">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="80">
+            android:orientation="vertical">
 
-            <View
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="11"/>
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:weightSum="786">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/icon"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@drawable/round_background_border_main_theme"
-                android:padding="1dp"
-                android:src="@drawable/mypage" />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="24" />
 
-            <View
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="80"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="11" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/icon"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/round_background_border_main_theme"
+                        android:padding="1dp"
+                        android:src="@drawable/mypage" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="10" />
+
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="22" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="660"
+                    android:orientation="vertical"
+                    android:weightSum="108">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="14" />
+
+                    <TextView
+                        android:id="@+id/clubName"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="46"
+                        android:autoSizeMaxTextSize="100dp"
+                        android:autoSizeMinTextSize="10dp"
+                        android:autoSizeStepGranularity="1dp"
+                        android:autoSizeTextType="uniform"
+                        android:fontFamily="@font/notosanskr_regular"
+                        android:includeFontPadding="false"
+                        android:text="동아리 이름"
+                        android:textColor="@color/black_191919" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="35"
+                        android:orientation="horizontal"
+                        android:weightSum="660">
+
+                        <TextView
+                            android:id="@+id/upTime"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="86"
+                            android:autoSizeMaxTextSize="100dp"
+                            android:autoSizeMinTextSize="10dp"
+                            android:autoSizeStepGranularity="1dp"
+                            android:autoSizeTextType="uniform"
+                            android:fontFamily="@font/notosanskr_light"
+                            android:includeFontPadding="false"
+                            android:text="12 분전"
+                            android:textColor="@color/gray_999999" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="4"
+                            android:orientation="vertical"
+                            android:weightSum="35">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="16" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="4"
+                                android:src="@drawable/icon_indicate_dot" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="15" />
+
+                        </LinearLayout>
+
+
+                        <TextView
+                            android:id="@+id/minor"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="553"
+                            android:autoSizeMaxTextSize="100dp"
+                            android:autoSizeMinTextSize="10dp"
+                            android:autoSizeStepGranularity="1dp"
+                            android:autoSizeTextType="uniform"
+                            android:fontFamily="@font/notosanskr_light"
+                            android:includeFontPadding="false"
+                            android:paddingLeft="5dp"
+                            android:text="소분류"
+                            android:textColor="@color/gray_999999" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="13" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="306" />
+
+            </LinearLayout>
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="10"/>
+                android:layout_height="400dp">
 
-        </LinearLayout>
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/home_viewpager2"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/gray_dbdbdb" />
 
+                <me.relex.circleindicator.CircleIndicator3
+                    android:id="@+id/indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_alignParentBottom="true"
+                    app:ci_drawable="@drawable/icon_dot" />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="22" />
+            </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="660"
-            android:orientation="vertical"
-            android:weightSum="108">
+            <ImageButton
+                android:id="@+id/scrap"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:background="@color/white"
+                android:scaleType="centerInside"
+                android:src="@drawable/icon_scrap" />
 
-            <View
+            <EditText
+                android:id="@+id/hashTag"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="14"/>
-
-            <TextView
-                android:id="@+id/clubName"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="46"
-                android:text="동아리 이름"
-                android:textColor="@color/black_191919"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:autoSizeMaxTextSize="100dp"
                 android:autoSizeMinTextSize="10dp"
                 android:autoSizeStepGranularity="1dp"
                 android:autoSizeTextType="uniform"
                 android:fontFamily="@font/notosanskr_regular"
-                android:includeFontPadding="false" />
-
-            <LinearLayout
+                android:includeFontPadding="false"
+                android:textColor="@color/maintheme" />
+            <!--<TextView
+                android:id="@+id/hashTag"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="35"
-                android:orientation="horizontal"
-                android:weightSum="660">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:text="#여기에 #해시태그 #띄우고"
+                android:textColor="@color/maintheme"
+                android:autoSizeMaxTextSize="100dp"
+                android:autoSizeMinTextSize="10dp"
+                android:autoSizeStepGranularity="1dp"
+                android:autoSizeTextType="uniform"
+                android:fontFamily="@font/notosanskr_regular"
+                android:includeFontPadding="false" />-->
 
-                <TextView
-                    android:id="@+id/upTime"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="86"
-                    android:text="12 분전"
-                    android:textColor="@color/gray_999999"
-                    android:autoSizeMaxTextSize="100dp"
-                    android:autoSizeMinTextSize="10dp"
-                    android:autoSizeStepGranularity="1dp"
-                    android:autoSizeTextType="uniform"
-                    android:fontFamily="@font/notosanskr_light"
-                    android:includeFontPadding="false" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:weightSum="35"
-                    android:layout_weight="4">
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="16"/>
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="4"
-                        android:layout_gravity="center_vertical"
-                        android:src="@drawable/icon_indicate_dot" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="15"/>
-
-                </LinearLayout>
-
-
-                <TextView
-                    android:id="@+id/minor"
-                    android:layout_width="0dp"
-                    android:layout_weight="553"
-                    android:layout_height="match_parent"
-                    android:text="소분류"
-                    android:paddingLeft="5dp"
-                    android:textColor="@color/gray_999999"
-                    android:autoSizeMaxTextSize="100dp"
-                    android:autoSizeMinTextSize="10dp"
-                    android:autoSizeStepGranularity="1dp"
-                    android:autoSizeTextType="uniform"
-                    android:fontFamily="@font/notosanskr_light"
-                    android:includeFontPadding="false" />
-
-            </LinearLayout>
-
-            <View
+            <EditText
+                android:id="@+id/contents"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="13"/>
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:autoSizeMaxTextSize="100dp"
+                android:autoSizeMinTextSize="10dp"
+                android:autoSizeStepGranularity="1dp"
+                android:autoSizeTextType="uniform"
+                android:fontFamily="@font/notosanskr_regular"
+                android:includeFontPadding="false"
+                android:textColor="@color/black_191919" />
 
         </LinearLayout>
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="306" />
+    </ScrollView>
 
-
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="400dp">
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/home_viewpager2"
-            android:layout_width="match_parent"
-            android:layout_height="400dp"
-            android:layout_alignParentBottom="true"
-            android:background="@color/gray_dbdbdb" />
-
-        <me.relex.circleindicator.CircleIndicator3
-            android:id="@+id/indicator"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_alignParentBottom="true"
-            app:ci_drawable="@drawable/icon_dot" />
-
-    </RelativeLayout>
-
-    <ImageButton
-        android:id="@+id/scrap"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="2dp"
-        android:background="@color/white"
-        android:scaleType="centerInside"
-        android:src="@drawable/icon_scrap" />
-
-    <EditText
-        android:id="@+id/hashTag"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:textColor="@color/maintheme"
-        android:autoSizeMaxTextSize="100dp"
-        android:autoSizeMinTextSize="10dp"
-        android:autoSizeStepGranularity="1dp"
-        android:autoSizeTextType="uniform"
-        android:fontFamily="@font/notosanskr_regular"
-        android:includeFontPadding="false"/>
-    <!--<TextView
-        android:id="@+id/hashTag"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:text="#여기에 #해시태그 #띄우고"
-        android:textColor="@color/maintheme"
-        android:autoSizeMaxTextSize="100dp"
-        android:autoSizeMinTextSize="10dp"
-        android:autoSizeStepGranularity="1dp"
-        android:autoSizeTextType="uniform"
-        android:fontFamily="@font/notosanskr_regular"
-        android:includeFontPadding="false" />-->
-
-    <EditText
-        android:id="@+id/contents"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:textColor="@color/black_191919"
-        android:autoSizeMaxTextSize="100dp"
-        android:autoSizeMinTextSize="10dp"
-        android:autoSizeStepGranularity="1dp"
-        android:autoSizeTextType="uniform"
-        android:fontFamily="@font/notosanskr_regular"
-        android:includeFontPadding="false"/>
-
-</LinearLayout>
+</RelativeLayout>
